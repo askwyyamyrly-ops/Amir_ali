@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AMIR ALI</title>
+<style>
+:root{--bg:#07111f;--panel:#101f33;--line:#263b56;--text:#eef5ff;--muted:#9fb1c8;--accent:#48b6ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#142c49,var(--bg) 55%);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+.wrap{max-width:900px;margin:auto;padding:22px}.top{text-align:center;padding:32px 10px}.top h1{font-size:clamp(34px,8vw,58px);letter-spacing:2px;margin:0;color:#fff}.top p{color:var(--muted);margin-top:10px}
+.card{background:rgba(16,31,51,.94);border:1px solid var(--line);border-radius:20px;padding:20px;margin:14px 0;box-shadow:0 14px 40px #0004}
+input,button{font:inherit;border-radius:12px;padding:12px;border:1px solid var(--line)}input{background:#081626;color:white;width:100%;margin:7px 0}button{background:var(--accent);color:#04111e;border:0;font-weight:bold;cursor:pointer;margin:5px}button.secondary{background:#263b56;color:white}button:active{transform:scale(.98)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}.tile{background:#0a192a;border:1px solid var(--line);border-radius:16px;padding:20px;text-align:center;cursor:pointer}.tile b{display:block;margin-top:9px}.hidden{display:none}.muted{color:var(--muted)}.screen{display:none}.screen.active{display:block}.row{display:flex;gap:8px;align-items:center}.row input{flex:1}.calc{max-width:360px;margin:auto}.calc input{font-size:25px;text-align:left;direction:ltr}.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.keys button{padding:16px 5px;font-size:18px}.gamebox{background:#061321;border-radius:14px;overflow:hidden}canvas{display:block;width:100%;height:auto;touch-action:manipulation}.back{margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><h1>AMIR ALI</h1><p>فضای شخصی و سرگرمی من</p></header>
+<section id="login" class="card">
+<h2>ورود به سایت</h2><p class="muted">برای ورود، رمز را وارد کن.</p>
+<input id="pass" type="password" placeholder="رمز ورود" inputmode="numeric">
+<button onclick="login()">ورود</button><p id="loginMsg" class="muted"></p>
+</section>
+<main id="home" class="hidden">
+<section class="card"><h2>خوش آمدی 👋</h2><p class="muted">یکی از بخش‌های زیر را انتخاب کن.</p>
+<div class="grid">
+<div class="tile" onclick="show('calculator')">🧮<b>ماشین‌حساب</b></div>
+<div class="tile" onclick="show('game')">🐦<b>Flappy Bird</b></div>
+<div class="tile" onclick="show('assistant')">🤖<b>راهنمای سایت</b></div>
+<div class="tile" onclick="logout()">🔒<b>خروج</b></div>
+</div></section>
+<section id="calculator" class="card screen"><button class="secondary back" onclick="show('')">بازگشت</button><h2>ماشین‌حساب</h2><div class="calc"><input id="display" readonly placeholder="0"><div class="keys">
+<button onclick="add('7')">7</button><button onclick="add('8')">8</button><button onclick="add('9')">9</button><button class="secondary" onclick="add('/')">÷</button>
+<button onclick="add('4')">4</button><button onclick="add('5')">5</button><button onclick="add('6')">6</button><button class="secondary" onclick="add('*')">×</button>
+<button onclick="add('1')">1</button><button onclick="add('2')">2</button><button onclick="add('3')">3</button><button class="secondary" onclick="add('-')">−</button>
+<button onclick="add('0')">0</button><button onclick="add('.')">.</button><button onclick="calculate()">=</button><button class="secondary" onclick="add('+')">+</button>
+<button class="secondary" style="grid-column:span 4" onclick="clearCalc()">پاک کردن</button></div></div></section>
+<section id="game" class="card screen"><button class="secondary back" onclick="show('')">بازگشت</button><h2>Flappy Bird</h2><p class="muted">برای پرش روی بازی ضربه بزن.</p><div class="gamebox"><canvas id="bird" width="640" height="360"></canvas></div><button onclick="startGame()">شروع / شروع دوباره</button><p id="score" class="muted">امتیاز: 0</p></section>
+<section id="assistant" class="card screen"><button class="secondary back" onclick="show('')">بازگشت</button><h2>راهنمای هوشمند</h2><p>سلام! من راهنمای ساده سایت AMIR ALI هستم.</p><p class="muted">می‌توانی درباره بخش‌های سایت بپرسی.</p><input id="question" placeholder="مثلاً ماشین‌حساب کجاست؟"><button onclick="ask()">ارسال</button><p id="answer"></p></section>
+<footer class="muted" style="text-align:center;padding:20px">AMIR ALI · نسخه 1.0</footer>
+</main></div>
+<script>
+const PASSWORD="1111"; // این رمز فقط برای ورود نمایشی است و امنیت واقعی ایجاد نمی‌کند.
+function login(){if(document.getElementById('pass').value===PASSWORD){document.getElementById('login').classList.add('hidden');document.getElementById('home').classList.remove('hidden')}else document.getElementById('loginMsg').textContent='رمز اشتباه است.'}
+function logout(){document.getElementById('home').classList.add('hidden');document.getElementById('login').classList.remove('hidden');document.getElementById('pass').value=''}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));if(id)document.getElementById(id).classList.add('active')}
+function add(v){document.getElementById('display').value+=v}
+function clearCalc(){document.getElementById('display').value=''}
+function calculate(){let d=document.getElementById('display');try{if(!/^[0-9+\-*/.() ]+$/.test(d.value))throw 0;let r=Function('"use strict";return ('+d.value+')')();d.value=Number.isFinite(r)?String(r):'خطا'}catch{d.value='خطا'}}
+function ask(){let q=document.getElementById('question').value.toLowerCase(),a='برای استفاده از امکانات، از صفحه اصلی بخش موردنظر را انتخاب کن.';if(q.includes('ماشین'))a='از صفحه اصلی روی ماشین‌حساب بزن.';else if(q.includes('بازی')||q.includes('فلپی'))a='از صفحه اصلی وارد Flappy Bird شو و شروع را بزن.';else if(q.includes('رمز')||q.includes('ورود'))a='رمز پیش‌فرض نمایشی این نسخه 1111 است.';document.getElementById('answer').textContent=a}
+const c=document.getElementById('bird'),ctx=c.getContext('2d');let birdY=170,vy=0,pipes=[],score=0,running=false,frame=0;
+function draw(){ctx.fillStyle='#071827';ctx.fillRect(0,0,640,360);ctx.fillStyle='#173b58';for(let i=0;i<640;i+=40)ctx.fillRect(i,0,1,360);ctx.fillStyle='#ffd34e';ctx.beginPath();ctx.arc(150,birdY,15,0,Math.PI*2);ctx.fill();ctx.fillStyle='#48c774';pipes.forEach(p=>{ctx.fillRect(p.x,0,48,p.top);ctx.fillRect(p.x,p.top+115,48,360)});ctx.fillStyle='white';ctx.font='22px Arial';ctx.fillText('Score: '+score,18,30);if(!running){ctx.font='18px Arial';ctx.fillText('Tap or press Start',235,190)}}
+function startGame(){birdY=170;vy=0;pipes=[];score=0;frame=0;running=true;loop()}
+function flap(){if(running)vy=-6.5}c.addEventListener('pointerdown',flap);
+function loop(){if(!running)return;frame++;vy+=.28;birdY+=vy;if(frame%95===0){let top=55+Math.random()*150;pipes.push({x:650,top,passed:false})}pipes.forEach(p=>{p.x-=3;if(!p.passed&&p.x<150){score++;p.passed=true}if(p.x<165&&p.x+48>135&&(birdY-15<p.top||birdY+15>p.top+115))running=false});pipes=pipes.filter(p=>p.x>-60);if(birdY>345||birdY<15)running=false;document.getElementById('score').textContent='امتیاز: '+score;draw();if(running)requestAnimationFrame(loop);else draw()}
+draw();
+</script>
+</body></html>
