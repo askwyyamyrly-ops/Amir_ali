@@ -1,22 +1,323 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101827"><title>AMIR PLAY</title>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAVAK GROUP</title>
 <style>
-:root{--bg:#0b1020;--p:#17243b;--a:#63e6be;--t:#f5f7ff;--m:#a8b5ca}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#203555,#0b1020 65%);color:var(--t);font-family:system-ui,sans-serif}header{text-align:center;padding:28px 12px 22px;background:#14223b99;border-bottom:1px solid #ffffff20}.logo{color:var(--a);letter-spacing:4px;font-weight:900;font-size:12px}.hero{font-size:clamp(30px,8vw,46px);font-weight:900;margin:8px}.sub,small,.hint{color:var(--m)}main{max-width:1000px;margin:auto;padding:18px 13px 50px}.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}.game-card{background:linear-gradient(145deg,#213451,#121d31);border:1px solid #ffffff20;border-radius:18px;padding:16px 8px;color:white;min-height:115px;cursor:pointer;box-shadow:0 8px 20px #0004}.emoji{font-size:34px;display:block}.game-card b{display:block;margin:6px}.game-card small{font-size:12px}#stage{display:none;margin-top:18px;padding:15px;background:#121e32;border:1px solid #ffffff22;border-radius:20px}.head{display:flex;justify-content:space-between;align-items:center;gap:8px}.head h2{font-size:20px}.btn{border:0;border-radius:12px;padding:11px 15px;background:linear-gradient(135deg,#63e6be,#37b99f);font-weight:800;color:#09251e;cursor:pointer}.secondary{background:#293b58;color:white;border:1px solid #ffffff22}canvas{display:block;width:100%;max-width:650px;margin:auto;border-radius:14px;touch-action:manipulation}.controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:12px}.hint,.center{text-align:center}.score,.result{margin:12px;text-align:center;font-weight:800}.result{color:var(--a);min-height:25px}.board{display:grid;grid-template-columns:repeat(3,90px);gap:8px;justify-content:center;margin:20px}.cell{height:85px;border:1px solid #ffffff25;border-radius:14px;background:#263752;color:white;font-size:38px}input{background:#091426;border:1px solid #ffffff44;color:white;padding:12px;border-radius:12px;font-size:18px;text-align:center;width:230px}footer{text-align:center;color:#7888a3;padding:20px;font-size:12px}@media(max-width:400px){.cell{height:75px}.board{grid-template-columns:repeat(3,80px)}}
-</style></head><body><header><div class="logo">AMIR PLAY</div><div class="hero">دنیای بازی‌ها 🎮</div><div class="sub">پنج بازی جذاب، مناسب موبایل</div></header><main>
-<div class="games">
-<button class="game-card" onclick="openGame('flappy')"><span class="emoji">🐤</span><b>فلپی برد</b><small>پرواز بین لوله‌ها</small></button>
-<button class="game-card" onclick="openGame('dino')"><span class="emoji">🦖</span><b>دایناسور گوگل</b><small>پرش از روی مانع</small></button>
-<button class="game-card" onclick="openGame('tic')"><span class="emoji">⭕</span><b>بازی دوز</b><small>دو نفره</small></button>
-<button class="game-card" onclick="openGame('car')"><span class="emoji">🏎️</span><b>ماشین‌بازی</b><small>فرار از ترافیک</small></button>
-<button class="game-card" onclick="openGame('guess')"><span class="emoji">🔢</span><b>حدس اعداد</b><small>عدد مخفی را پیدا کن</small></button>
-</div><section id="stage"><div class="head"><h2 id="title">بازی</h2><button class="btn secondary" onclick="closeGame()">بازگشت</button></div><div id="area"></div></section></main><footer>ساخته‌شده با HTML, CSS و JavaScript · AMIR PLAY</footer>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#080e1b;color:white;
+ font-family:Tahoma,Arial,sans-serif;
+}
+button,input{font:inherit}
+button{
+ border:0;border-radius:12px;padding:13px 20px;
+ background:#087cf0;color:white;cursor:pointer;
+}
+button:hover{filter:brightness(1.2)}
+input{
+ width:100%;padding:14px;border:1px solid #344766;
+ border-radius:12px;background:#101d32;color:white;
+ margin:9px 0;outline:none;
+}
+.login{
+ min-height:100vh;display:flex;justify-content:center;
+ align-items:center;padding:20px;
+ background:radial-gradient(circle at top,#183c66,#080e1b 65%);
+}
+.loginbox{
+ width:100%;max-width:380px;padding:30px;
+ border:1px solid #29496c;border-radius:25px;
+ background:#101b2d;text-align:center;
+ box-shadow:0 15px 60px #0008;
+}
+.logo{font-size:42px;color:#40cfff}
+.loginbox h1{letter-spacing:3px}
+.small{color:#9aacc4;font-size:13px}
+#error{color:#ff6969}
+header{
+ padding:22px;text-align:center;
+ background:#111e32;border-bottom:1px solid #29415f;
+}
+header h1{color:#3dcfff;margin:0}
+nav{
+ display:flex;gap:8px;justify-content:center;
+ flex-wrap:wrap;padding:15px;
+ background:#0c1728;position:sticky;top:0;
+}
+nav button{background:#1c2d47}
+nav button.active{background:#087cf0}
+main{max-width:850px;margin:auto;padding:15px}
+.panel{
+ display:none;background:#111e32;
+ border:1px solid #273e5d;border-radius:18px;
+ padding:20px;margin-bottom:20px;
+}
+.panel.active{display:block}
+#messages{
+ height:270px;overflow-y:auto;background:#091424;
+ border-radius:12px;padding:12px;margin:12px 0;
+}
+.message{
+ background:#1d3451;border-radius:12px;
+ padding:12px;margin:8px 0;overflow-wrap:anywhere;
+}
+#game{
+ display:block;width:100%;max-width:400px;
+ margin:auto;background:#73d9ee;border-radius:15px;
+ touch-action:manipulation;
+}
+.center{text-align:center}
+.score{font-size:23px;color:#4ddcff;margin:15px}
+table{width:100%;border-collapse:collapse;text-align:center}
+td,th{padding:13px;border-bottom:1px solid #344766}
+footer{text-align:center;color:#647a98;padding:25px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login" id="login">
+ <div class="loginbox">
+  <div class="logo">⬡</div>
+  <h1>SAVAK GROUP</h1>
+  <p class="small">PRIVATE MEMBERS AREA</p>
+  <input id="password" type="password" placeholder="رمز عبور">
+  <button onclick="login()" style="width:100%">ورود به سایت</button>
+  <p id="error"></p>
+  <p class="small">WELCOME TO SAVAK GROUP</p>
+ </div>
+</div>
+
+<!-- MAIN SITE -->
+<div id="site" style="display:none">
+<header>
+ <h1>⬡ SAVAK GROUP</h1>
+ <p>گروه اختصاصی اعضا</p>
+</header>
+
+<nav>
+ <button class="active" onclick="showPage('chat',this)">💬 چت</button>
+ <button onclick="showPage('gamepage',this)">🐦 فلپی برد</button>
+ <button onclick="showPage('ranking',this)">🏆 رکوردها</button>
+</nav>
+
+<main>
+<section id="chat" class="panel active">
+ <h2>💬 چت گروه</h2>
+ <input id="username" placeholder="نام کاربری">
+ <div id="messages"></div>
+ <input id="msg" placeholder="پیام خود را بنویسید">
+ <button onclick="sendMessage()">ارسال پیام</button>
+ <p class="small">این نسخه چت محلی است و پیام‌ها بین دستگاه‌ها مشترک نیستند.</p>
+</section>
+
+<section id="gamepage" class="panel">
+ <h2 class="center">🐦 FLAPPY BIRD</h2>
+ <div class="score center">امتیاز: <span id="score">0</span></div>
+ <canvas id="game" width="400" height="500"></canvas>
+ <div class="center" style="margin-top:15px">
+  <button onclick="startGame()">شروع مجدد</button>
+  <button onclick="jump()">پرش</button>
+ </div>
+ <p class="small center">برای پرش روی صفحه بازی ضربه بزن.</p>
+</section>
+
+<section id="ranking" class="panel">
+ <h2>🏆 جدول رکوردها</h2>
+ <table>
+  <thead><tr><th>رتبه</th><th>بازیکن</th><th>امتیاز</th></tr></thead>
+  <tbody id="records"></tbody>
+ </table>
+</section>
+</main>
+<footer>SAVAK GROUP © 2026</footer>
+</div>
+
 <script>
-const stage=document.querySelector('#stage'),area=document.querySelector('#area'),title=document.querySelector('#title');let stop=()=>{};
-function openGame(n){stop();stage.style.display='block';stage.scrollIntoView({behavior:'smooth'});let g={flappy:['فلپی برد',flappy],dino:['دایناسور گوگل',dino],tic:['بازی دوز',tic],car:['ماشین‌بازی',car],guess:['حدس اعداد',guess]}[n];title.textContent=g[0];area.innerHTML='';stop=g[1]()}
-function closeGame(){stop();stage.style.display='none';area.innerHTML=''}
-function setup(w,h){area.innerHTML=`<canvas id="c" width="${w}" height="${h}"></canvas><div class="controls"><button class="btn" id="restart">شروع دوباره</button><button class="btn secondary" id="act">حرکت / پرش</button></div><div class="hint" id="hint"></div><div class="score" id="score">امتیاز: ۰</div>`;return{c:document.querySelector('#c'),x:document.querySelector('#c').getContext('2d'),score:v=>document.querySelector('#score').textContent='امتیاز: '+v,hint:v=>document.querySelector('#hint').textContent=v,start:f=>document.querySelector('#restart').onclick=f,act:f=>document.querySelector('#act').onclick=f}}
-function flappy(){let u=setup(600,350),{c,x}=u,b,pipes,f,s,dead,id;function reset(){cancelAnimationFrame(id);b={y:160,v:0};pipes=[];f=s=0;dead=false;u.score(0);loop()}function jump(){if(dead){reset();return}b.v=-6.5}function loop(){let gr=x.createLinearGradient(0,0,0,350);gr.addColorStop(0,'#61c9f4');gr.addColorStop(1,'#e4fbff');x.fillStyle=gr;x.fillRect(0,0,600,350);x.fillStyle='#fff9';for(let i=0;i<5;i++){let xx=(i*150-f%750+750)%750;x.beginPath();x.arc(xx,65,18,0,7);x.arc(xx+20,65,23,0,7);x.fill()}if(!dead){b.v+=.34;b.y+=b.v;if(f%90===0)pipes.push({x:620,g:85+Math.random()*90,passed:false});pipes.forEach(p=>p.x-=3);pipes=pipes.filter(p=>p.x>-70);pipes.forEach(p=>{x.fillStyle='#16975c';x.fillRect(p.x,0,55,p.g);x.fillRect(p.x,p.g+135,55,350);if(!p.passed&&p.x+55<130){p.passed=true;u.score(++s)}if(142>p.x&&118<p.x+55&&(b.y-12<p.g||b.y+12>p.g+135))dead=true});if(b.y>338||b.y<0)dead=true;f++}x.fillStyle='#f2bd42';x.beginPath();x.ellipse(130,b.y,17,13,0,0,7);x.fill();x.fillStyle='#fff';x.beginPath();x.arc(137,b.y-5,5,0,7);x.fill();x.fillStyle='#ef7847';x.fillRect(143,b.y,13,5);x.fillStyle='#4baf68';x.fillRect(0,340,600,10);if(dead){x.fillStyle='#17243b';x.font='bold 30px sans-serif';x.textAlign='center';x.fillText('پایان بازی! لمس کن',300,180)}id=requestAnimationFrame(loop)}u.start(reset);u.act(jump);c.onpointerdown=jump;u.hint('برای پرواز روی صفحه یا دکمه بزن.');reset();return()=>cancelAnimationFrame(id)}
-function dino(){let u=setup(600,300),{c,x}=u,y=220,v=0,obs=[],f=0,s=0,dead=false,id;function reset(){cancelAnimationFrame(id);y=220;v=0;obs=[];f=s=0;dead=false;u.score(0);loop()}function jump(){if(dead){reset();return}if(y>=220)v=-11}function loop(){x.fillStyle='#d7f5ff';x.fillRect(0,0,600,300);x.fillStyle='#9cbdc8';x.beginPath();x.arc(500,55,24,0,7);x.fill();x.strokeStyle='#657b85';x.beginPath();x.moveTo(0,252);x.lineTo(600,252);x.stroke();if(!dead){v+=.55;y=Math.min(220,y+v);if(y===220)v=0;if(f%75===0)obs.push({x:620,h:28+Math.random()*28});obs.forEach(o=>o.x-=5);obs=obs.filter(o=>o.x>-30);obs.forEach(o=>{x.fillStyle='#268b5c';x.fillRect(o.x,252-o.h,20,o.h);if(o.x<90&&o.x+20>55&&y+28>252-o.h)dead=true});if(++f%8===0)u.score(++s)}x.fillStyle='#35475e';x.fillRect(55,y,40,30);x.fillRect(78,y-13,24,20);x.fillStyle='white';x.fillRect(94,y-9,4,4);x.fillStyle='#35475e';x.fillRect(60,y+25,8,10);x.fillRect(82,y+25,8,10);if(dead){x.fillStyle='#17243b';x.font='bold 28px sans-serif';x.textAlign='center';x.fillText('بازی تمام شد!',300,130)}id=requestAnimationFrame(loop)}u.start(reset);u.act(jump);c.onpointerdown=jump;u.hint('برای پرش روی صفحه یا دکمه بزن.');reset();return()=>cancelAnimationFrame(id)}
-function tic(){area.innerHTML='<div class="center"><div id="turn">نوبت X</div><div class="board" id="board"></div><div class="result" id="res"></div><button class="btn" id="again">شروع دوباره</button></div>';let b=Array(9).fill(''),t='X',done=false;function draw(){let board=document.querySelector('#board');board.innerHTML='';b.forEach((v,i)=>{let z=document.createElement('button');z.className='cell';z.textContent=v;z.onclick=()=>play(i);board.append(z)});document.querySelector('#turn').textContent=done?'پایان بازی':'نوبت '+t}function play(i){if(done||b[i])return;b[i]=t;let wins=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];if(wins.some(a=>a.every(k=>b[k]===t))){done=true;document.querySelector('#res').textContent='برنده: '+t}else if(b.every(Boolean)){done=true;document.querySelector('#res').textContent='مساوی!'}else t=t==='X'?'O':'X';draw()}document.querySelector('#again').onclick=()=>{b=Array(9).fill('');t='X';done=false;document.querySelector('#res').textContent='';draw()};draw();return()=>{}}
-function car(){let u=setup(600,400),{c,x}=u,lane=1,obs=[],f=0,s=0,dead=false,id;function reset(){cancelAnimationFrame(id);lane=1;obs=[];f=s=0;dead=false;u.score(0);loop()}function move(d){if(dead){reset();return}lane=Math.max(0,Math.min(2,lane+d))}function loop(){x.fillStyle='#246047';x.fillRect(0,0,600,400);x.fillStyle='#303b4c';x.fillRect(150,0,300,400);x.strokeStyle='#f5e9a6';x.lineWidth=5;x.setLineDash([25,22]);[250,350].forEach(a=>{x.beginPath();x.moveTo(a,0);x.lineTo(a,400);x.stroke()});x.setLineDash([]);if(!dead){if(f%60===0)obs.push({l:Math.floor(Math.random()*3),y:-60});obs.forEach(o=>o.y+=5);obs=obs.filter(o=>o.y<450);obs.forEach(o=>{let xx=[200,300,400][o.l];x.fillStyle='#e65d58';x.fillRect(xx-20,o.y,40,60);if(o.l===lane&&o.y+60>320&&o.y<390)dead=true});if(++f%5===0)u.score(++s)}let xx=[200,300,400][lane];x.fillStyle='#65d8ff';x.fillRect(xx-22,320,44,65);x.fillStyle='#14253c';x.fillRect(xx-14,330,28,18);x.fillStyle='#111';x.fillRect(xx-25,375,12,17);x.fillRect(xx+13,375,12,17);if(dead){x.fillStyle='white';x.font='bold 28px sans-serif';x.textAlign='center';x.fillText('تصادف کردی!',300,190)}id=requestAnimationFrame(loop)}u.start(reset);u.act(()=>move(1));c.onpointerdown=e=>{let r=c.getBoundingClientRect();move((e.clientX-r.left)/r.width<.5?-1:1)};u.hint('سمت چپ یا راست صفحه را لمس کن.');reset();return()=>cancelAnimationFrame(id)}
-function guess(){let secret=Math.ceil(Math.random()*100),tries=0;area.innerHTML='<div class="center"><p>یک عدد بین ۱ تا ۱۰۰ حدس بزن.</p><input id="num" type="number" min="1" max="100" placeholder="عدد تو"><div class="controls"><button class="btn" id="check">بررسی حدس</button><button class="btn secondary" id="new">عدد جدید</button></div><div class="result" id="feedback"></div><div class="hint" id="tries">تعداد حدس: ۰</div></div>';let n=document.querySelector('#num'),f=document.querySelector('#feedback'),tr=document.querySelector('#tries');function fresh(){secret=Math.ceil(Math.random()*100);tries=0;n.value='';f.textContent='';tr.textContent='تعداد حدس: ۰'}document.querySelector('#new').onclick=fresh;document.querySelector('#check').onclick=()=>{let v=Number(n.value);if(!Number.isInteger(v)||v<1||v>100){f.textContent='عدد صحیح بین ۱ تا ۱۰۰ وارد کن.';return}tries++;tr.textContent='تعداد حدس: '+tries;f.textContent=v===secret?'آفرین! درست حدس زدی 🎉':v<secret?'عدد مخفی بزرگ‌تر است.':'عدد مخفی کوچک‌تر است.'};n.onkeydown=e=>{if(e.key==='Enter')document.querySelector('#check').click()};return()=>{}}
-</script></body></html>
+// LOGIN
+function login(){
+ const pass=document.getElementById('password').value;
+ if(pass==='1224'){
+  sessionStorage.setItem('savakLogin','yes');
+  enterSite();
+ }else{
+  document.getElementById('error').textContent='رمز عبور اشتباه است!';
+ }
+}
+function enterSite(){
+ document.getElementById('login').style.display='none';
+ document.getElementById('site').style.display='block';
+ renderMessages();
+}
+if(sessionStorage.getItem('savakLogin')==='yes')enterSite();
+
+document.getElementById('password').addEventListener('keydown',e=>{
+ if(e.key==='Enter')login();
+});
+
+// NAVIGATION
+function showPage(id,btn){
+ document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+ document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ btn.classList.add('active');
+ if(id==='ranking')renderRecords();
+}
+
+// CHAT - LOCAL VERSION
+function sendMessage(){
+ const name=document.getElementById('username').value.trim();
+ const msg=document.getElementById('msg').value.trim();
+ if(!name||!msg){alert('نام و پیام را وارد کن');return}
+ let arr=JSON.parse(localStorage.getItem('savakMessages')||'[]');
+ arr.push({name,msg});
+ if(arr.length>100)arr=arr.slice(-100);
+ localStorage.setItem('savakMessages',JSON.stringify(arr));
+ document.getElementById('msg').value='';
+ renderMessages();
+}
+function renderMessages(){
+ const box=document.getElementById('messages');
+ if(!box)return;
+ box.innerHTML='';
+ let arr=JSON.parse(localStorage.getItem('savakMessages')||'[]');
+ arr.forEach(m=>{
+  const div=document.createElement('div');
+  div.className='message';
+  const b=document.createElement('b');
+  b.textContent=m.name+': ';
+  div.append(b,document.createTextNode(m.msg));
+  box.appendChild(div);
+ });
+ box.scrollTop=box.scrollHeight;
+}
+
+// FLAPPY BIRD
+const canvas=document.getElementById('game');
+const ctx=canvas.getContext('2d');
+let bird={x:85,y:220,v:0};
+let pipes=[],score=0,frame=0,running=false,raf=null;
+
+function drawBird(){
+ ctx.fillStyle='#ffdb36';
+ ctx.beginPath();
+ ctx.arc(bird.x,bird.y,15,0,Math.PI*2);
+ ctx.fill();
+ ctx.fillStyle='white';
+ ctx.beginPath();
+ ctx.arc(bird.x+6,bird.y-5,5,0,Math.PI*2);
+ ctx.fill();
+ ctx.fillStyle='#222';
+ ctx.beginPath();
+ ctx.arc(bird.x+8,bird.y-5,2,0,Math.PI*2);
+ ctx.fill();
+ ctx.fillStyle='#ff8138';
+ ctx.beginPath();
+ ctx.moveTo(bird.x+13,bird.y);
+ ctx.lineTo(bird.x+25,bird.y+4);
+ ctx.lineTo(bird.x+13,bird.y+7);
+ ctx.fill();
+}
+function draw(){
+ ctx.clearRect(0,0,400,500);
+ ctx.fillStyle='#74d9ed';
+ ctx.fillRect(0,0,400,500);
+ ctx.fillStyle='#d8f7ff';
+ ctx.beginPath();
+ ctx.arc(80,90,25,0,7);
+ ctx.arc(110,90,18,0,7);
+ ctx.fill();
+ pipes.forEach(p=>{
+  ctx.fillStyle='#20ad54';
+  ctx.fillRect(p.x,0,52,p.top);
+  ctx.fillRect(p.x,p.top+135,52,500);
+  ctx.fillStyle='#168a41';
+  ctx.fillRect(p.x-4,p.top-17,60,17);
+  ctx.fillRect(p.x-4,p.top+135,60,17);
+ });
+ ctx.fillStyle='#d9b66c';
+ ctx.fillRect(0,465,400,35);
+ ctx.fillStyle='#67bd42';
+ ctx.fillRect(0,460,400,8);
+ drawBird();
+}
+function startGame(){
+ if(raf)cancelAnimationFrame(raf);
+ bird={x:85,y:220,v:0};
+ pipes=[];
+ score=0;frame=0;running=true;
+ document.getElementById('score').textContent=score;
+ loop();
+}
+function jump(){
+ if(!running){startGame();return}
+ bird.v=-6.5;
+}
+function loop(){
+ if(!running)return;
+ frame++;
+ bird.v+=0.34;
+ bird.y+=bird.v;
+ if(frame%95===0){
+  let top=70+Math.random()*220;
+  pipes.push({x:410,top,passed:false});
+ }
+ pipes.forEach(p=>{
+  p.x-=2.6;
+  if(!p.passed&&p.x+52<bird.x){
+   p.passed=true;score++;
+   document.getElementById('score').textContent=score;
+  }
+  if(bird.x+12>p.x&&bird.x-12<p.x+52&&
+  (bird.y-12<p.top||bird.y+12>p.top+135))endGame();
+ });
+ pipes=pipes.filter(p=>p.x>-65);
+ if(bird.y>450||bird.y<0)endGame();
+ draw();
+ if(running)raf=requestAnimationFrame(loop);
+}
+function endGame(){
+ running=false;
+ saveRecord(score);
+ draw();
+ ctx.fillStyle='#10243a';
+ ctx.fillRect(35,190,330,105);
+ ctx.fillStyle='white';
+ ctx.textAlign='center';
+ ctx.font='bold 25px Tahoma';
+ ctx.fillText('GAME OVER',200,235);
+ ctx.font='17px Tahoma';
+ ctx.fillText('امتیاز: '+score,200,270);
+}
+canvas.addEventListener('pointerdown',e=>{
+ e.preventDefault();jump();
+});
+
+// RECORDS - LOCAL VERSION
+function saveRecord(s){
+ const name=document.getElementById('username').value.trim()||'بازیکن';
+ let records=JSON.parse(localStorage.getItem('savakRecords')||'[]');
+ records.push({name,score:s});
+ records.sort((a,b)=>b.score-a.score);
+ records=records.slice(0,20);
+ localStorage.setItem('savakRecords',JSON.stringify(records));
+}
+function renderRecords(){
+ let records=JSON.parse(localStorage.getItem('savakRecords')||'[]');
+ document.getElementById('records').innerHTML='';
+ records.forEach((r,i)=>{
+  const tr=document.createElement('tr');
+  [i+1,r.name,r.score].forEach(value=>{
+   const td=document.createElement('td');
+   td.textContent=value;
+   tr.appendChild(td);
+  });
+  document.getElementById('records').appendChild(tr);
+ });
+}
+draw();
+</script>
+</body>
+</html>
