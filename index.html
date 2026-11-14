@@ -1,323 +1,967 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080f20">
 <title>SAVAK GROUP</title>
+
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#080e1b;color:white;
+ margin:0;
+ background:#080f20;
+ color:#fff;
  font-family:Tahoma,Arial,sans-serif;
 }
 button,input{font:inherit}
 button{
- border:0;border-radius:12px;padding:13px 20px;
- background:#087cf0;color:white;cursor:pointer;
+ border:0;
+ border-radius:12px;
+ padding:13px 18px;
+ background:#087cf0;
+ color:white;
+ cursor:pointer;
+ transition:.2s;
 }
 button:hover{filter:brightness(1.2)}
 input{
- width:100%;padding:14px;border:1px solid #344766;
- border-radius:12px;background:#101d32;color:white;
- margin:9px 0;outline:none;
+ width:100%;
+ padding:14px;
+ margin:8px 0;
+ border:1px solid #304968;
+ border-radius:12px;
+ background:#101d32;
+ color:white;
+ outline:none;
 }
+input:focus{border-color:#26baff}
+
 .login{
- min-height:100vh;display:flex;justify-content:center;
- align-items:center;padding:20px;
- background:radial-gradient(circle at top,#183c66,#080e1b 65%);
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+ background:radial-gradient(circle at top,#19416b,#080f20 70%);
 }
 .loginbox{
- width:100%;max-width:380px;padding:30px;
- border:1px solid #29496c;border-radius:25px;
- background:#101b2d;text-align:center;
- box-shadow:0 15px 60px #0008;
+ width:100%;
+ max-width:390px;
+ padding:30px;
+ text-align:center;
+ border:1px solid #294b70;
+ border-radius:25px;
+ background:#111e32;
+ box-shadow:0 15px 60px #0009;
 }
-.logo{font-size:42px;color:#40cfff}
-.loginbox h1{letter-spacing:3px}
-.small{color:#9aacc4;font-size:13px}
-#error{color:#ff6969}
+.logo{
+ font-size:55px;
+ color:#36caff;
+}
+.loginbox h1{
+ letter-spacing:3px;
+ font-size:25px;
+}
+.small{
+ color:#9bacc3;
+ font-size:12px;
+ line-height:2;
+}
+#error{color:#ff6c6c}
+
 header{
- padding:22px;text-align:center;
- background:#111e32;border-bottom:1px solid #29415f;
+ padding:25px 15px;
+ text-align:center;
+ background:linear-gradient(120deg,#101d32,#142e50);
+ border-bottom:1px solid #284566;
 }
-header h1{color:#3dcfff;margin:0}
+header h1{
+ color:#3bcaff;
+ margin:0;
+ letter-spacing:2px;
+}
+header p{color:#a8bed7}
+
 nav{
- display:flex;gap:8px;justify-content:center;
- flex-wrap:wrap;padding:15px;
- background:#0c1728;position:sticky;top:0;
+ position:sticky;
+ top:0;
+ z-index:5;
+ display:flex;
+ justify-content:center;
+ gap:9px;
+ flex-wrap:wrap;
+ padding:14px 8px;
+ background:#0b1729;
+ border-bottom:1px solid #253c5a;
 }
-nav button{background:#1c2d47}
+nav button{background:#1b2d47}
 nav button.active{background:#087cf0}
-main{max-width:850px;margin:auto;padding:15px}
+
+main{
+ width:100%;
+ max-width:850px;
+ margin:auto;
+ padding:15px;
+}
 .panel{
- display:none;background:#111e32;
- border:1px solid #273e5d;border-radius:18px;
- padding:20px;margin-bottom:20px;
+ display:none;
+ padding:20px;
+ margin-bottom:20px;
+ background:#111e32;
+ border:1px solid #29415f;
+ border-radius:18px;
 }
 .panel.active{display:block}
+
+h2{color:#49cfff}
+.center{text-align:center}
+
 #messages{
- height:270px;overflow-y:auto;background:#091424;
- border-radius:12px;padding:12px;margin:12px 0;
+ height:300px;
+ overflow-y:auto;
+ padding:12px;
+ margin:15px 0;
+ border-radius:13px;
+ background:#091424;
 }
 .message{
- background:#1d3451;border-radius:12px;
- padding:12px;margin:8px 0;overflow-wrap:anywhere;
+ padding:12px;
+ margin:9px 0;
+ border-radius:12px;
+ background:#203854;
+ overflow-wrap:anywhere;
 }
+.message b{color:#48d4ff}
+.message small{
+ display:block;
+ color:#94a9c3;
+ margin-top:5px;
+}
+.chatrow{
+ display:flex;
+ gap:8px;
+ align-items:center;
+}
+.chatrow input{flex:1;min-width:0}
+.chatrow button{white-space:nowrap}
+.status{
+ font-size:12px;
+ color:#7bd8a0;
+}
+
 #game{
- display:block;width:100%;max-width:400px;
- margin:auto;background:#73d9ee;border-radius:15px;
+ display:block;
+ width:100%;
+ max-width:400px;
+ height:auto;
+ margin:auto;
+ border-radius:15px;
+ background:#74d9ef;
  touch-action:manipulation;
 }
-.center{text-align:center}
-.score{font-size:23px;color:#4ddcff;margin:15px}
-table{width:100%;border-collapse:collapse;text-align:center}
-td,th{padding:13px;border-bottom:1px solid #344766}
-footer{text-align:center;color:#647a98;padding:25px}
+.score{
+ color:#43d5ff;
+ font-size:25px;
+ margin:15px;
+}
+.gamebuttons{
+ display:flex;
+ justify-content:center;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-top:15px;
+}
+table{
+ width:100%;
+ border-collapse:collapse;
+ text-align:center;
+}
+td,th{
+ padding:13px 5px;
+ border-bottom:1px solid #344766;
+}
+th{color:#4bcfff}
+footer{
+ padding:25px;
+ text-align:center;
+ color:#7288a5;
+ font-size:12px;
+}
+.hidden{display:none!important}
 </style>
 </head>
+
 <body>
 
-<!-- LOGIN -->
+<!-- LOGIN PAGE -->
+
 <div class="login" id="login">
+
  <div class="loginbox">
+
   <div class="logo">⬡</div>
+
   <h1>SAVAK GROUP</h1>
+
   <p class="small">PRIVATE MEMBERS AREA</p>
-  <input id="password" type="password" placeholder="رمز عبور">
-  <button onclick="login()" style="width:100%">ورود به سایت</button>
+
+  <input
+   id="password"
+   type="password"
+   placeholder="رمز عبور"
+   autocomplete="current-password"
+  >
+
+  <button onclick="login()" style="width:100%">
+   ورود به سایت
+  </button>
+
   <p id="error"></p>
+
   <p class="small">WELCOME TO SAVAK GROUP</p>
+
  </div>
 </div>
 
 <!-- MAIN SITE -->
+
 <div id="site" style="display:none">
+
 <header>
  <h1>⬡ SAVAK GROUP</h1>
  <p>گروه اختصاصی اعضا</p>
 </header>
 
 <nav>
- <button class="active" onclick="showPage('chat',this)">💬 چت</button>
- <button onclick="showPage('gamepage',this)">🐦 فلپی برد</button>
- <button onclick="showPage('ranking',this)">🏆 رکوردها</button>
+ <button class="active" onclick="showPage('chat',this)">
+  💬 چت
+ </button>
+
+ <button onclick="showPage('gamepage',this)">
+  🐦 فلپی برد
+ </button>
+
+ <button onclick="showPage('ranking',this)">
+  🏆 رکوردها
+ </button>
 </nav>
 
 <main>
+
+<!-- CHAT -->
+
 <section id="chat" class="panel active">
- <h2>💬 چت گروه</h2>
- <input id="username" placeholder="نام کاربری">
+
+ <h2>💬 چت آنلاین گروه</h2>
+
+ <input
+  id="username"
+  maxlength="24"
+  placeholder="نام کاربری شما"
+ >
+
+ <div class="status" id="chatStatus">
+  در حال اتصال...
+ </div>
+
  <div id="messages"></div>
- <input id="msg" placeholder="پیام خود را بنویسید">
- <button onclick="sendMessage()">ارسال پیام</button>
- <p class="small">این نسخه چت محلی است و پیام‌ها بین دستگاه‌ها مشترک نیستند.</p>
+
+ <div class="chatrow">
+  <input
+   id="msg"
+   maxlength="500"
+   placeholder="پیام خود را بنویسید..."
+  >
+
+  <button onclick="sendMessage()">
+   ارسال
+  </button>
+ </div>
+
+ <p class="small">
+  پیام‌ها با Firebase بین کاربران متصل به اشتراک گذاشته می‌شوند.
+ </p>
+
 </section>
+
+<!-- FLAPPY BIRD -->
 
 <section id="gamepage" class="panel">
+
  <h2 class="center">🐦 FLAPPY BIRD</h2>
- <div class="score center">امتیاز: <span id="score">0</span></div>
- <canvas id="game" width="400" height="500"></canvas>
- <div class="center" style="margin-top:15px">
-  <button onclick="startGame()">شروع مجدد</button>
-  <button onclick="jump()">پرش</button>
+
+ <div class="score center">
+  امتیاز: <span id="score">0</span>
  </div>
- <p class="small center">برای پرش روی صفحه بازی ضربه بزن.</p>
+
+ <canvas id="game" width="400" height="500"></canvas>
+
+ <div class="gamebuttons">
+
+  <button onclick="startGame()">
+   شروع بازی
+  </button>
+
+  <button onclick="jump()">
+   پرش
+  </button>
+
+ </div>
+
+ <p class="small center">
+  برای پرش روی صفحه بازی ضربه بزن.
+ </p>
+
 </section>
+
+<!-- RANKING -->
 
 <section id="ranking" class="panel">
+
  <h2>🏆 جدول رکوردها</h2>
+
  <table>
-  <thead><tr><th>رتبه</th><th>بازیکن</th><th>امتیاز</th></tr></thead>
+
+  <thead>
+   <tr>
+    <th>رتبه</th>
+    <th>بازیکن</th>
+    <th>امتیاز</th>
+   </tr>
+  </thead>
+
   <tbody id="records"></tbody>
+
  </table>
+
+ <p class="small">
+  رکوردهای این نسخه فقط روی همین دستگاه ذخیره می‌شوند.
+ </p>
+
 </section>
+
 </main>
-<footer>SAVAK GROUP © 2026</footer>
+
+<footer>
+ SAVAK GROUP © 2026
+</footer>
+
 </div>
 
-<script>
-// LOGIN
-function login(){
- const pass=document.getElementById('password').value;
- if(pass==='1224'){
-  sessionStorage.setItem('savakLogin','yes');
-  enterSite();
- }else{
-  document.getElementById('error').textContent='رمز عبور اشتباه است!';
- }
-}
-function enterSite(){
- document.getElementById('login').style.display='none';
- document.getElementById('site').style.display='block';
- renderMessages();
-}
-if(sessionStorage.getItem('savakLogin')==='yes')enterSite();
+<!-- GENERAL JAVASCRIPT -->
 
-document.getElementById('password').addEventListener('keydown',e=>{
- if(e.key==='Enter')login();
+<script>
+
+// LOGIN
+
+function login(){
+
+ const pass=document.getElementById("password").value;
+
+ if(pass==="1224"){
+
+  sessionStorage.setItem("savakLogin","yes");
+
+  enterSite();
+
+ }else{
+
+  document.getElementById("error").textContent=
+  "رمز عبور اشتباه است!";
+
+ }
+
+}
+
+function enterSite(){
+
+ document.getElementById("login").style.display="none";
+
+ document.getElementById("site").style.display="block";
+
+ if(window.startChat)window.startChat();
+
+}
+
+if(sessionStorage.getItem("savakLogin")==="yes"){
+ enterSite();
+}
+
+document.getElementById("password").addEventListener("keydown",e=>{
+ if(e.key==="Enter")login();
 });
 
+
 // NAVIGATION
+
 function showPage(id,btn){
- document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
- document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- btn.classList.add('active');
- if(id==='ranking')renderRecords();
+
+ document.querySelectorAll(".panel").forEach(p=>{
+  p.classList.remove("active");
+ });
+
+ document.querySelectorAll("nav button").forEach(b=>{
+  b.classList.remove("active");
+ });
+
+ document.getElementById(id).classList.add("active");
+
+ btn.classList.add("active");
+
+ if(id==="ranking")renderRecords();
+
 }
 
-// CHAT - LOCAL VERSION
-function sendMessage(){
- const name=document.getElementById('username').value.trim();
- const msg=document.getElementById('msg').value.trim();
- if(!name||!msg){alert('نام و پیام را وارد کن');return}
- let arr=JSON.parse(localStorage.getItem('savakMessages')||'[]');
- arr.push({name,msg});
- if(arr.length>100)arr=arr.slice(-100);
- localStorage.setItem('savakMessages',JSON.stringify(arr));
- document.getElementById('msg').value='';
- renderMessages();
-}
-function renderMessages(){
- const box=document.getElementById('messages');
- if(!box)return;
- box.innerHTML='';
- let arr=JSON.parse(localStorage.getItem('savakMessages')||'[]');
- arr.forEach(m=>{
-  const div=document.createElement('div');
-  div.className='message';
-  const b=document.createElement('b');
-  b.textContent=m.name+': ';
-  div.append(b,document.createTextNode(m.msg));
-  box.appendChild(div);
- });
- box.scrollTop=box.scrollHeight;
-}
 
 // FLAPPY BIRD
-const canvas=document.getElementById('game');
-const ctx=canvas.getContext('2d');
+
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
 let bird={x:85,y:220,v:0};
-let pipes=[],score=0,frame=0,running=false,raf=null;
+
+let pipes=[];
+let score=0;
+let frame=0;
+let running=false;
+let raf=null;
 
 function drawBird(){
- ctx.fillStyle='#ffdb36';
+
+ ctx.fillStyle="#ffdb36";
+
  ctx.beginPath();
  ctx.arc(bird.x,bird.y,15,0,Math.PI*2);
  ctx.fill();
- ctx.fillStyle='white';
+
+ ctx.fillStyle="white";
+
  ctx.beginPath();
  ctx.arc(bird.x+6,bird.y-5,5,0,Math.PI*2);
  ctx.fill();
- ctx.fillStyle='#222';
+
+ ctx.fillStyle="#222";
+
  ctx.beginPath();
  ctx.arc(bird.x+8,bird.y-5,2,0,Math.PI*2);
  ctx.fill();
- ctx.fillStyle='#ff8138';
+
+ ctx.fillStyle="#ff8138";
+
  ctx.beginPath();
  ctx.moveTo(bird.x+13,bird.y);
  ctx.lineTo(bird.x+25,bird.y+4);
- ctx.lineTo(bird.x+13,bird.y+7);
+ ctx.lineTo(bird.x+13,bird.y+8);
  ctx.fill();
+
 }
+
 function draw(){
+
  ctx.clearRect(0,0,400,500);
- ctx.fillStyle='#74d9ed';
+
+ ctx.fillStyle="#74d9ed";
  ctx.fillRect(0,0,400,500);
- ctx.fillStyle='#d8f7ff';
+
+ // CLOUDS
+
+ ctx.fillStyle="#e5faff";
+
  ctx.beginPath();
- ctx.arc(80,90,25,0,7);
- ctx.arc(110,90,18,0,7);
+ ctx.arc(75,90,22,0,Math.PI*2);
+ ctx.arc(100,85,27,0,Math.PI*2);
+ ctx.arc(125,93,18,0,Math.PI*2);
  ctx.fill();
+
+ // PIPES
+
  pipes.forEach(p=>{
-  ctx.fillStyle='#20ad54';
+
+  ctx.fillStyle="#20ad54";
+
   ctx.fillRect(p.x,0,52,p.top);
+
   ctx.fillRect(p.x,p.top+135,52,500);
-  ctx.fillStyle='#168a41';
+
+  ctx.fillStyle="#168a41";
+
   ctx.fillRect(p.x-4,p.top-17,60,17);
+
   ctx.fillRect(p.x-4,p.top+135,60,17);
+
  });
- ctx.fillStyle='#d9b66c';
+
+ // GROUND
+
+ ctx.fillStyle="#d9b66c";
  ctx.fillRect(0,465,400,35);
- ctx.fillStyle='#67bd42';
+
+ ctx.fillStyle="#67bd42";
  ctx.fillRect(0,460,400,8);
+
  drawBird();
+
 }
+
 function startGame(){
+
  if(raf)cancelAnimationFrame(raf);
+
  bird={x:85,y:220,v:0};
+
  pipes=[];
- score=0;frame=0;running=true;
- document.getElementById('score').textContent=score;
+
+ score=0;
+ frame=0;
+ running=true;
+
+ document.getElementById("score").textContent=score;
+
  loop();
+
 }
+
 function jump(){
- if(!running){startGame();return}
- bird.v=-6.5;
-}
-function loop(){
- if(!running)return;
- frame++;
- bird.v+=0.34;
- bird.y+=bird.v;
- if(frame%95===0){
-  let top=70+Math.random()*220;
-  pipes.push({x:410,top,passed:false});
+
+ if(!running){
+  startGame();
+  return;
  }
+
+ bird.v=-6.5;
+
+}
+
+function loop(){
+
+ if(!running)return;
+
+ frame++;
+
+ bird.v+=0.34;
+
+ bird.y+=bird.v;
+
+ if(frame%95===0){
+
+  let top=70+Math.random()*220;
+
+  pipes.push({
+   x:410,
+   top:top,
+   passed:false
+  });
+
+ }
+
  pipes.forEach(p=>{
+
   p.x-=2.6;
-  if(!p.passed&&p.x+52<bird.x){
-   p.passed=true;score++;
-   document.getElementById('score').textContent=score;
+
+  if(!p.passed && p.x+52<bird.x){
+
+   p.passed=true;
+
+   score++;
+
+   document.getElementById("score").textContent=score;
+
   }
-  if(bird.x+12>p.x&&bird.x-12<p.x+52&&
-  (bird.y-12<p.top||bird.y+12>p.top+135))endGame();
+
+  if(
+   bird.x+12>p.x &&
+   bird.x-12<p.x+52 &&
+   (
+    bird.y-12<p.top ||
+    bird.y+12>p.top+135
+   )
+  ){
+   endGame();
+  }
+
  });
+
  pipes=pipes.filter(p=>p.x>-65);
- if(bird.y>450||bird.y<0)endGame();
+
+ if(bird.y>450 || bird.y<0){
+  endGame();
+ }
+
  draw();
- if(running)raf=requestAnimationFrame(loop);
+
+ if(running){
+  raf=requestAnimationFrame(loop);
+ }
+
 }
+
 function endGame(){
+
+ if(!running)return;
+
  running=false;
+
  saveRecord(score);
+
  draw();
- ctx.fillStyle='#10243a';
+
+ ctx.fillStyle="#10243a";
+
  ctx.fillRect(35,190,330,105);
- ctx.fillStyle='white';
- ctx.textAlign='center';
- ctx.font='bold 25px Tahoma';
- ctx.fillText('GAME OVER',200,235);
- ctx.font='17px Tahoma';
- ctx.fillText('امتیاز: '+score,200,270);
+
+ ctx.fillStyle="white";
+
+ ctx.textAlign="center";
+
+ ctx.font="bold 25px Tahoma";
+
+ ctx.fillText("GAME OVER",200,235);
+
+ ctx.font="17px Tahoma";
+
+ ctx.fillText("امتیاز: "+score,200,270);
+
 }
-canvas.addEventListener('pointerdown',e=>{
- e.preventDefault();jump();
+
+canvas.addEventListener("pointerdown",e=>{
+
+ e.preventDefault();
+
+ jump();
+
 });
 
-// RECORDS - LOCAL VERSION
+
+// LOCAL RECORDS
+
 function saveRecord(s){
- const name=document.getElementById('username').value.trim()||'بازیکن';
- let records=JSON.parse(localStorage.getItem('savakRecords')||'[]');
- records.push({name,score:s});
- records.sort((a,b)=>b.score-a.score);
- records=records.slice(0,20);
- localStorage.setItem('savakRecords',JSON.stringify(records));
-}
-function renderRecords(){
- let records=JSON.parse(localStorage.getItem('savakRecords')||'[]');
- document.getElementById('records').innerHTML='';
- records.forEach((r,i)=>{
-  const tr=document.createElement('tr');
-  [i+1,r.name,r.score].forEach(value=>{
-   const td=document.createElement('td');
-   td.textContent=value;
-   tr.appendChild(td);
-  });
-  document.getElementById('records').appendChild(tr);
+
+ const name=
+ document.getElementById("username").value.trim() || "بازیکن";
+
+ let records=JSON.parse(
+  localStorage.getItem("savakRecords")||"[]"
+ );
+
+ records.push({
+  name:name,
+  score:s
  });
+
+ records.sort((a,b)=>b.score-a.score);
+
+ records=records.slice(0,20);
+
+ localStorage.setItem(
+  "savakRecords",
+  JSON.stringify(records)
+ );
+
 }
+
+function renderRecords(){
+
+ let records=JSON.parse(
+  localStorage.getItem("savakRecords")||"[]"
+ );
+
+ const tbody=document.getElementById("records");
+
+ tbody.innerHTML="";
+
+ records.forEach((r,i)=>{
+
+  const tr=document.createElement("tr");
+
+  [i+1,r.name,r.score].forEach(value=>{
+
+   const td=document.createElement("td");
+
+   td.textContent=value;
+
+   tr.appendChild(td);
+
+  });
+
+  tbody.appendChild(tr);
+
+ });
+
+}
+
 draw();
+
 </script>
+
+
+<!-- FIREBASE ONLINE CHAT -->
+
+<script type="module">
+
+import {
+ initializeApp
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+import {
+ getDatabase,
+ ref,
+ push,
+ onChildAdded,
+ query,
+ limitToLast
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+import {
+ getAuth,
+ signInAnonymously,
+ onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+
+// FIREBASE CONFIG
+
+const firebaseConfig={
+
+ apiKey:"AIzaSyD81ZMMuKfQ4msqUHgeoo8MYMXQcnbx0DM",
+
+ authDomain:"amiral-1390.firebaseapp.com",
+
+ databaseURL:"https://amiral-1390-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+ projectId:"amiral-1390",
+
+ storageBucket:"amiral-1390.firebasestorage.app",
+
+ messagingSenderId:"992833996810",
+
+ appId:"1:992833996810:web:371a5cc9779da7457437f3"
+
+};
+
+
+// INITIALIZE
+
+const app=initializeApp(firebaseConfig);
+
+const db=getDatabase(app);
+
+const auth=getAuth(app);
+
+const messagesRef=ref(db,"messages");
+
+let currentUser=null;
+let chatStarted=false;
+let listenerStarted=false;
+let signingIn=false;
+
+
+// STATUS
+
+const status=document.getElementById("chatStatus");
+
+function setStatus(message){
+
+ status.textContent=message;
+
+}
+
+
+// DISPLAY MESSAGE
+
+function displayMessage(data){
+
+ const box=document.getElementById("messages");
+
+ const div=document.createElement("div");
+
+ div.className="message";
+
+ const name=document.createElement("b");
+
+ name.textContent=data.name+": ";
+
+ const content=document.createElement("span");
+
+ content.textContent=data.text;
+
+ div.append(name,content);
+
+ box.appendChild(div);
+
+ box.scrollTop=box.scrollHeight;
+
+}
+
+
+// START LISTENER
+
+function listenMessages(){
+
+ if(!currentUser || listenerStarted || !chatStarted)return;
+
+ listenerStarted=true;
+
+ const recentMessages=query(
+  messagesRef,
+  limitToLast(100)
+ );
+
+ onChildAdded(
+  recentMessages,
+  snapshot=>{
+
+   const data=snapshot.val();
+
+   if(data && typeof data.name==="string" &&
+      typeof data.text==="string"){
+
+    displayMessage(data);
+
+   }
+
+  },
+  error=>{
+
+   listenerStarted=false;
+
+   setStatus("خطای دریافت پیام: "+error.message);
+
+  }
+ );
+
+}
+
+
+// AUTHENTICATION
+
+onAuthStateChanged(auth,user=>{
+
+ if(user){
+
+  currentUser=user;
+
+  signingIn=false;
+
+  setStatus("🟢 اتصال به Firebase برقرار است");
+
+  listenMessages();
+
+ }else{
+
+  currentUser=null;
+
+  if(!signingIn){
+
+   signingIn=true;
+
+   setStatus("در حال ورود ناشناس...");
+
+   signInAnonymously(auth).catch(error=>{
+
+    signingIn=false;
+
+    setStatus("خطای ورود: "+error.message);
+
+   });
+
+  }
+
+ }
+
+});
+
+
+// START CHAT AFTER LOGIN
+
+window.startChat=function(){
+
+ chatStarted=true;
+
+ if(currentUser){
+
+  listenMessages();
+
+ }
+
+};
+
+
+// SEND MESSAGE
+
+window.sendMessage=async function(){
+
+ if(!currentUser){
+
+  alert("هنوز به Firebase متصل نشده‌ای.");
+
+  return;
+
+ }
+
+ const nameInput=document.getElementById("username");
+
+ const msgInput=document.getElementById("msg");
+
+ const name=nameInput.value.trim();
+
+ const message=msgInput.value.trim();
+
+ if(!name || !message){
+
+  alert("نام و پیام را وارد کن.");
+
+  return;
+
+ }
+
+ if(name.length>24 || message.length>500){
+
+  alert("نام یا پیام بیش از حد طولانی است.");
+
+  return;
+
+ }
+
+ try{
+
+  await push(messagesRef,{
+
+   name:name,
+
+   text:message,
+
+   uid:currentUser.uid,
+
+   createdAt:Date.now()
+
+  });
+
+  msgInput.value="";
+
+ }catch(error){
+
+  alert("ارسال پیام ناموفق بود: "+error.message);
+
+ }
+
+};
+
+
+// ENTER TO SEND
+
+document.getElementById("msg").addEventListener("keydown",event=>{
+
+ if(event.key==="Enter"){
+
+  window.sendMessage();
+
+ }
+
+});
+
+</script>
+
 </body>
 </html>
