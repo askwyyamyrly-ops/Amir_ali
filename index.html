@@ -1,967 +1,481 @@
 
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080f20">
 <title>SAVAK GROUP</title>
-
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- background:#080f20;
- color:#fff;
+ margin:0;background:#080d19;color:white;
  font-family:Tahoma,Arial,sans-serif;
 }
-button,input{font:inherit}
-button{
- border:0;
- border-radius:12px;
- padding:13px 18px;
- background:#087cf0;
- color:white;
- cursor:pointer;
- transition:.2s;
-}
-button:hover{filter:brightness(1.2)}
-input{
- width:100%;
- padding:14px;
- margin:8px 0;
- border:1px solid #304968;
- border-radius:12px;
- background:#101d32;
- color:white;
- outline:none;
-}
-input:focus{border-color:#26baff}
-
-.login{
- min-height:100vh;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:20px;
- background:radial-gradient(circle at top,#19416b,#080f20 70%);
-}
-.loginbox{
- width:100%;
- max-width:390px;
- padding:30px;
- text-align:center;
- border:1px solid #294b70;
- border-radius:25px;
- background:#111e32;
- box-shadow:0 15px 60px #0009;
-}
-.logo{
- font-size:55px;
- color:#36caff;
-}
-.loginbox h1{
- letter-spacing:3px;
- font-size:25px;
-}
-.small{
- color:#9bacc3;
- font-size:12px;
- line-height:2;
-}
-#error{color:#ff6c6c}
-
-header{
- padding:25px 15px;
- text-align:center;
- background:linear-gradient(120deg,#101d32,#142e50);
- border-bottom:1px solid #284566;
-}
-header h1{
- color:#3bcaff;
- margin:0;
- letter-spacing:2px;
-}
-header p{color:#a8bed7}
-
-nav{
- position:sticky;
- top:0;
- z-index:5;
- display:flex;
- justify-content:center;
- gap:9px;
- flex-wrap:wrap;
- padding:14px 8px;
- background:#0b1729;
- border-bottom:1px solid #253c5a;
-}
-nav button{background:#1b2d47}
-nav button.active{background:#087cf0}
-
-main{
- width:100%;
- max-width:850px;
- margin:auto;
- padding:15px;
+button,input{font-family:inherit}
+button{cursor:pointer}
+#login{
+ min-height:100vh;display:flex;align-items:center;
+ justify-content:center;padding:20px;
+ background:radial-gradient(circle at top,#17345e,#080d19 65%);
 }
 .panel{
- display:none;
- padding:20px;
- margin-bottom:20px;
- background:#111e32;
- border:1px solid #29415f;
- border-radius:18px;
+ width:100%;max-width:390px;background:#111c30;
+ border:1px solid #294568;border-radius:22px;
+ padding:28px;text-align:center;
+ box-shadow:0 15px 50px #0008;
 }
-.panel.active{display:block}
-
-h2{color:#49cfff}
-.center{text-align:center}
-
+.logo{font-size:30px;font-weight:bold;color:#55b9ff}
+.sub{color:#9eb4d1;font-size:13px}
+input{
+ width:100%;padding:14px;margin:8px 0;
+ border:1px solid #344d6e;border-radius:12px;
+ background:#091426;color:white;font-size:15px;
+ outline:none;
+}
+button{
+ border:0;border-radius:12px;padding:13px 18px;
+ background:#1689ed;color:white;font-size:15px;
+}
+button:active{transform:scale(.98)}
+#login button{width:100%;margin-top:10px}
+#error{color:#ff7474;font-size:12px;line-height:2}
+#app{display:none;min-height:100vh}
+header{
+ background:#101b2e;padding:17px;
+ display:flex;justify-content:space-between;
+ align-items:center;border-bottom:1px solid #263b58;
+}
+header strong{color:#55b9ff;font-size:19px}
+nav{
+ display:flex;gap:8px;padding:12px;
+ overflow-x:auto;background:#0d1728;
+}
+nav button{white-space:nowrap;background:#1a2a43}
+nav button.active{background:#1689ed}
+.page{display:none;padding:15px;max-width:850px;margin:auto}
+.page.active{display:block}
+.card{
+ background:#111e32;border:1px solid #273e5d;
+ border-radius:17px;padding:16px;margin-bottom:15px;
+}
+h2{font-size:19px;margin-top:4px}
+#connection{font-size:12px;color:#ffc66b;margin:10px 0}
 #messages{
- height:300px;
- overflow-y:auto;
- padding:12px;
- margin:15px 0;
- border-radius:13px;
- background:#091424;
+ height:390px;overflow-y:auto;
+ background:#091426;border-radius:12px;
+ padding:10px;margin-bottom:12px;
 }
 .message{
- padding:12px;
- margin:9px 0;
- border-radius:12px;
- background:#203854;
+ background:#182b45;padding:10px;
+ border-radius:12px;margin:8px 0;
  overflow-wrap:anywhere;
 }
-.message b{color:#48d4ff}
-.message small{
- display:block;
- color:#94a9c3;
- margin-top:5px;
+.message b{color:#63bdff;font-size:13px}
+.message p{margin:7px 0 0;white-space:pre-wrap}
+.sendrow{display:flex;gap:7px}
+.sendrow input{flex:1;min-width:0}
+.sendrow button{padding:10px}
+canvas{
+ width:100%;max-width:480px;display:block;
+ margin:10px auto;background:#80d8ff;
+ border-radius:14px;touch-action:manipulation;
 }
-.chatrow{
- display:flex;
- gap:8px;
- align-items:center;
-}
-.chatrow input{flex:1;min-width:0}
-.chatrow button{white-space:nowrap}
-.status{
- font-size:12px;
- color:#7bd8a0;
-}
-
-#game{
- display:block;
- width:100%;
- max-width:400px;
- height:auto;
- margin:auto;
- border-radius:15px;
- background:#74d9ef;
- touch-action:manipulation;
-}
-.score{
- color:#43d5ff;
- font-size:25px;
- margin:15px;
-}
-.gamebuttons{
- display:flex;
- justify-content:center;
- gap:10px;
- flex-wrap:wrap;
- margin-top:15px;
-}
-table{
- width:100%;
- border-collapse:collapse;
- text-align:center;
-}
-td,th{
- padding:13px 5px;
- border-bottom:1px solid #344766;
-}
-th{color:#4bcfff}
-footer{
- padding:25px;
- text-align:center;
- color:#7288a5;
- font-size:12px;
-}
-.hidden{display:none!important}
+.gamebuttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.gamebuttons button{min-width:120px}
+.score{text-align:center;font-size:17px;color:#75c7ff}
+table{width:100%;border-collapse:collapse}
+td,th{padding:12px;border-bottom:1px solid #293e5b;text-align:center}
+.small{font-size:12px;color:#9eb4d1;line-height:2}
+footer{text-align:center;color:#607895;font-size:11px;padding:25px}
 </style>
 </head>
-
 <body>
 
-<!-- LOGIN PAGE -->
-
-<div class="login" id="login">
-
- <div class="loginbox">
-
-  <div class="logo">⬡</div>
-
-  <h1>SAVAK GROUP</h1>
-
-  <p class="small">PRIVATE MEMBERS AREA</p>
-
-  <input
-   id="password"
-   type="password"
-   placeholder="رمز عبور"
-   autocomplete="current-password"
-  >
-
-  <button onclick="login()" style="width:100%">
-   ورود به سایت
-  </button>
-
-  <p id="error"></p>
-
-  <p class="small">WELCOME TO SAVAK GROUP</p>
-
+<section id="login">
+ <div class="panel">
+  <div class="logo">SAVAK GROUP</div>
+  <p class="sub">به جمع اعضای گروه خوش آمدید</p>
+  <input id="password" type="password" placeholder="رمز ورود">
+  <button onclick="enterSite()">ورود به سایت</button>
+  <p id="loginError"></p>
  </div>
+</section>
+
+<div id="app">
+ <header>
+  <strong>SAVAK GROUP</strong>
+  <span style="font-size:12px;color:#8ca8c9">نسخه آنلاین</span>
+ </header>
+
+ <nav>
+  <button class="active" onclick="showPage('chat',this)">💬 چت</button>
+  <button onclick="showPage('game',this)">🐤 فلپی برد</button>
+  <button onclick="showPage('ranking',this)">🏆 رکوردها</button>
+ </nav>
+
+ <section id="chat" class="page active">
+  <div class="card">
+   <h2>💬 گفت‌وگوی اعضا</h2>
+   <div id="connection">در حال اتصال به Firebase...</div>
+   <div id="messages"></div>
+   <input id="username" maxlength="24" placeholder="نام نمایشی شما">
+   <div class="sendrow">
+    <input id="messageInput" maxlength="500" placeholder="پیامت را بنویس...">
+    <button onclick="sendMessage()">ارسال</button>
+   </div>
+   <p class="small">پیام‌ها برای اعضای متصل به دیتابیس نمایش داده می‌شوند.</p>
+  </div>
+ </section>
+
+ <section id="game" class="page">
+  <div class="card">
+   <h2>🐤 Flappy Bird</h2>
+   <div class="score">امتیاز: <span id="score">0</span></div>
+   <canvas id="gameCanvas" width="480" height="600"></canvas>
+   <div class="gamebuttons">
+    <button onclick="startGame()">شروع بازی</button>
+    <button onclick="jump()">پرش</button>
+   </div>
+   <p class="small" style="text-align:center">
+    برای پرواز روی صفحه ضربه بزن. از لوله‌ها عبور کن و امتیاز بگیر.
+   </p>
+  </div>
+ </section>
+
+ <section id="ranking" class="page">
+  <div class="card">
+   <h2>🏆 جدول رکوردها</h2>
+   <table>
+    <thead><tr><th>رتبه</th><th>نام</th><th>امتیاز</th></tr></thead>
+    <tbody id="rankingBody"></tbody>
+   </table>
+   <p class="small">این نسخه رکوردها را روی همین دستگاه ذخیره می‌کند.</p>
+  </div>
+ </section>
+ <footer>SAVAK GROUP • ساخته شده برای اعضای گروه</footer>
 </div>
-
-<!-- MAIN SITE -->
-
-<div id="site" style="display:none">
-
-<header>
- <h1>⬡ SAVAK GROUP</h1>
- <p>گروه اختصاصی اعضا</p>
-</header>
-
-<nav>
- <button class="active" onclick="showPage('chat',this)">
-  💬 چت
- </button>
-
- <button onclick="showPage('gamepage',this)">
-  🐦 فلپی برد
- </button>
-
- <button onclick="showPage('ranking',this)">
-  🏆 رکوردها
- </button>
-</nav>
-
-<main>
-
-<!-- CHAT -->
-
-<section id="chat" class="panel active">
-
- <h2>💬 چت آنلاین گروه</h2>
-
- <input
-  id="username"
-  maxlength="24"
-  placeholder="نام کاربری شما"
- >
-
- <div class="status" id="chatStatus">
-  در حال اتصال...
- </div>
-
- <div id="messages"></div>
-
- <div class="chatrow">
-  <input
-   id="msg"
-   maxlength="500"
-   placeholder="پیام خود را بنویسید..."
-  >
-
-  <button onclick="sendMessage()">
-   ارسال
-  </button>
- </div>
-
- <p class="small">
-  پیام‌ها با Firebase بین کاربران متصل به اشتراک گذاشته می‌شوند.
- </p>
-
-</section>
-
-<!-- FLAPPY BIRD -->
-
-<section id="gamepage" class="panel">
-
- <h2 class="center">🐦 FLAPPY BIRD</h2>
-
- <div class="score center">
-  امتیاز: <span id="score">0</span>
- </div>
-
- <canvas id="game" width="400" height="500"></canvas>
-
- <div class="gamebuttons">
-
-  <button onclick="startGame()">
-   شروع بازی
-  </button>
-
-  <button onclick="jump()">
-   پرش
-  </button>
-
- </div>
-
- <p class="small center">
-  برای پرش روی صفحه بازی ضربه بزن.
- </p>
-
-</section>
-
-<!-- RANKING -->
-
-<section id="ranking" class="panel">
-
- <h2>🏆 جدول رکوردها</h2>
-
- <table>
-
-  <thead>
-   <tr>
-    <th>رتبه</th>
-    <th>بازیکن</th>
-    <th>امتیاز</th>
-   </tr>
-  </thead>
-
-  <tbody id="records"></tbody>
-
- </table>
-
- <p class="small">
-  رکوردهای این نسخه فقط روی همین دستگاه ذخیره می‌شوند.
- </p>
-
-</section>
-
-</main>
-
-<footer>
- SAVAK GROUP © 2026
-</footer>
-
-</div>
-
-<!-- GENERAL JAVASCRIPT -->
 
 <script>
-
-// LOGIN
-
-function login(){
-
- const pass=document.getElementById("password").value;
-
- if(pass==="1224"){
-
-  sessionStorage.setItem("savakLogin","yes");
-
-  enterSite();
-
- }else{
-
-  document.getElementById("error").textContent=
-  "رمز عبور اشتباه است!";
-
- }
-
-}
+const SITE_PASSWORD = "1224";
 
 function enterSite(){
-
+ if(document.getElementById("password").value !== SITE_PASSWORD){
+  document.getElementById("loginError").textContent="رمز ورود اشتباه است.";
+  return;
+ }
+ sessionStorage.setItem("savakLogin","yes");
  document.getElementById("login").style.display="none";
-
- document.getElementById("site").style.display="block";
-
- if(window.startChat)window.startChat();
-
+ document.getElementById("app").style.display="block";
+ if(window.startChat) window.startChat();
 }
 
 if(sessionStorage.getItem("savakLogin")==="yes"){
- enterSite();
+ document.getElementById("login").style.display="none";
+ document.getElementById("app").style.display="block";
+}
+
+function showPage(id,btn){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+ btn.classList.add("active");
+ if(id==="ranking") renderRanking();
 }
 
 document.getElementById("password").addEventListener("keydown",e=>{
- if(e.key==="Enter")login();
+ if(e.key==="Enter")enterSite();
 });
-
-
-// NAVIGATION
-
-function showPage(id,btn){
-
- document.querySelectorAll(".panel").forEach(p=>{
-  p.classList.remove("active");
- });
-
- document.querySelectorAll("nav button").forEach(b=>{
-  b.classList.remove("active");
- });
-
- document.getElementById(id).classList.add("active");
-
- btn.classList.add("active");
-
- if(id==="ranking")renderRecords();
-
-}
-
-
-// FLAPPY BIRD
-
-const canvas=document.getElementById("game");
-const ctx=canvas.getContext("2d");
-
-let bird={x:85,y:220,v:0};
-
-let pipes=[];
-let score=0;
-let frame=0;
-let running=false;
-let raf=null;
-
-function drawBird(){
-
- ctx.fillStyle="#ffdb36";
-
- ctx.beginPath();
- ctx.arc(bird.x,bird.y,15,0,Math.PI*2);
- ctx.fill();
-
- ctx.fillStyle="white";
-
- ctx.beginPath();
- ctx.arc(bird.x+6,bird.y-5,5,0,Math.PI*2);
- ctx.fill();
-
- ctx.fillStyle="#222";
-
- ctx.beginPath();
- ctx.arc(bird.x+8,bird.y-5,2,0,Math.PI*2);
- ctx.fill();
-
- ctx.fillStyle="#ff8138";
-
- ctx.beginPath();
- ctx.moveTo(bird.x+13,bird.y);
- ctx.lineTo(bird.x+25,bird.y+4);
- ctx.lineTo(bird.x+13,bird.y+8);
- ctx.fill();
-
-}
-
-function draw(){
-
- ctx.clearRect(0,0,400,500);
-
- ctx.fillStyle="#74d9ed";
- ctx.fillRect(0,0,400,500);
-
- // CLOUDS
-
- ctx.fillStyle="#e5faff";
-
- ctx.beginPath();
- ctx.arc(75,90,22,0,Math.PI*2);
- ctx.arc(100,85,27,0,Math.PI*2);
- ctx.arc(125,93,18,0,Math.PI*2);
- ctx.fill();
-
- // PIPES
-
- pipes.forEach(p=>{
-
-  ctx.fillStyle="#20ad54";
-
-  ctx.fillRect(p.x,0,52,p.top);
-
-  ctx.fillRect(p.x,p.top+135,52,500);
-
-  ctx.fillStyle="#168a41";
-
-  ctx.fillRect(p.x-4,p.top-17,60,17);
-
-  ctx.fillRect(p.x-4,p.top+135,60,17);
-
- });
-
- // GROUND
-
- ctx.fillStyle="#d9b66c";
- ctx.fillRect(0,465,400,35);
-
- ctx.fillStyle="#67bd42";
- ctx.fillRect(0,460,400,8);
-
- drawBird();
-
-}
-
-function startGame(){
-
- if(raf)cancelAnimationFrame(raf);
-
- bird={x:85,y:220,v:0};
-
- pipes=[];
-
- score=0;
- frame=0;
- running=true;
-
- document.getElementById("score").textContent=score;
-
- loop();
-
-}
-
-function jump(){
-
- if(!running){
-  startGame();
-  return;
- }
-
- bird.v=-6.5;
-
-}
-
-function loop(){
-
- if(!running)return;
-
- frame++;
-
- bird.v+=0.34;
-
- bird.y+=bird.v;
-
- if(frame%95===0){
-
-  let top=70+Math.random()*220;
-
-  pipes.push({
-   x:410,
-   top:top,
-   passed:false
-  });
-
- }
-
- pipes.forEach(p=>{
-
-  p.x-=2.6;
-
-  if(!p.passed && p.x+52<bird.x){
-
-   p.passed=true;
-
-   score++;
-
-   document.getElementById("score").textContent=score;
-
-  }
-
-  if(
-   bird.x+12>p.x &&
-   bird.x-12<p.x+52 &&
-   (
-    bird.y-12<p.top ||
-    bird.y+12>p.top+135
-   )
-  ){
-   endGame();
-  }
-
- });
-
- pipes=pipes.filter(p=>p.x>-65);
-
- if(bird.y>450 || bird.y<0){
-  endGame();
- }
-
- draw();
-
- if(running){
-  raf=requestAnimationFrame(loop);
- }
-
-}
-
-function endGame(){
-
- if(!running)return;
-
- running=false;
-
- saveRecord(score);
-
- draw();
-
- ctx.fillStyle="#10243a";
-
- ctx.fillRect(35,190,330,105);
-
- ctx.fillStyle="white";
-
- ctx.textAlign="center";
-
- ctx.font="bold 25px Tahoma";
-
- ctx.fillText("GAME OVER",200,235);
-
- ctx.font="17px Tahoma";
-
- ctx.fillText("امتیاز: "+score,200,270);
-
-}
-
-canvas.addEventListener("pointerdown",e=>{
-
- e.preventDefault();
-
- jump();
-
+document.getElementById("messageInput").addEventListener("keydown",e=>{
+ if(e.key==="Enter")sendMessage();
 });
-
-
-// LOCAL RECORDS
-
-function saveRecord(s){
-
- const name=
- document.getElementById("username").value.trim() || "بازیکن";
-
- let records=JSON.parse(
-  localStorage.getItem("savakRecords")||"[]"
- );
-
- records.push({
-  name:name,
-  score:s
- });
-
- records.sort((a,b)=>b.score-a.score);
-
- records=records.slice(0,20);
-
- localStorage.setItem(
-  "savakRecords",
-  JSON.stringify(records)
- );
-
-}
-
-function renderRecords(){
-
- let records=JSON.parse(
-  localStorage.getItem("savakRecords")||"[]"
- );
-
- const tbody=document.getElementById("records");
-
- tbody.innerHTML="";
-
- records.forEach((r,i)=>{
-
-  const tr=document.createElement("tr");
-
-  [i+1,r.name,r.score].forEach(value=>{
-
-   const td=document.createElement("td");
-
-   td.textContent=value;
-
-   tr.appendChild(td);
-
-  });
-
-  tbody.appendChild(tr);
-
- });
-
-}
-
-draw();
-
 </script>
 
-
-<!-- FIREBASE ONLINE CHAT -->
-
 <script type="module">
+import {initializeApp}
+ from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 
 import {
- initializeApp
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-
-import {
- getDatabase,
- ref,
- push,
- onChildAdded,
- query,
- limitToLast
+ getDatabase,ref,push,onValue,query,limitToLast
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
 import {
- getAuth,
- signInAnonymously,
- onAuthStateChanged
+ getAuth,signInAnonymously,onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-
-// FIREBASE CONFIG
-
-const firebaseConfig={
-
- apiKey:"AIzaSyD81ZMMuKfQ4msqUHgeoo8MYMXQcnbx0DM",
-
- authDomain:"amiral-1390.firebaseapp.com",
-
- databaseURL:"https://amiral-1390-default-rtdb.asia-southeast1.firebasedatabase.app",
-
- projectId:"amiral-1390",
-
- storageBucket:"amiral-1390.firebasestorage.app",
-
- messagingSenderId:"992833996810",
-
- appId:"1:992833996810:web:371a5cc9779da7457437f3"
-
+const firebaseConfig = {
+ apiKey: "AIzaSyD81ZMMuKfQ4msqUHgeoo8MYMXQcnbx0DM",
+ authDomain: "amiral-1390.firebaseapp.com",
+ databaseURL: "https://amiral-1390-default-rtdb.asia-southeast1.firebasedatabase.app",
+ projectId: "amiral-1390",
+ storageBucket: "amiral-1390.firebasestorage.app",
+ messagingSenderId: "992833996810",
+ appId: "1:992833996810:web:371a5cc9779da7457437f3",
+ measurementId: "G-CF5CRGZVRR"
 };
 
-
-// INITIALIZE
-
-const app=initializeApp(firebaseConfig);
-
-const db=getDatabase(app);
-
-const auth=getAuth(app);
-
-const messagesRef=ref(db,"messages");
-
-let currentUser=null;
+let db,auth,currentUser=null;
 let chatStarted=false;
-let listenerStarted=false;
-let signingIn=false;
+let messagesListenerStarted=false;
+const status=document.getElementById("connection");
+const messagesBox=document.getElementById("messages");
 
-
-// STATUS
-
-const status=document.getElementById("chatStatus");
-
-function setStatus(message){
-
- status.textContent=message;
-
+function setStatus(text,color="#ffc66b"){
+ status.textContent=text;
+ status.style.color=color;
 }
 
+try{
+ const app=initializeApp(firebaseConfig);
+ db=getDatabase(app);
+ auth=getAuth(app);
 
-// DISPLAY MESSAGE
+ setStatus("در حال ورود به Firebase...");
+ signInAnonymously(auth).catch(error=>{
+  showFirebaseError(error);
+ });
 
-function displayMessage(data){
+ onAuthStateChanged(auth,user=>{
+  if(user){
+   currentUser=user;
+   setStatus("اتصال به Firebase برقرار است ✓","#54e69a");
+   if(chatStarted) listenMessages();
+  }else{
+   currentUser=null;
+   setStatus("ورود به Firebase انجام نشده است.","#ff7474");
+  }
+ });
 
- const box=document.getElementById("messages");
-
- const div=document.createElement("div");
-
- div.className="message";
-
- const name=document.createElement("b");
-
- name.textContent=data.name+": ";
-
- const content=document.createElement("span");
-
- content.textContent=data.text;
-
- div.append(name,content);
-
- box.appendChild(div);
-
- box.scrollTop=box.scrollHeight;
-
+}catch(error){
+ showFirebaseError(error);
 }
 
-
-// START LISTENER
+function showFirebaseError(error){
+ console.error("Firebase error:",error);
+ setStatus("خطای Firebase: "+(error.code||error.message),"#ff7474");
+}
 
 function listenMessages(){
+ if(!currentUser || messagesListenerStarted || !db)return;
+ messagesListenerStarted=true;
 
- if(!currentUser || listenerStarted || !chatStarted)return;
+ const messagesRef=ref(db,"messages");
+ const lastMessages=query(messagesRef,limitToLast(100));
 
- listenerStarted=true;
+ onValue(lastMessages,snapshot=>{
+  messagesBox.innerHTML="";
+  snapshot.forEach(child=>{
+   const data=child.val();
+   const item=document.createElement("div");
+   item.className="message";
 
- const recentMessages=query(
-  messagesRef,
-  limitToLast(100)
- );
+   const name=document.createElement("b");
+   name.textContent=data.name||"عضو";
 
- onChildAdded(
-  recentMessages,
-  snapshot=>{
+   const text=document.createElement("p");
+   text.textContent=data.text||"";
 
-   const data=snapshot.val();
-
-   if(data && typeof data.name==="string" &&
-      typeof data.text==="string"){
-
-    displayMessage(data);
-
-   }
-
-  },
-  error=>{
-
-   listenerStarted=false;
-
-   setStatus("خطای دریافت پیام: "+error.message);
-
-  }
- );
-
+   item.append(name,text);
+   messagesBox.appendChild(item);
+  });
+  messagesBox.scrollTop=messagesBox.scrollHeight;
+ },error=>{
+  messagesListenerStarted=false;
+  showFirebaseError(error);
+ });
 }
 
-
-// AUTHENTICATION
-
-onAuthStateChanged(auth,user=>{
-
- if(user){
-
-  currentUser=user;
-
-  signingIn=false;
-
-  setStatus("🟢 اتصال به Firebase برقرار است");
-
-  listenMessages();
-
- }else{
-
-  currentUser=null;
-
-  if(!signingIn){
-
-   signingIn=true;
-
-   setStatus("در حال ورود ناشناس...");
-
-   signInAnonymously(auth).catch(error=>{
-
-    signingIn=false;
-
-    setStatus("خطای ورود: "+error.message);
-
-   });
-
-  }
-
- }
-
-});
-
-
-// START CHAT AFTER LOGIN
-
 window.startChat=function(){
-
  chatStarted=true;
-
- if(currentUser){
-
-  listenMessages();
-
- }
-
+ if(currentUser)listenMessages();
 };
 
-
-// SEND MESSAGE
+if(sessionStorage.getItem("savakLogin")==="yes"){
+ window.startChat();
+}
 
 window.sendMessage=async function(){
+ const input=document.getElementById("messageInput");
+ const nameInput=document.getElementById("username");
+ const text=input.value.trim();
+ const name=nameInput.value.trim()||"عضو";
+
+ if(!text)return;
 
  if(!currentUser){
-
-  alert("هنوز به Firebase متصل نشده‌ای.");
-
+  setStatus("هنوز به Firebase متصل نشده‌اید. "+ 
+   (auth?.currentUser?"":"ورود انجام نشده است."),"#ff7474");
   return;
-
- }
-
- const nameInput=document.getElementById("username");
-
- const msgInput=document.getElementById("msg");
-
- const name=nameInput.value.trim();
-
- const message=msgInput.value.trim();
-
- if(!name || !message){
-
-  alert("نام و پیام را وارد کن.");
-
-  return;
-
- }
-
- if(name.length>24 || message.length>500){
-
-  alert("نام یا پیام بیش از حد طولانی است.");
-
-  return;
-
  }
 
  try{
-
-  await push(messagesRef,{
-
+  setStatus("در حال ارسال پیام...");
+  await push(ref(db,"messages"),{
    name:name,
-
-   text:message,
-
+   text:text,
    uid:currentUser.uid,
-
    createdAt:Date.now()
-
   });
-
-  msgInput.value="";
-
+  input.value="";
+  setStatus("پیام با موفقیت ارسال شد ✓","#54e69a");
  }catch(error){
-
-  alert("ارسال پیام ناموفق بود: "+error.message);
-
+  showFirebaseError(error);
  }
-
 };
-
-
-// ENTER TO SEND
-
-document.getElementById("msg").addEventListener("keydown",event=>{
-
- if(event.key==="Enter"){
-
-  window.sendMessage();
-
- }
-
-});
-
 </script>
 
+<script>
+/* Flappy Bird */
+const canvas=document.getElementById("gameCanvas");
+const ctx=canvas.getContext("2d");
+let bird,pipes,score,running,frame,gameOver;
+
+function resetGame(){
+ bird={x:110,y:280,velocity:0,r:17};
+ pipes=[];
+ score=0;frame=0;running=false;gameOver=false;
+ document.getElementById("score").textContent=score;
+ drawGame();
+}
+
+function startGame(){
+ resetGame();
+ running=true;
+ requestAnimationFrame(gameLoop);
+}
+
+function jump(){
+ if(!running){
+  if(gameOver)startGame();
+  else startGame();
+ }
+ bird.velocity=-6.8;
+}
+
+canvas.addEventListener("pointerdown",jump);
+
+function drawGame(){
+ const sky=ctx.createLinearGradient(0,0,0,600);
+ sky.addColorStop(0,"#65c9f5");
+ sky.addColorStop(1,"#d7f5ff");
+ ctx.fillStyle=sky;ctx.fillRect(0,0,480,600);
+
+ // ابرها
+ ctx.fillStyle="#ffffffaa";
+ for(let i=0;i<4;i++){
+  let x=(i*150-frame*.3)%550;
+  ctx.beginPath();ctx.arc(x,90+i%2*55,22,0,Math.PI*2);
+  ctx.arc(x+24,85+i%2*55,28,0,Math.PI*2);
+  ctx.arc(x+50,92+i%2*55,20,0,Math.PI*2);
+  ctx.fill();
+ }
+
+ // زمین
+ ctx.fillStyle="#62bd55";ctx.fillRect(0,560,480,40);
+ ctx.fillStyle="#d8ad63";ctx.fillRect(0,575,480,25);
+
+ // لوله‌ها
+ pipes.forEach(p=>{
+  ctx.fillStyle="#198d39";
+  ctx.fillRect(p.x,0,55,p.top);
+  ctx.fillRect(p.x,p.top+155,55,560-p.top-155);
+  ctx.fillStyle="#35ca56";
+  ctx.fillRect(p.x-5,p.top-18,65,18);
+  ctx.fillRect(p.x-5,p.top+155,65,18);
+ });
+
+ // پرنده
+ ctx.save();
+ ctx.translate(bird.x,bird.y);
+ ctx.rotate(Math.max(-.5,Math.min(.7,bird.velocity*.06)));
+ ctx.fillStyle="#ffd83d";
+ ctx.beginPath();ctx.arc(0,0,17,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="white";
+ ctx.beginPath();ctx.arc(7,-6,6,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="#111";
+ ctx.beginPath();ctx.arc(9,-6,2.5,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="#ff8138";
+ ctx.beginPath();ctx.moveTo(14,1);ctx.lineTo(28,6);ctx.lineTo(14,10);ctx.fill();
+ ctx.fillStyle="#f3a900";
+ ctx.beginPath();ctx.ellipse(-5,5,9,5,-.4,0,Math.PI*2);ctx.fill();
+ ctx.restore();
+
+ if(!running){
+  ctx.fillStyle="#07182dcc";
+  ctx.fillRect(35,225,410,110);
+  ctx.fillStyle="white";
+  ctx.textAlign="center";
+  ctx.font="bold 25px Tahoma";
+  ctx.fillText(gameOver?"پایان بازی!":"برای شروع ضربه بزن",240,270);
+  ctx.font="17px Tahoma";
+  ctx.fillText("امتیاز: "+score,240,305);
+ }
+}
+
+function endGame(){
+ if(!running)return;
+ running=false;gameOver=true;
+ saveScore(score);
+ drawGame();
+}
+
+function gameLoop(){
+ if(!running)return;
+ frame++;
+ bird.velocity+=.34;
+ bird.y+=bird.velocity;
+
+ if(frame%95===0){
+  let top=90+Math.random()*260;
+  pipes.push({x:500,top:top,passed:false});
+ }
+ pipes.forEach(p=>{
+  p.x-=2.7;
+  if(!p.passed && p.x+55<bird.x){
+   p.passed=true;score++;
+   document.getElementById("score").textContent=score;
+  }
+  if(bird.x+bird.r>p.x && bird.x-bird.r<p.x+55 &&
+    (bird.y-bird.r<p.top || bird.y+bird.r>p.top+155)){
+   endGame();
+  }
+ });
+ pipes=pipes.filter(p=>p.x>-70);
+
+ if(bird.y>560||bird.y<0)endGame();
+
+ drawGame();
+ if(running)requestAnimationFrame(gameLoop);
+}
+
+function saveScore(value){
+ if(value<=0)return;
+ let scores=JSON.parse(localStorage.getItem("savakScores")||"[]");
+ let name=document.getElementById("username").value.trim()||"عضو";
+ scores.push({name,score:value});
+ scores.sort((a,b)=>b.score-a.score);
+ localStorage.setItem("savakScores",JSON.stringify(scores.slice(0,20)));
+}
+
+function renderRanking(){
+ let scores=JSON.parse(localStorage.getItem("savakScores")||"[]");
+ const body=document.getElementById("rankingBody");
+ body.innerHTML="";
+ if(scores.length===0){
+  body.innerHTML='<tr><td colspan="3">هنوز رکوردی ثبت نشده است.</td></tr>';
+  return;
+ }
+ scores.forEach((s,i)=>{
+  const tr=document.createElement("tr");
+  [i+1,s.name,s.score].forEach(value=>{
+   const td=document.createElement("td");
+   td.textContent=value;
+   tr.appendChild(td);
+  });
+  body.appendChild(tr);
+ });
+}
+resetGame();
+</script>
 </body>
 </html>
