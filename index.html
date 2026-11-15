@@ -3,622 +3,563 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SAVAK GROUP</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>AMIR ALI ARCADE</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;background:#080d19;color:white;
- font-family:Tahoma,Arial,sans-serif
-}
-button,input{font-family:inherit}
-button{cursor:pointer;border:0;border-radius:12px;
- padding:12px 17px;background:#1689ed;color:white}
-button:active{transform:scale(.98)}
-input{
- width:100%;padding:14px;margin:7px 0;
- border:1px solid #344d6e;border-radius:12px;
- background:#091426;color:white;font-size:15px;
- outline:none
-}
-#login{
- min-height:100vh;display:flex;align-items:center;
- justify-content:center;padding:20px;
- background:radial-gradient(circle at top,#17345e,#080d19 65%)
-}
-.panel{
- width:100%;max-width:390px;background:#111c30;
- border:1px solid #294568;border-radius:22px;
- padding:28px;text-align:center;
- box-shadow:0 15px 50px #0008
-}
-.logo{font-size:30px;font-weight:bold;color:#55b9ff}
-.sub{color:#9eb4d1;font-size:13px}
-#login button{width:100%;margin-top:10px}
-#loginError{color:#ff7474;font-size:13px}
-#app{display:none;min-height:100vh}
-header{
- background:#101b2e;padding:17px;
- display:flex;justify-content:space-between;
- align-items:center;border-bottom:1px solid #263b58
-}
-header strong{color:#55b9ff;font-size:19px}
-nav{
- display:flex;gap:8px;padding:12px;
- overflow-x:auto;background:#0d1728
-}
-nav button{white-space:nowrap;background:#1a2a43}
-nav button.active{background:#1689ed}
-.page{display:none;padding:15px;max-width:850px;margin:auto}
-.page.active{display:block}
-.card{
- background:#111e32;border:1px solid #273e5d;
- border-radius:17px;padding:16px;margin-bottom:15px
-}
-h2{font-size:19px;margin-top:4px}
-#connection{font-size:12px;color:#ffc66b;margin:10px 0}
-#messages{
- height:390px;overflow-y:auto;
- background:#091426;border-radius:12px;
- padding:10px;margin-bottom:12px
-}
-.message{
- background:#182b45;padding:10px;
- border-radius:12px;margin:8px 0;
- overflow-wrap:anywhere
-}
-.message b{color:#63bdff;font-size:13px}
-.message p{margin:7px 0 0;white-space:pre-wrap}
-.message time{display:block;color:#8099b8;font-size:10px;margin-top:7px}
-.sendrow{display:flex;gap:7px}
-.sendrow input{flex:1;min-width:0}
-.sendrow button{padding:10px}
-canvas{
- width:100%;max-width:480px;display:block;
- margin:10px auto;background:#80d8ff;
- border-radius:14px;touch-action:manipulation
-}
-.gamebuttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.gamebuttons button{min-width:120px}
-.score{text-align:center;font-size:18px;color:#75c7ff}
-table{width:100%;border-collapse:collapse}
-td,th{padding:12px;border-bottom:1px solid #293e5b;text-align:center}
-.small{font-size:12px;color:#9eb4d1;line-height:2}
-footer{text-align:center;color:#607895;font-size:11px;padding:25px}
+body{margin:0;background:#070b18;color:#fff;font-family:Tahoma,Arial;min-height:100vh}
+header{text-align:center;padding:28px 10px;background:radial-gradient(ellipse at top,#343b91,#111936 65%,#080d1c);border-bottom:1px solid #424b92}
+header h1{font-size:30px;margin:0;text-shadow:0 0 20px #8b76ff}
+header p{color:#b9c5ed;font-size:13px}
+.wrap{max-width:1100px;margin:auto;padding:18px}
+.heading{display:flex;align-items:center;justify-content:space-between;margin:10px 0 18px}
+.heading h2{font-size:20px}
+.games{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.card{position:relative;overflow:hidden;min-height:155px;padding:15px;border-radius:19px;background:linear-gradient(145deg,#202e5d,#10182d);border:1px solid #394a7c;cursor:pointer;transition:.2s}
+.card:active{transform:scale(.96)}
+.card:before{content:"";position:absolute;width:110px;height:110px;border-radius:50%;background:var(--glow);filter:blur(35px);right:55%;top:15px;opacity:.55}
+.card .emoji{font-size:42px;position:relative}
+.card h3{position:relative;margin:10px 0 5px;font-size:15px}
+.card p{position:relative;font-size:11px;color:#aebde5;margin:0}
+.card small{position:absolute;left:12px;top:13px;color:#b9c7ef}
+#play{display:none;text-align:center}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+button{border:0;padding:11px 15px;border-radius:12px;background:#6859f5;color:white;font-family:inherit;font-weight:bold;cursor:pointer}
+button:active{transform:scale(.94)}
+#score{color:#d5d9ff;font-size:14px}
+canvas{display:block;width:100%;max-width:600px;margin:auto;background:#101a34;border:1px solid #5262a0;border-radius:17px;touch-action:none;box-shadow:0 10px 40px #0008}
+#controls{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:15px auto}
+#message{min-height:25px;color:#bfc9ff;font-size:13px}
+footer{text-align:center;padding:30px;color:#64749c;font-size:12px}
+@media(min-width:650px){.games{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
-
 <body>
-
-<section id="login">
- <div class="panel">
-  <div class="logo">SAVAK GROUP</div>
-  <p class="sub">به جمع اعضای گروه خوش آمدید</p>
-  <input id="password" type="password" placeholder="رمز ورود">
-  <button onclick="enterSite()">ورود به سایت</button>
-  <p id="loginError"></p>
- </div>
-</section>
-
-<div id="app">
-
 <header>
- <strong>SAVAK GROUP</strong>
- <span style="font-size:12px;color:#8ca8c9">نسخه آنلاین</span>
+<h1>🎮 AMIR ALI ARCADE</h1>
+<p>THE ULTIMATE 2D GAMING WORLD</p>
 </header>
 
-<nav>
- <button class="active" onclick="showPage('chat',this)">💬 چت</button>
- <button onclick="showPage('game',this)">🐤 فلپی برد</button>
- <button onclick="showPage('ranking',this)">🏆 رکوردها</button>
-</nav>
-
-<section id="chat" class="page active">
- <div class="card">
-  <h2>💬 گفت‌وگوی اعضا</h2>
-  <div id="connection">در حال اتصال به Firebase...</div>
-  <div id="messages"></div>
-  <input id="username" maxlength="24" placeholder="نام نمایشی شما">
-  <div class="sendrow">
-   <input id="messageInput" maxlength="500" placeholder="پیامت را بنویس...">
-   <button id="sendButton" onclick="sendMessage()">ارسال</button>
-  </div>
-  <p class="small">پیام‌ها به صورت آنلاین برای تمام اعضا نمایش داده می‌شوند.</p>
- </div>
+<div class="wrap">
+<section id="menu">
+<div class="heading"><h2>🔥 انتخاب بازی</h2><span>10 GAMES</span></div>
+<div class="games" id="games"></div>
 </section>
 
-<section id="game" class="page">
- <div class="card">
-  <h2>🐤 Flappy Bird</h2>
-  <div class="score">امتیاز: <span id="score">0</span></div>
-  <canvas id="gameCanvas" width="480" height="600"></canvas>
-  <div class="gamebuttons">
-   <button onclick="startGame()">شروع بازی</button>
-   <button onclick="jump()">پرش</button>
-  </div>
-  <p class="small" style="text-align:center">
-   با ضربه روی صفحه پرواز کن و از لوله‌ها عبور کن.
-  </p>
- </div>
-</section>
-
-<section id="ranking" class="page">
- <div class="card">
-  <h2>🏆 جدول رکوردهای اعضا</h2>
-  <table>
-   <thead>
-    <tr><th>رتبه</th><th>نام</th><th>امتیاز</th></tr>
-   </thead>
-   <tbody id="rankingBody">
-    <tr><td colspan="3">در حال دریافت رکوردها...</td></tr>
-   </tbody>
-  </table>
-  <p class="small">رکوردها به صورت آنلاین ذخیره می‌شوند.</p>
- </div>
-</section>
-
-<footer>SAVAK GROUP • ساخته شده برای اعضای گروه</footer>
+<section id="play">
+<div class="topbar">
+<button onclick="home()">⬅ بازگشت</button>
+<strong id="title">GAME</strong>
+<span id="score">امتیاز: 0</span>
 </div>
+<canvas id="c" width="600" height="420"></canvas>
+<div id="message"></div>
+<div id="controls"></div>
+<button onclick="restart()">🔄 شروع دوباره</button>
+</section>
+</div>
+<footer>AMIR ALI ARCADE © 2026</footer>
 
 <script>
-const SITE_PASSWORD="1224";
+const $=id=>document.getElementById(id);
+const canvas=$("c"),ctx=canvas.getContext("2d");
+const W=600,H=420;
+const games=[
+["🐦","Flappy Bird","پرواز در آسمان"," #ffb43c"],
+["🐍","Snake","مار کلاسیک","#39d98a"],
+["🏓","Pong","مسابقه پینگ پنگ","#43c9ff"],
+["🧱","Breakout","شکستن آجرها","#a77aff"],
+["❌","Tic Tac Toe","بازی فکری دو نفره","#ff6688"],
+["🔢","2048","ترکیب اعداد","#ffbf52"],
+["🧠","Memory Cards","تقویت حافظه","#48d9df"],
+["🎵","Simon Game","حافظه رنگی","#bb83ff"],
+["🏃","Jungle Runner","فرار از موانع","#65e78c"],
+["🏎️","Mini Racing","مسابقه ماشین","#ff655e"]
+];
+let game=0,s={},running=false,raf=0,last=0,score=0,over=false;
+let keys={},particles=[],best={};
 
-function enterSite(){
- const password=document.getElementById("password").value;
- if(password!==SITE_PASSWORD){
-  document.getElementById("loginError").textContent="رمز ورود اشتباه است.";
-  return;
- }
- sessionStorage.setItem("savakLogin","yes");
- openSite();
-}
-
-function openSite(){
- document.getElementById("login").style.display="none";
- document.getElementById("app").style.display="block";
- if(window.startChat)window.startChat();
-}
-
-if(sessionStorage.getItem("savakLogin")==="yes"){
- openSite();
-}
-
-function showPage(id,btn){
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- document.getElementById(id).classList.add("active");
- document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
- btn.classList.add("active");
- if(id==="ranking" && window.loadRanking)window.loadRanking();
-}
-
-document.getElementById("password").addEventListener("keydown",e=>{
- if(e.key==="Enter")enterSite();
+games.forEach((g,i)=>{
+ let d=document.createElement("div");
+ d.className="card";
+ d.style.setProperty("--glow",g[3]);
+ d.innerHTML=`<small>0${i+1}</small><div class="emoji">${g[0]}</div><h3>${g[1]}</h3><p>${g[2]}</p>`;
+ d.onclick=()=>start(i);
+ $("games").appendChild(d);
 });
 
-document.getElementById("messageInput").addEventListener("keydown",e=>{
- if(e.key==="Enter")sendMessage();
-});
-</script>
-
-<!-- FIREBASE -->
-<script type="module">
-
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-
-import {
- getDatabase,ref,push,onValue,query,limitToLast,
- set,get
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
-
-import {
- getAuth,signInAnonymously,onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-
-const firebaseConfig={
- apiKey:"AIzaSyD81ZMMuKfQ4msqUHgeoo8MYMXQcnbx0DM",
- authDomain:"amiral-1390.firebaseapp.com",
- databaseURL:"https://amiral-1390-default-rtdb.asia-southeast1.firebasedatabase.app",
- projectId:"amiral-1390",
- storageBucket:"amiral-1390.firebasestorage.app",
- messagingSenderId:"992833996810",
- appId:"1:992833996810:web:371a5cc9779da7457437f3"
-};
-
-const app=initializeApp(firebaseConfig);
-const db=getDatabase(app);
-const auth=getAuth(app);
-
-const status=document.getElementById("connection");
-const messagesBox=document.getElementById("messages");
-
-let currentUser=null;
-let chatStarted=false;
-let messageListener=false;
-let rankingListener=false;
-
-function setStatus(message,color="#ffc66b"){
- status.textContent=message;
- status.style.color=color;
+function rand(a,b){return Math.random()*(b-a)+a}
+function rect(x,y,w,h,color,r=5){
+ ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill();
 }
-
-function showError(error){
- console.error("Firebase error:",error);
- setStatus("خطا: "+(error.code||error.message),"#ff7474");
+function circle(x,y,r,color){
+ ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
 }
-
-function startMessageListener(){
- if(!currentUser || messageListener)return;
-
- messageListener=true;
- setStatus("در حال دریافت پیام‌ها...");
-
- const messagesQuery=query(
-  ref(db,"messages"),
-  limitToLast(100)
- );
-
- onValue(messagesQuery,snapshot=>{
-  messagesBox.replaceChildren();
-
-  if(!snapshot.exists()){
-   const empty=document.createElement("p");
-   empty.textContent="هنوز پیامی ارسال نشده است.";
-   messagesBox.appendChild(empty);
-  }
-
-  snapshot.forEach(child=>{
-   const data=child.val();
-
-   const item=document.createElement("div");
-   item.className="message";
-
-   const name=document.createElement("b");
-   name.textContent=data.name||"عضو";
-
-   const text=document.createElement("p");
-   text.textContent=data.text||"";
-
-   const time=document.createElement("time");
-   time.textContent=data.createdAt
-    ?new Date(data.createdAt).toLocaleString("fa-IR")
-    :"";
-
-   item.append(name,text,time);
-   messagesBox.appendChild(item);
-  });
-
-  messagesBox.scrollTop=messagesBox.scrollHeight;
-  setStatus("اتصال و دریافت پیام‌ها برقرار است ✓","#54e69a");
-
- },error=>{
-  messageListener=false;
-  showError(error);
+function text(t,x,y,size=24,color="white"){
+ ctx.fillStyle=color;ctx.font=`bold ${size}px Tahoma`;
+ ctx.textAlign="center";ctx.fillText(t,x,y);
+}
+function bg(a="#101b39",b="#080d20"){
+ let g=ctx.createLinearGradient(0,0,0,H);
+ g.addColorStop(0,a);g.addColorStop(1,b);
+ ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+}
+function particle(x,y,color){
+ for(let i=0;i<15;i++)particles.push({x,y,vx:rand(-4,4),vy:rand(-4,4),life:30,color});
+}
+function drawParticles(){
+ particles.forEach(p=>{
+ p.x+=p.vx;p.y+=p.vy;p.life--;
+ ctx.globalAlpha=Math.max(0,p.life/30);
+ circle(p.x,p.y,3,p.color);
  });
+ ctx.globalAlpha=1;
+ particles=particles.filter(p=>p.life>0);
 }
-
-function startRankingListener(){
- if(!currentUser || rankingListener)return;
-
- rankingListener=true;
-
- onValue(ref(db,"scores"),snapshot=>{
-  const body=document.getElementById("rankingBody");
-  body.replaceChildren();
-
-  if(!snapshot.exists()){
-   body.innerHTML='<tr><td colspan="3">هنوز رکوردی ثبت نشده است.</td></tr>';
-   return;
-  }
-
-  const scores=[];
-  snapshot.forEach(child=>{
-   const data=child.val();
-   scores.push({
-    name:data.name||"عضو",
-    score:Number(data.score)||0
-   });
-  });
-
-  scores.sort((a,b)=>b.score-a.score);
-
-  scores.slice(0,30).forEach((item,index)=>{
-   const tr=document.createElement("tr");
-
-   [index+1,item.name,item.score].forEach(value=>{
-    const td=document.createElement("td");
-    td.textContent=value;
-    tr.appendChild(td);
-   });
-
-   body.appendChild(tr);
-  });
-
- },error=>{
-  rankingListener=false;
-  console.error("Ranking error:",error);
+function updateScore(){
+ $("score").textContent="امتیاز: "+score+" | رکورد: "+(best[game]||0);
+}
+function addScore(n=1){
+ score+=n;
+ if(score>(best[game]||0))best[game]=score;
+ updateScore();
+}
+function finish(msg="بازی تمام شد!"){
+ over=true;
+ $("message").textContent=msg+" برای شروع دوباره دکمه را بزن.";
+}
+function start(i){
+ game=i;running=true;over=false;score=0;
+ $("menu").style.display="none";
+ $("play").style.display="block";
+ $("title").textContent=games[i][1];
+ $("message").textContent="";
+ init();controls();updateScore();
+ cancelAnimationFrame(raf);last=0;
+ raf=requestAnimationFrame(loop);
+}
+function home(){
+ running=false;cancelAnimationFrame(raf);
+ $("play").style.display="none";
+ $("menu").style.display="block";
+}
+function restart(){
+ over=false;score=0;particles=[];init();updateScore();
+ $("message").textContent="";
+}
+function init(){
+ s={};
+ if(game===0)s={y:200,v:0,pipes:[],frame:0};
+ if(game===1)s={body:[[10,10],[9,10],[8,10]],dir:[1,0],food:[18,10],tick:0};
+ if(game===2)s={x:300,y:210,vx:4,vy:3,p:180,ai:180};
+ if(game===3){
+ s={x:300,y:380,vx:4,vy:-4,p:250,bricks:[]};
+ for(let r=0;r<5;r++)for(let col=0;col<9;col++)
+ s.bricks.push({x:32+col*60,y:35+r*29,on:true,color:["#ff526c","#ffb84b","#47c9f0","#a76cff","#55dc94"][r]});
+ }
+ if(game===4)s={board:Array(9).fill(""),turn:"X",done:false};
+ if(game===5){s={board:Array(16).fill(0),done:false};spawn2048();spawn2048();}
+ if(game===6){
+ let a=["🍎","🍎","🚗","🚗","⭐","⭐","🐱","🐱","⚽","⚽","🍀","🍀","🌙","🌙","🍒","🍒"];
+ a.sort(()=>Math.random()-.5);
+ s={cards:a,open:[],matched:[],moves:0};
+ }
+ if(game===7)s={seq:[],step:0,waiting:false,active:-1};
+ if(game===8)s={y:320,vy:0,obs:[],frame:0,ground:350};
+ if(game===9)s={x:280,obs:[],frame:0,speed:5,lane:1};
+}
+function controls(){
+ let box=$("controls");box.innerHTML="";
+ let labels=game===0?["⬆"]:game===1?["⬆","⬇","⬅","➡"]:
+ [2,3].includes(game)?["⬅","➡"]:
+ game===8?["⬆"]:game===9?["⬅","➡"]:[];
+ labels.forEach(b=>{
+ let el=document.createElement("button");el.textContent=b;
+ el.onpointerdown=e=>{e.preventDefault();action(b)};
+ box.appendChild(el);
  });
+ if(game===0||game===8){
+ let el=document.createElement("button");
+ el.textContent=game===0?"🪽 پرواز":"⬆ پرش";
+ el.onclick=()=>action("⬆");box.appendChild(el);
+ }
+ if(game===7){
+ let el=document.createElement("button");el.textContent="شروع";
+ el.onclick=beginSimon;box.appendChild(el);
+ }
 }
+function action(b){
+ if(over)return;
+ if(game===0)s.v=-7.5;
+ if(game===1){
+ let d={"⬆":[0,-1],"⬇":[0,1],"⬅":[-1,0],"➡":[1,0]}[b];
+ if(d&&d[0]!==-s.dir[0]&&d[1]!==-s.dir[1])s.dir=d;
+ }
+ if(game===2){if(b==="⬆")s.p-=35;if(b==="⬇")s.p+=35;}
+ if(game===3){if(b==="⬅")s.p-=40;if(b==="➡")s.p+=40;}
+ if(game===8)s.vy=-12;
+ if(game===9){if(b==="⬅")s.lane=Math.max(0,s.lane-1);if(b==="➡")s.lane=Math.min(2,s.lane+1);}
+}
+window.addEventListener("keydown",e=>{
+ keys[e.key]=true;
+ let k=e.key;
+ if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(k))e.preventDefault();
+ if(k==="ArrowUp"||k==="w")action("⬆");
+ if(k==="ArrowDown"||k==="s")action("⬇");
+ if(k==="ArrowLeft"||k==="a")action("⬅");
+ if(k==="ArrowRight"||k==="d")action("➡");
+ if(k===" "&&(game===0||game===8))action("⬆");
+});
+window.addEventListener("keyup",e=>keys[e.key]=false);
 
-onAuthStateChanged(auth,async user=>{
- if(user){
-  currentUser=user;
-  setStatus("ورود موفق؛ بررسی دیتابیس...");
-
-  if(chatStarted){
-   startMessageListener();
-   startRankingListener();
-  }
- }else{
-  currentUser=null;
-  setStatus("در حال ورود به حساب ناشناس...");
-
-  try{
-   await signInAnonymously(auth);
-  }catch(error){
-   showError(error);
-  }
+canvas.addEventListener("pointerdown",e=>{
+ if(!running||over)return;
+ let r=canvas.getBoundingClientRect();
+ let x=(e.clientX-r.left)*W/r.width;
+ let y=(e.clientY-r.top)*H/r.height;
+ if(game===3){s.x=x;return;}
+ if(game===4)ticClick(x,y);
+ if(game===5)move2048(Math.abs(x-W/2)>Math.abs(y-H/2)?(x>W/2?"right":"left"):(y>H/2?"down":"up"));
+ if(game===6)memoryClick(x,y);
+ if(game===7) {
+ let col=Math.floor(x/300),row=Math.floor(y/210);
+ simonClick(row*2+col);
  }
 });
+let touchX=0,touchY=0;
+canvas.addEventListener("touchstart",e=>{
+ touchX=e.touches[0].clientX;touchY=e.touches[0].clientY;
+},{passive:true});
+canvas.addEventListener("touchend",e=>{
+ if(game!==5)return;
+ let dx=e.changedTouches[0].clientX-touchX;
+ let dy=e.changedTouches[0].clientY-touchY;
+ if(Math.max(Math.abs(dx),Math.abs(dy))<20)return;
+ move2048(Math.abs(dx)>Math.abs(dy)?(dx>0?"right":"left"):(dy>0?"down":"up"));
+},{passive:true});
 
-window.startChat=function(){
- chatStarted=true;
-
- if(currentUser){
-  startMessageListener();
-  startRankingListener();
- }
-};
-
-window.loadRanking=function(){
- if(currentUser)startRankingListener();
-};
-
-window.sendMessage=async function(){
- const input=document.getElementById("messageInput");
- const nameInput=document.getElementById("username");
-
- const message=input.value.trim();
- const name=nameInput.value.trim()||"عضو";
-
- if(!message)return;
-
- if(!currentUser){
-  setStatus("لطفاً صبر کن تا اتصال کامل شود.","#ff7474");
-  return;
- }
-
- const button=document.getElementById("sendButton");
- button.disabled=true;
-
- try{
-  await push(ref(db,"messages"),{
-   name:name,
-   text:message,
-   uid:currentUser.uid,
-   createdAt:Date.now()
-  });
-
-  input.value="";
-  setStatus("پیام ارسال و ذخیره شد ✓","#54e69a");
-
- }catch(error){
-  showError(error);
- }finally{
-  button.disabled=false;
- }
-};
-
-window.saveScore=async function(value){
- if(!currentUser || value<=0)return;
-
- const name=document.getElementById("username").value.trim()||"عضو";
- const scoreRef=ref(db,"scores/"+currentUser.uid);
-
- try{
-  const old=await get(scoreRef);
-  const oldScore=old.exists()?Number(old.val().score)||0:0;
-
-  if(value>oldScore){
-   await set(scoreRef,{
-    name:name,
-    score:value,
-    uid:currentUser.uid,
-    updatedAt:Date.now()
-   });
-  }
- }catch(error){
-  console.error("Save score error:",error);
- }
-};
-
-</script>
-
-<!-- FLAPPY BIRD -->
-<script>
-
-const canvas=document.getElementById("gameCanvas");
-const ctx=canvas.getContext("2d");
-
-let bird,pipes,score,running,frame,gameOver;
-
-function resetGame(){
- bird={x:110,y:280,velocity:0,r:17};
- pipes=[];
- score=0;
- frame=0;
- running=false;
- gameOver=false;
- document.getElementById("score").textContent=0;
- drawGame();
+function loop(t){
+ if(!running)return;
+ let dt=Math.min((t-last)/16.67||1,2);last=t;
+ if(!over)update(dt);
+ draw();
+ raf=requestAnimationFrame(loop);
+}
+function update(dt){
+ if(game===0)updateFlappy(dt);
+ if(game===1)updateSnake(dt);
+ if(game===2)updatePong(dt);
+ if(game===3)updateBreakout(dt);
+ if(game===8)updateRunner(dt);
+ if(game===9)updateRacing(dt);
+ drawParticles();
 }
 
-function startGame(){
- resetGame();
- running=true;
- requestAnimationFrame(gameLoop);
-}
-
-function jump(){
- if(!running){
-  startGame();
+// 1 FLAPPY BIRD
+function updateFlappy(dt){
+ s.frame+=dt;s.v+=.38*dt;s.y+=s.v*dt;
+ if(s.frame%90<dt){
+ let gap=rand(125,185),top=rand(45,250);
+ s.pipes.push({x:620,top,gap,passed:false});
  }
- bird.velocity=-6.8;
+ s.pipes.forEach(p=>{
+ p.x-=3.6*dt;
+ if(!p.passed&&p.x<100){p.passed=true;addScore();}
+ if(100+17>p.x&&100-17<p.x+65){
+ if(s.y-14<p.top||s.y+14>p.top+p.gap)finish();
+ }
+ });
+ s.pipes=s.pipes.filter(p=>p.x>-80);
+ if(s.y>390||s.y<0)finish();
+}
+function drawFlappy(){
+ bg("#3cafe9","#b0e8ff");
+ circle(510,65,35,"#fff0a1");
+ for(let i=0;i<5;i++){
+ let x=(i*155-s.frame*1.1%155);
+ circle(x,100+i%2*25,24,"#ffffff55");
+ circle(x+23,100+i%2*25,31,"#ffffff55");
+ }
+ rect(0,385,600,35,"#59b34d");
+ s.pipes.forEach(p=>{
+ let g=ctx.createLinearGradient(p.x,0,p.x+65,0);
+ g.addColorStop(0,"#087c37");g.addColorStop(.5,"#44e66c");g.addColorStop(1,"#087c37");
+ rect(p.x,0,65,p.top,g,5);
+ rect(p.x-6,p.top-20,77,20,"#23ba50",5);
+ rect(p.x,p.top+p.gap,65,420-p.top-p.gap,g,5);
+ rect(p.x-6,p.top+p.gap,77,20,"#23ba50",5);
+ });
+ circle(100,s.y,16,"#ffdb38");
+ circle(105,s.y-5,5,"white");circle(107,s.y-5,2,"#111");
+ ctx.fillStyle="#ff8d2d";ctx.beginPath();ctx.moveTo(113,s.y);ctx.lineTo(130,s.y+5);ctx.lineTo(113,s.y+9);ctx.fill();
+ text("FLAPPY BIRD",300,32,18,"#173d66");
 }
 
-canvas.addEventListener("pointerdown",jump);
+// 2 SNAKE
+function updateSnake(dt){
+ s.tick+=dt;
+ if(s.tick<8)return;s.tick=0;
+ let h=s.body[0],n=[h[0]+s.dir[0],h[1]+s.dir[1]];
+ if(n[0]<0||n[0]>=30||n[1]<0||n[1]>=21||s.body.some(p=>p[0]===n[0]&&p[1]===n[1])){finish();return;}
+ s.body.unshift(n);
+ if(n[0]===s.food[0]&&n[1]===s.food[1]){
+ addScore(10);s.food=[Math.floor(rand(1,29)),Math.floor(rand(1,20))];
+ }else s.body.pop();
+}
+function drawSnake(){
+ bg("#071d26","#07111d");
+ for(let x=0;x<30;x++)for(let y=0;y<21;y++)if((x+y)%2===0)rect(x*20,y*20,20,20,"#ffffff08",1);
+ circle(s.food[0]*20+10,s.food[1]*20+10,8,"#ff526b");
+ s.body.forEach((p,i)=>rect(p[0]*20+2,p[1]*20+2,16,16,i?"#24d58a":"#b0ff66",5));
+ text("SNAKE",300,30,18);
+}
 
-function drawGame(){
+// 3 PONG
+function updatePong(dt){
+ s.y+=s.vy*dt;s.x+=s.vx*dt;
+ if(s.y<10||s.y>410)s.vy*=-1;
+ s.ai+=(s.y-s.ai)*.045*dt;
+ s.p=Math.max(0,Math.min(340,s.p));
+ if(s.x<40&&s.y>s.p&&s.y<s.p+80){s.vx=Math.abs(s.vx)*1.05;s.vy+=(s.y-s.p-40)*.09;}
+ if(s.x>560&&s.y>s.ai&&s.y<s.ai+80)s.vx=-Math.abs(s.vx);
+ if(s.x<0){finish("حریف برنده شد");return;}
+ if(s.x>600){addScore(1);s.x=300;s.vx=-4;}
+}
+function drawPong(){
+ bg("#101a39","#080d1c");
+ for(let y=0;y<420;y+=35)rect(298,y,4,18,"#ffffff30");
+ rect(20,s.p,13,80,"#56e4ff",7);
+ rect(567,s.ai,13,80,"#ff70b5",7);
+ circle(s.x,s.y,10,"white");
+ text("YOU",100,25,14,"#65e7ff");text("CPU",500,25,14,"#ff90c6");
+}
 
- const sky=ctx.createLinearGradient(0,0,0,600);
- sky.addColorStop(0,"#65c9f5");
- sky.addColorStop(1,"#d7f5ff");
+// 4 BREAKOUT
+function updateBreakout(dt){
+ s.x=Math.max(50,Math.min(550,s.x));
+ s.ballX??=300;s.ballY??=330;
+ s.ballX+=s.vx*dt;s.ballY+=s.vy*dt;
+ if(s.ballX<10||s.ballX>590)s.vx*=-1;
+ if(s.ballY<10)s.vy=Math.abs(s.vy);
+ if(s.ballY>365&&s.ballX>s.x-55&&s.ballX<s.x+55){s.vy=-Math.abs(s.vy);s.vx+=(s.ballX-s.x)*.08;}
+ if(s.ballY>420){finish();return;}
+ s.bricks.forEach(b=>{
+ if(b.on&&s.ballX>b.x&&s.ballX<b.x+55&&s.ballY>b.y&&s.ballY<b.y+20){
+ b.on=false;s.vy*=-1;addScore(5);particle(b.x+25,b.y,b.color);
+ }});
+ if(s.bricks.every(b=>!b.on)){finish("برنده شدی!");}
+}
+function drawBreakout(){
+ bg("#15112c","#080d1b");
+ s.bricks.forEach(b=>{if(b.on){rect(b.x,b.y,54,20,b.color,5);rect(b.x+4,b.y+3,45,3,"#ffffff55",2);}});
+ rect(s.x-52,375,104,13,"#60dcff",8);
+ circle(s.ballX??300,s.ballY??330,9,"#fff17a");
+}
 
- ctx.fillStyle=sky;
- ctx.fillRect(0,0,480,600);
+// 5 TIC TAC TOE
+function ticClick(x,y){
+ if(s.done)return;
+ let col=Math.floor(x/200),row=Math.floor(y/140),i=row*3+col;
+ if(s.board[i])return;
+ s.board[i]=s.turn;
+ if(checkWin(s.turn)){s.done=true;finish(s.turn+" برنده شد!");return;}
+ if(s.board.every(Boolean)){s.done=true;finish("مساوی!");return;}
+ s.turn=s.turn==="X"?"O":"X";
+}
+function checkWin(p){
+ return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].some(a=>a.every(i=>s.board[i]===p));
+}
+function drawTic(){
+ bg("#191633","#080d1b");
+ for(let i=1;i<3;i++){
+ rect(i*200-2,30,4,360,"#6571a8",3);
+ rect(30,i*130+5,540,4,"#6571a8",3);
+ }
+ s.board.forEach((p,i)=>{
+ let x=i%3*200+100,y=Math.floor(i/3)*130+90;
+ if(p==="X"){text("X",x,y+20,75,"#ff7197");}
+ if(p==="O"){ctx.strokeStyle="#65dcff";ctx.lineWidth=9;ctx.beginPath();ctx.arc(x,y,32,0,Math.PI*2);ctx.stroke();}
+ });
+ text("TIC TAC TOE",300,25,17);
+}
 
- // ابرها
- ctx.fillStyle="#ffffffaa";
-
+// 6 2048
+function spawn2048(){
+ let empty=s.board.map((v,i)=>v===0?i:-1).filter(i=>i>=0);
+ if(empty.length)s.board[empty[Math.floor(Math.random()*empty.length)]]=Math.random()<.9?2:4;
+}
+function move2048(dir){
+ if(game!==5||over)return;
+ let old=s.board.slice(),b=s.board.slice();
  for(let i=0;i<4;i++){
-  let x=(i*150-frame*.3)%550;
-  if(x<0)x+=550;
-
-  ctx.beginPath();
-  ctx.arc(x,90+i%2*55,22,0,Math.PI*2);
-  ctx.arc(x+24,85+i%2*55,28,0,Math.PI*2);
-  ctx.arc(x+50,92+i%2*55,20,0,Math.PI*2);
-  ctx.fill();
+ let line=[];
+ for(let j=0;j<4;j++){
+ let idx=dir==="left"?i*4+j:dir==="right"?i*4+3-j:dir==="up"?j*4+i:(3-j)*4+i;
+ line.push(b[idx]);
  }
-
- // لوله‌ها
- pipes.forEach(p=>{
-  ctx.fillStyle="#198d39";
-  ctx.fillRect(p.x,0,55,p.top);
-  ctx.fillRect(p.x,p.top+155,55,560-p.top-155);
-
-  ctx.fillStyle="#35ca56";
-  ctx.fillRect(p.x-5,p.top-18,65,18);
-  ctx.fillRect(p.x-5,p.top+155,65,18);
+ let a=line.filter(Boolean);
+ for(let k=0;k<a.length-1;k++)if(a[k]===a[k+1]){a[k]*=2;addScore(a[k]);a.splice(k+1,1);}
+ while(a.length<4)a.push(0);
+ for(let j=0;j<4;j++){
+ let idx=dir==="left"?i*4+j:dir==="right"?i*4+3-j:dir==="up"?j*4+i:(3-j)*4+i;
+ b[idx]=a[j];
+ }
+ }
+ if(b.some((v,i)=>v!==old[i])){s.board=b;spawn2048();}
+ if(!s.board.includes(0)&&!can2048())finish("حرکت دیگری باقی نمانده");
+}
+function can2048(){
+ for(let y=0;y<4;y++)for(let x=0;x<4;x++){
+ let i=y*4+x;
+ if(x<3&&s.board[i]===s.board[i+1])return true;
+ if(y<3&&s.board[i]===s.board[i+4])return true;
+ }return false;
+}
+function draw2048(){
+ bg("#202035","#111322");
+ let colors={2:"#eee4da",4:"#ede0c8",8:"#f2b179",16:"#f59563",32:"#f67c5f",64:"#f65e3b",128:"#edcf72",256:"#edcc61",512:"#edc850",1024:"#edc53f",2048:"#edc22e"};
+ s.board.forEach((v,i)=>{
+ let x=30+i%4*137,y=25+Math.floor(i/4)*96;
+ rect(x,y,125,84,v?colors[v]||"#9a63dc":"#ffffff13",9);
+ if(v)text(v,x+62,y+53,v>=100?25:34,v>=8?"white":"#584a42");
  });
-
- // زمین
- ctx.fillStyle="#62bd55";
- ctx.fillRect(0,560,480,40);
-
- ctx.fillStyle="#d8ad63";
- ctx.fillRect(0,575,480,25);
-
- // پرنده
- ctx.save();
- ctx.translate(bird.x,bird.y);
- ctx.rotate(Math.max(-.5,Math.min(.7,bird.velocity*.06)));
-
- ctx.fillStyle="#ffd83d";
- ctx.beginPath();
- ctx.arc(0,0,17,0,Math.PI*2);
- ctx.fill();
-
- ctx.fillStyle="white";
- ctx.beginPath();
- ctx.arc(7,-6,6,0,Math.PI*2);
- ctx.fill();
-
- ctx.fillStyle="#111";
- ctx.beginPath();
- ctx.arc(9,-6,2.5,0,Math.PI*2);
- ctx.fill();
-
- ctx.fillStyle="#ff8138";
- ctx.beginPath();
- ctx.moveTo(14,1);
- ctx.lineTo(28,6);
- ctx.lineTo(14,10);
- ctx.fill();
-
- ctx.fillStyle="#f3a900";
- ctx.beginPath();
- ctx.ellipse(-5,5,9,5,-.4,0,Math.PI*2);
- ctx.fill();
-
- ctx.restore();
-
- if(!running){
-  ctx.fillStyle="#07182dcc";
-  ctx.fillRect(35,225,410,110);
-
-  ctx.fillStyle="white";
-  ctx.textAlign="center";
-  ctx.font="bold 25px Tahoma";
-  ctx.fillText(gameOver?"پایان بازی!":"برای شروع ضربه بزن",240,270);
-
-  ctx.font="17px Tahoma";
-  ctx.fillText("امتیاز: "+score,240,305);
- }
+ text("2048",300,415,20);
 }
 
-function endGame(){
- if(!running)return;
-
- running=false;
- gameOver=true;
-
- if(window.saveScore){
-  window.saveScore(score);
+// 7 MEMORY
+function memoryClick(x,y){
+ if(s.open.length===2)return;
+ let col=Math.floor((x-30)/137),row=Math.floor((y-35)/90),i=row*4+col;
+ if(i<0||i>=16||s.matched.includes(i)||s.open.includes(i))return;
+ s.open.push(i);
+ if(s.open.length===2){
+ s.moves++;
+ if(s.cards[s.open[0]]===s.cards[s.open[1]]){
+ s.matched.push(...s.open);addScore(10);s.open=[];
+ if(s.matched.length===16)finish("همه کارت ها را پیدا کردی!");
+ }else setTimeout(()=>{if(game===6&&s.open.length===2)s.open=[];},650);
  }
-
- drawGame();
 }
-
-function gameLoop(){
- if(!running)return;
-
- frame++;
-
- bird.velocity+=.34;
- bird.y+=bird.velocity;
-
- if(frame%95===0){
-  let top=90+Math.random()*260;
-  pipes.push({x:500,top:top,passed:false});
- }
-
- pipes.forEach(p=>{
-  p.x-=2.7;
-
-  if(!p.passed && p.x+55<bird.x){
-   p.passed=true;
-   score++;
-   document.getElementById("score").textContent=score;
-  }
-
-  if(
-   bird.x+bird.r>p.x &&
-   bird.x-bird.r<p.x+55 &&
-   (bird.y-bird.r<p.top ||
-    bird.y+bird.r>p.top+155)
-  ){
-   endGame();
-  }
+function drawMemory(){
+ bg("#151d3c","#0a1023");
+ s.cards.forEach((v,i)=>{
+ let x=30+i%4*137,y=35+Math.floor(i/4)*90;
+ let shown=s.open.includes(i)||s.matched.includes(i);
+ rect(x,y,125,78,shown?"#f4f0ff":"#4655a4",10);
+ text(shown?v:"?",x+62,y+53,shown?32:35,shown?"#30284b":"white");
  });
-
- pipes=pipes.filter(p=>p.x>-70);
-
- if(bird.y>560||bird.y<0){
-  endGame();
- }
-
- drawGame();
-
- if(running){
-  requestAnimationFrame(gameLoop);
- }
+ text("MOVES: "+s.moves,300,410,18);
 }
 
-resetGame();
+// 8 SIMON
+function beginSimon(){
+ s.seq=[Math.floor(rand(0,4))];s.step=0;s.waiting=true;
+ $("message").textContent="الگو را به خاطر بسپار!";
+}
+function simonClick(i){
+ if(game!==7||!s.waiting||s.active!==-1)return;
+ flashSimon(i);
+ if(i!==s.seq[s.step]){
+ s.waiting=false;finish("اشتباه شد!");return;
+ }
+ s.step++;
+ if(s.step===s.seq.length){
+ addScore(1);s.waiting=false;
+ setTimeout(()=>{if(game===7&&!over){s.seq.push(Math.floor(rand(0,4)));s.step=0;s.waiting=true;$("message").textContent="مرحله بعد!";}},600);
+ }
+}
+function flashSimon(i){
+ s.active=i;setTimeout(()=>{if(game===7)s.active=-1;},250);
+}
+function drawSimon(){
+ bg("#14162e","#080d1b");
+ let colors=["#ed5269","#44d88c","#438bff","#f3c34e"];
+ for(let i=0;i<4;i++){
+ let x=i%2*290+10,y=Math.floor(i/2)*195+10;
+ rect(x,y,280,185,i===s.active?"white":colors[i],20);
+ text(["●","◆","▲","★"][i],x+140,y+110,60,"#ffffff");
+ }
+ text("SIMON MEMORY",300,415,18);
+}
 
+// 9 RUNNER
+function updateRunner(dt){
+ s.frame+=dt;s.vy+=.65*dt;s.y+=s.vy*dt;
+ if(s.y>320){s.y=320;s.vy=0;}
+ if(s.frame>55){s.frame=0;s.obs.push({x:620,h:rand(35,75)});}
+ s.obs.forEach(o=>{
+ o.x-=6*dt;
+ if(o.x<120&&o.x+35>85&&s.y+35>350-o.h)finish();
+ if(!o.p&&o.x<80){o.p=true;addScore();}
+ });
+ s.obs=s.obs.filter(o=>o.x>-50);
+}
+function drawRunner(){
+ bg("#55b5e6","#d1eaff");
+ circle(500,70,35,"#fff1a0");
+ for(let i=0;i<5;i++)circle(i*145+20,100,30,"#ffffff77");
+ rect(0,350,600,70,"#4aaf58");
+ for(let i=0;i<600;i+=40)rect(i,350,20,5,"#b6ed73");
+ s.obs.forEach(o=>rect(o.x,350-o.h,35,o.h,"#258b4a",7));
+ circle(100,s.y+15,19,"#ffb23f");
+ rect(85,s.y+25,30,27,"#477cf6",7);
+ rect(88,s.y+48,9,12,"#242e4b");
+ rect(106,s.y+48,9,12,"#242e4b");
+ text("JUNGLE RUNNER",300,30,18,"#164a58");
+}
+
+// 10 RACING
+function updateRacing(dt){
+ s.frame+=dt;s.speed=Math.min(10,5+score*.08);
+ if(s.frame>40){s.frame=0;s.obs.push({lane:Math.floor(rand(0,3)),y:-60});}
+ s.obs.forEach(o=>{
+ o.y+=s.speed*dt;
+ if(o.lane===s.lane&&o.y>310&&o.y<390)finish("تصادف کردی!");
+ if(!o.p&&o.y>410){o.p=true;addScore();}
+ });
+ s.obs=s.obs.filter(o=>o.y<470);
+}
+function drawCar(x,y,color){
+ rect(x-19,y-28,38,57,color,9);
+ rect(x-13,y-19,26,16,"#b9edff",5);
+ rect(x-13,y+5,26,12,"#26334d",3);
+ rect(x-24,y-17,7,15,"#151515",2);
+ rect(x+17,y-17,7,15,"#151515",2);
+ rect(x-24,y+12,7,15,"#151515",2);
+ rect(x+17,y+12,7,15,"#151515",2);
+}
+function drawRacing(){
+ bg("#27844e","#145234");
+ rect(90,0,420,420,"#30343f",3);
+ rect(105,0,390,420,"#454a54",2);
+ for(let i=0;i<2;i++)for(let y=-30;y<450;y+=75){
+ rect(235+i*130,y+(s.frame*5)%75,5,35,"#ffffff88");
+ }
+ rect(95,0,7,420,"#f2dc5a");rect(498,0,7,420,"#f2dc5a");
+ s.obs.forEach(o=>drawCar(170+o.lane*130,o.y,"#e84d65"));
+ drawCar(170+s.lane*130,350,"#36b9ff");
+ text("MINI RACING",300,25,18);
+}
+
+function draw(){
+ if(game===0)drawFlappy();
+ if(game===1)drawSnake();
+ if(game===2)drawPong();
+ if(game===3)drawBreakout();
+ if(game===4)drawTic();
+ if(game===5)draw2048();
+ if(game===6)drawMemory();
+ if(game===7)drawSimon();
+ if(game===8)drawRunner();
+ if(game===9)drawRacing();
+ if(game===2||game===3||game===4||game===5||game===6||game===7)drawParticles();
+ if(over){
+ ctx.fillStyle="#050817bb";ctx.fillRect(0,0,W,H);
+ text("GAME OVER",300,185,39,"#fff");
+ text("امتیاز: "+score,300,235,25,"#ffe17b");
+ text("برای بازی دوباره دکمه پایین را بزن",300,280,17);
+ }
+}
 </script>
-
 </body>
 </html>
