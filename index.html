@@ -1,732 +1,756 @@
-
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#080d1b">
-<title>AMIR ALI ARCADE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0c">
+<meta name="description" content="Amin Nikaee CrossFit | برنامه تمرینی، رکوردها و مدیریت حرفه‌ای ورزشکاران">
+<title>Amin Nikaee CrossFit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+:root{--bg:#09090b;--panel:#141418;--panel2:#1b1b21;--red:#e32636;--red2:#ff4352;--white:#f7f7f8;--muted:#a4a4ad;--line:#2b2b32;--green:#42c98b;--gold:#e9b44c;--radius:18px;--shadow:0 18px 55px #0008}
 *{box-sizing:border-box}
-html,body{
- margin:0;width:100%;height:100%;
- overflow:hidden;background:#080d1b;color:white;
- font-family:Tahoma,Arial;
- overscroll-behavior:none;
-}
-button{font-family:inherit;cursor:pointer;border:0;color:white}
-#menu{
- width:100%;height:100dvh;overflow:auto;
- padding:20px;background:
- radial-gradient(circle at 50% 0,#343a82,#10172e 55%,#070b16);
-}
-.logo{text-align:center;padding:15px 0 25px}
-.logo h1{font-size:30px;margin:5px;text-shadow:0 0 22px #9c7bff}
-.logo p{color:#aebce8;font-size:12px}
-.games{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
- gap:12px;max-width:900px;margin:auto;
-}
-.card{
- min-height:145px;padding:15px;border-radius:18px;
- background:linear-gradient(145deg,#26376b,#111a32);
- border:1px solid #485b92;
- box-shadow:0 7px 18px #0005;
-}
-.card:active{transform:scale(.96)}
-.card .emoji{font-size:39px}
-.card h3{font-size:15px;margin:8px 0}
-.card p{font-size:11px;color:#b7c5e9;margin:0}
-#play{
- display:none;position:fixed;inset:0;
- height:100dvh;width:100%;
- background:#080d1b;
- flex-direction:column;
- padding-top:env(safe-area-inset-top);
- padding-bottom:env(safe-area-inset-bottom);
-}
-#top{
- height:54px;flex-shrink:0;
- display:flex;align-items:center;justify-content:space-between;
- padding:5px 8px;gap:6px;
- background:#141d39;border-bottom:1px solid #394a79;
-}
-#top strong{font-size:13px;text-align:center;flex:1}
-.topbtn{
- padding:10px 11px;border-radius:10px;
- background:#354578;font-size:12px;
-}
-.exit{background:#b83757}
-#canvasBox{
- flex:1;min-height:0;width:100%;
- display:flex;align-items:stretch;justify-content:center;
- overflow:hidden;
-}
-canvas{
- display:block;width:100%;height:100%;
- background:#101a34;
- touch-action:none!important;
- user-select:none;-webkit-user-select:none;
- -webkit-touch-callout:none;
-}
-#bottom{
- flex-shrink:0;min-height:37px;
- display:flex;align-items:center;justify-content:center;
- color:#c8d2f6;font-size:12px;
- padding:5px;
- background:#111a32;
-}
-#menuButton{
- display:block;margin:20px auto;
- padding:14px 25px;background:#6655ef;
- border-radius:13px;font-weight:bold;
-}
-@media(min-width:650px){
- .games{grid-template-columns:repeat(3,1fr)}
- #play{max-width:1000px;margin:auto;left:0;right:0}
-}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{margin:0;background:var(--bg);color:var(--white);font-family:"Vazirmatn",Tahoma,sans-serif;line-height:1.8}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:min(1160px,92%);margin:auto}
+.topbar{position:sticky;top:0;z-index:50;background:#09090beF;border-bottom:1px solid #ffffff12;backdrop-filter:blur(16px)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.3px}
+.brand-mark{width:43px;height:43px;border-radius:13px;background:linear-gradient(145deg,var(--red2),#9d0718);display:grid;place-items:center;font-size:23px;box-shadow:0 7px 24px #e3263644}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;line-height:1.2}
+.navlinks{display:flex;align-items:center;gap:23px;color:#d5d5da;font-size:13px}
+.navlinks a:hover{color:var(--red2)}
+.btn{border:0;border-radius:12px;padding:11px 18px;font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-red{background:var(--red);color:white;box-shadow:0 8px 25px #e3263630}
+.btn-red:hover{background:var(--red2);transform:translateY(-2px)}
+.btn-dark{background:#24242b;color:white;border:1px solid #ffffff16}
+.btn-dark:hover{background:#303039}
+.btn-outline{background:transparent;border:1px solid #ffffff35;color:white}
+.btn-small{padding:7px 11px;font-size:12px;border-radius:9px}
+.menu-toggle{display:none;background:none;border:1px solid var(--line);color:white;border-radius:10px;padding:8px 12px;font-size:20px}
+.hero{min-height:620px;display:grid;align-items:center;position:relative;overflow:hidden;background:linear-gradient(90deg,#08080bf2 5%,#08080bd9 48%,#08080b55),url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1900&q=85") center/cover}
+.hero:after{content:"";position:absolute;inset:auto 0 0;height:130px;background:linear-gradient(transparent,var(--bg))}
+.hero-content{position:relative;z-index:1;padding:95px 0 120px;max-width:700px}
+.eyebrow{color:var(--red2);font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase}
+.hero h1{font-size:clamp(42px,7vw,82px);line-height:1.15;margin:18px 0;font-weight:900;letter-spacing:-2px}
+.hero h1 span{color:var(--red)}
+.hero p{color:#d0d0d5;max-width:570px;font-size:17px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero-stats{display:flex;gap:32px;margin-top:50px;flex-wrap:wrap}
+.stat strong{display:block;font-size:24px;color:white}
+.stat span{font-size:12px;color:var(--muted)}
+.section{padding:82px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:30px}
+.section-head h2{font-size:clamp(27px,4vw,42px);line-height:1.3;margin:8px 0}
+.section-head p{color:var(--muted);margin:0;max-width:520px;font-size:14px}
+.kicker{color:var(--red2);font-size:12px;font-weight:900;letter-spacing:2px}
+.grid{display:grid;gap:18px}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:linear-gradient(145deg,#19191f,#111115);border:1px solid #ffffff12;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 10px;font-size:19px}
+.card p{color:var(--muted);font-size:14px;margin:0}
+.feature-icon{width:48px;height:48px;border-radius:14px;background:#e326361c;color:var(--red2);display:grid;place-items:center;font-size:24px;margin-bottom:17px}
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center}
+.about-image{min-height:430px;border-radius:24px;background:url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1100&q=85") center/cover;position:relative;overflow:hidden}
+.about-image:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0008,transparent 60%)}
+.about-tag{position:absolute;z-index:1;bottom:22px;right:22px;background:var(--red);padding:12px 17px;border-radius:12px;font-weight:900}
+.checks{padding:0;list-style:none;margin:22px 0}
+.checks li{margin:9px 0;color:#dedee2}
+.checks li:before{content:"✓";color:var(--red2);font-weight:900;margin-left:10px}
+.calc{max-width:760px;margin:auto;background:linear-gradient(145deg,#1b1b22,#111115);border:1px solid #ffffff17;border-radius:24px;padding:30px;box-shadow:var(--shadow)}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:13px}
+.field label{font-size:13px;color:#d9d9df;font-weight:700}
+.field input,.field select,.field textarea{width:100%;background:#0b0b0f;border:1px solid #34343d;border-radius:11px;color:white;padding:12px 13px;outline:none;min-width:0}
+.field textarea{min-height:115px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px #e326361c}
+.result{margin-top:18px;background:#0c0c10;border:1px solid #ffffff15;border-radius:16px;padding:20px;text-align:center}
+.result strong{font-size:clamp(36px,7vw,58px);line-height:1.3;color:var(--red2);display:block}
+.result span{color:var(--muted);font-size:13px}
+.gallery{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:210px 210px;gap:14px}
+.gallery div{border-radius:17px;background-size:cover;background-position:center;overflow:hidden;position:relative}
+.gallery div:after{content:"CROSSFIT";position:absolute;bottom:13px;right:15px;font-size:12px;font-weight:900;letter-spacing:2px;text-shadow:0 2px 8px #000}
+.gallery div:first-child{grid-row:span 2;background-image:url("https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80")}
+.gallery div:nth-child(2){background-image:url("https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=800&q=80")}
+.gallery div:nth-child(3){background-image:url("https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=800&q=80")}
+.gallery div:nth-child(4){background-image:url("https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=800&q=80")}
+.contact-band{background:linear-gradient(110deg,#b80e20,#ed2c3d);border-radius:24px;padding:35px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.contact-band h2{margin:0;font-size:28px}
+.contact-band p{margin:5px 0 0;color:#ffe2e5;font-size:14px}
+.contact-band .btn{background:white;color:#b70f20}
+.contact-info{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.info-line{display:flex;gap:13px;align-items:flex-start}
+.info-line b{display:block}
+.info-line span{font-size:13px;color:var(--muted)}
+footer{border-top:1px solid #ffffff12;padding:28px 0;color:var(--muted);font-size:12px}
+.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.hidden{display:none!important}
+.panel-section{background:#0e0e12;border-top:1px solid #ffffff12;border-bottom:1px solid #ffffff12}
+.panel-box{background:#15151b;border:1px solid #ffffff15;border-radius:18px;padding:22px;margin:18px 0}
+.panel-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.panel-title h3{margin:0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{background:#24242c;border:1px solid #ffffff14;color:#ddd;padding:8px 13px;border-radius:10px;font-size:12px}
+.tab.active{background:var(--red);color:white;border-color:var(--red)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:560px;font-size:13px}
+th,td{padding:12px 10px;border-bottom:1px solid #ffffff12;text-align:right;vertical-align:middle}
+th{color:#aaa;font-weight:700}
+td{color:#eee}
+.pill{display:inline-block;border-radius:50px;padding:3px 9px;font-size:11px;background:#ffffff12;color:#ddd}
+.level-beginner{background:#7773}.level-intermediate{background:#2876c333;color:#83bdff}.level-advanced{background:#d99a2433;color:#f3c86e}.level-elite{background:#e3263633;color:#ff7b86}
+.notice{padding:12px 14px;border-radius:11px;background:#25252d;color:#cfcfd6;font-size:12px;margin:12px 0}
+.notice.error{background:#6c1720;color:#ffe1e4}
+.notice.success{background:#123c2c;color:#baf2d5}
+.actions{display:flex;gap:7px;flex-wrap:wrap}
+.empty{color:var(--muted);text-align:center;padding:25px;font-size:13px}
+.auth-card{max-width:500px;margin:20px auto}
+.auth-switch{display:flex;gap:8px;margin-bottom:15px}
+.auth-switch button{flex:1}
+.small-muted{font-size:11px;color:var(--muted)}
+#progressChart{width:100%;max-height:280px}
+.mobile-nav{display:none}
+@media(max-width:850px){.navlinks{display:none;position:absolute;top:76px;right:0;left:0;background:#101015;padding:18px 5%;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch}.navlinks.open{display:flex}.menu-toggle{display:block}.nav>.btn{display:none}.about-wrap{grid-template-columns:1fr}.about-image{min-height:310px}.grid-3{grid-template-columns:1fr 1fr}.gallery{grid-template-rows:170px 170px}.section{padding:62px 0}}
+@media(max-width:560px){.hero{min-height:600px}.hero-content{padding:75px 0 100px}.hero h1{letter-spacing:-1px}.hero p{font-size:14px}.hero-stats{gap:20px}.grid-3,.grid-2,.form-grid,.contact-info{grid-template-columns:1fr}.section-head{display:block}.gallery{grid-template-columns:1fr 1fr;grid-template-rows:160px 160px 160px}.gallery div:first-child{grid-row:span 2}.contact-band{display:block;padding:25px}.contact-band .btn{margin-top:16px}.calc{padding:18px}.card{padding:19px}.brand{font-size:13px}}
 </style>
 </head>
 <body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <span class="brand-mark">A</span>
+      <span>AMIN NIKAEE<small>CROSSFIT • PERFORMANCE</small></span>
+    </a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#home">خانه</a><a href="#about">مربی</a><a href="#calculator">محاسبه درصد</a><a href="#gallery">فضای تمرین</a><a href="#contact">تماس</a><a href="#account">حساب کاربری</a>
+    </nav>
+    <a class="btn btn-red" href="tel:+989104738711">تماس با مربی</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو">☰</button>
+  </div>
+</header>
 
-<section id="menu">
- <div class="logo">
-  <h1>🎮 AMIR ALI ARCADE</h1>
-  <p>ULTIMATE 2D GAMING WORLD</p>
-  <p>۱۰ بازی دوبعدی | کنترل لمسی | تمام صفحه</p>
- </div>
- <div class="games" id="games"></div>
+<main>
+<section class="hero" id="home">
+  <div class="container hero-content">
+    <div class="eyebrow">TRAIN HARD • MOVE BETTER</div>
+    <h1>قدرتت را<br><span>بساز.</span> محدودیتت را<br>جابه‌جا کن.</h1>
+    <p>به دنیای تمرین حرفه‌ای کراس‌فیت خوش آمدی؛ جایی برای پیشرفت واقعی، ثبت رکوردها و ساختن نسخه قوی‌تر خودت.</p>
+    <div class="hero-actions">
+      <a class="btn btn-red" href="#account">ورود ورزشکاران ←</a>
+      <a class="btn btn-outline" href="#about">آشنایی با مربی</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>STRENGTH</strong><span>قدرت و توان</span></div>
+      <div class="stat"><strong>ENDURANCE</strong><span>استقامت و آمادگی</span></div>
+      <div class="stat"><strong>PROGRESS</strong><span>پیشرفت قابل اندازه‌گیری</span></div>
+    </div>
+  </div>
 </section>
 
-<section id="play">
- <div id="top">
-  <button class="topbtn exit" onclick="home()">🏠 منو</button>
-  <strong id="gameTitle">GAME</strong>
-  <button class="topbtn" onclick="restart()">🔄</button>
-  <button class="topbtn" onclick="fullScreen()">⛶</button>
-  <button class="topbtn exit" onclick="home()">✖ خروج</button>
- </div>
- <div id="canvasBox">
-  <canvas id="c" width="600" height="700"></canvas>
- </div>
- <div id="bottom">برای کنترل، صفحه بازی را لمس کن</div>
+<section class="section" id="about">
+  <div class="container about-wrap">
+    <div class="about-image"><div class="about-tag">AMIN NIKAEE • COACH</div></div>
+    <div>
+      <div class="kicker">ABOUT THE COACH</div>
+      <h2 style="font-size:clamp(30px,4vw,44px);line-height:1.35;margin:10px 0">تمرین هدفمند،<br>پیشرفت مداوم.</h2>
+      <p style="color:var(--muted)">در Amin Nikaee CrossFit تمرین‌ها با هدف افزایش قدرت، مهارت، استقامت و بهبود عملکرد ورزشی دنبال می‌شوند. برنامه‌ها و رکوردها در پنل اختصاصی هر ورزشکار ثبت می‌شوند تا مسیر پیشرفت قابل پیگیری باشد.</p>
+      <ul class="checks">
+        <li>برنامه تمرینی اختصاصی و هفتگی</li>
+        <li>ثبت و بررسی رکوردهای ورزشی</li>
+        <li>پیگیری روند پیشرفت هر ورزشکار</li>
+        <li>سطح‌بندی قابل تنظیم توسط مربی</li>
+      </ul>
+      <a class="btn btn-red" href="tel:+989104738711">تماس با امین نیکایی</a>
+    </div>
+  </div>
 </section>
 
+<section class="section" style="background:#101014" id="features">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">TRAINING SYSTEM</div><h2>همه‌چیز برای پیشرفت</h2></div><p>ابزارهای ساده و کاربردی برای اینکه تمرین، برنامه و رکوردهایت همیشه منظم و در دسترس باشند.</p></div>
+    <div class="grid grid-3">
+      <div class="card"><div class="feature-icon">％</div><h3>ماشین‌حساب درصد رکورد</h3><p>درصد وزنه تمرینی را نسبت به رکورد اصلی در چند ثانیه محاسبه کن.</p></div>
+      <div class="card"><div class="feature-icon">▤</div><h3>برنامه اختصاصی</h3><p>برنامه روزانه و هفتگی مخصوص هر ورزشکار در حساب کاربری ذخیره می‌شود.</p></div>
+      <div class="card"><div class="feature-icon">↗</div><h3>پیگیری رکوردها</h3><p>رکورد حرکات را ثبت کن و تغییرات عملکردت را در طول زمان ببین.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="calculator">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">PERCENT CALCULATOR</div><h2>ماشین‌حساب درصد رکورد</h2></div><p>وزنه تمرینی را وارد کن تا درصد آن نسبت به رکورد اصلی محاسبه شود.</p></div>
+    <div class="calc">
+      <div class="form-grid">
+        <div class="field"><label for="maxLift">رکورد اصلی (کیلوگرم)</label><input id="maxLift" type="number" min="0.01" step="0.5" placeholder="مثلاً 100"></div>
+        <div class="field"><label for="trainingLift">وزنه تمرینی (کیلوگرم)</label><input id="trainingLift" type="number" min="0" step="0.5" placeholder="مثلاً 90"></div>
+      </div>
+      <button class="btn btn-red" style="width:100%" id="calculateBtn">محاسبه درصد</button>
+      <div class="result"><strong id="calcResult">—</strong><span id="calcCaption">درصد رکورد اینجا نمایش داده می‌شود</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">THE GYM</div><h2>قدرت در حرکت است</h2></div><p>تمرکز، تلاش و استمرار؛ هر جلسه یک قدم رو به جلو.</p></div>
+    <div class="gallery"><div></div><div></div><div></div><div></div></div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-band">
+      <div><h2>آماده شروعی؟</h2><p>برای اطلاعات بیشتر و هماهنگی با مربی تماس بگیر.</p></div>
+      <a class="btn" href="tel:+989104738711">تماس: 0910 473 8711</a>
+    </div>
+    <div class="grid grid-2" style="margin-top:22px">
+      <div class="card">
+        <div class="info-line"><div class="feature-icon">☎</div><div><b>تماس با مربی</b><a href="tel:+989104738711" style="color:var(--red2);direction:ltr;display:inline-block">0910 473 8711</a><span>امین نیکایی</span></div></div>
+      </div>
+      <div class="card">
+        <div class="info-line"><div class="feature-icon">⌖</div><div><b>آدرس باشگاه</b><span>بلوار آیت، آیت ۱۶، دومین کوچه سمت چپ، سوله سمت راست.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section panel-section" id="account">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">ATHLETE PORTAL</div><h2>ورود به حساب کاربری</h2></div><p>ورزشکاران و مربی از این قسمت وارد پنل اختصاصی خود می‌شوند.</p></div>
+    <div id="authArea" class="card auth-card">
+      <div class="auth-switch">
+        <button class="btn btn-red" id="showLogin">ورود</button>
+        <button class="btn btn-dark" id="showRegister">ثبت‌نام ورزشکار</button>
+      </div>
+      <form id="loginForm">
+        <div class="field"><label for="loginEmail">ایمیل</label><input id="loginEmail" type="email" autocomplete="email" required placeholder="name@example.com"></div>
+        <div class="field"><label for="loginPassword">رمز عبور</label><input id="loginPassword" type="password" autocomplete="current-password" required minlength="6"></div>
+        <button class="btn btn-red" style="width:100%" type="submit">ورود به حساب</button>
+        <button class="btn btn-dark" style="width:100%;margin-top:8px" type="button" id="resetPassword">بازیابی رمز عبور</button>
+      </form>
+      <form id="registerForm" class="hidden">
+        <div class="field"><label for="registerName">نام و نام خانوادگی</label><input id="registerName" required maxlength="60" placeholder="نام ورزشکار"></div>
+        <div class="field"><label for="registerEmail">ایمیل</label><input id="registerEmail" type="email" required autocomplete="email" placeholder="name@example.com"></div>
+        <div class="field"><label for="registerPassword">رمز عبور (حداقل ۶ کاراکتر)</label><input id="registerPassword" type="password" required minlength="6" autocomplete="new-password"></div>
+        <button class="btn btn-red" style="width:100%" type="submit">ساخت حساب ورزشکار</button>
+      </form>
+      <div id="authMessage" class="notice hidden"></div>
+      <p class="small-muted">اطلاعات حساب و رکوردها فقط برای صاحب حساب و مربی مجاز قابل مشاهده است.</p>
+    </div>
+
+    <div id="dashboard" class="hidden">
+      <div class="panel-box">
+        <div class="panel-title"><div><div class="kicker">YOUR ACCOUNT</div><h3 id="welcomeName">پنل کاربری</h3><span id="accountEmail" class="small-muted"></span></div><button class="btn btn-dark btn-small" id="logoutBtn">خروج از حساب</button></div>
+      </div>
+
+      <div id="athletePanel" class="hidden">
+        <div class="grid grid-2">
+          <div class="panel-box">
+            <h3>وزن بدن</h3>
+            <p class="small-muted">وزن بدن برای محاسبه نسبت رکورد به وزن بدن استفاده می‌شود.</p>
+            <div class="field"><label for="myBodyweight">وزن بدن (کیلوگرم)</label><input id="myBodyweight" type="number" min="1" max="400" step="0.1" placeholder="مثلاً 75"></div>
+            <button class="btn btn-red btn-small" id="saveBodyweight">ذخیره وزن بدن</button>
+            <div id="bodyweightMessage" class="notice hidden"></div>
+          </div>
+          <div class="panel-box">
+            <h3>ثبت رکورد جدید</h3>
+            <form id="athleteRecordForm">
+              <div class="field"><label for="athleteExercise">حرکت</label><select id="athleteExercise" required></select></div>
+              <div class="field"><label id="athleteRecordLabel" for="athleteRecordWeight">رکورد (کیلوگرم)</label><input id="athleteRecordWeight" type="number" min="0" step="0.5" required></div>
+              <div class="field"><label for="athleteRecordDate">تاریخ رکورد</label><input id="athleteRecordDate" type="date" required></div>
+              <div class="field"><label for="athleteRecordNote">توضیح (اختیاری)</label><input id="athleteRecordNote" maxlength="150" placeholder="مثلاً رکورد تمرین"></div>
+              <button class="btn btn-red btn-small" type="submit">ثبت رکورد</button>
+            </form>
+            <div id="athleteRecordMessage" class="notice hidden"></div>
+          </div>
+        </div>
+        <div class="panel-box">
+          <div class="panel-title"><h3>برنامه‌های تمرینی من</h3></div>
+          <div id="myPrograms" class="empty">هنوز برنامه‌ای برای حساب تو ثبت نشده است.</div>
+        </div>
+        <div class="panel-box">
+          <div class="panel-title"><h3>رکوردهای شخصی من</h3></div>
+          <div class="table-wrap"><table><thead><tr><th>حرکت</th><th>رکورد</th><th>درصد از بهترین رکورد</th><th>نسبت به وزن بدن</th><th>سطح</th><th>تاریخ</th></tr></thead><tbody id="myRecords"></tbody></table></div>
+          <div id="myRecordsEmpty" class="empty">هنوز رکوردی ثبت نکرده‌ای.</div>
+        </div>
+        <div class="panel-box">
+          <div class="panel-title"><h3>روند تغییر رکورد</h3></div>
+          <div class="field"><label for="progressExercise">انتخاب حرکت</label><select id="progressExercise"></select></div>
+          <canvas id="progressChart"></canvas>
+          <p class="small-muted">نمودار بر اساس رکوردهای ثبت‌شده و تاریخ آن‌ها رسم می‌شود.</p>
+        </div>
+      </div>
+
+      <div id="coachPanel" class="hidden">
+        <div class="notice success">دسترسی مربی فعال است. تغییرات برنامه‌ها، حرکات و معیارهای سطح‌بندی در پایگاه داده ذخیره می‌شوند.</div>
+        <div class="panel-box">
+          <div class="panel-title"><h3>مدیریت ورزشکاران</h3></div>
+          <form id="inviteForm" class="form-grid">
+            <div class="field"><label for="inviteName">نام ورزشکار</label><input id="inviteName" required maxlength="60"></div>
+            <div class="field"><label for="inviteEmail">ایمیل ورزشکار</label><input id="inviteEmail" type="email" required></div>
+            <div><button class="btn btn-red btn-small" type="submit">افزودن به فهرست</button></div>
+          </form>
+          <div id="inviteMessage" class="notice hidden"></div>
+          <div class="small-muted">این قسمت ورزشکار را به فهرست دعوت‌ها اضافه می‌کند. ورزشکار باید با همان ایمیل ثبت‌نام کند؛ سپس می‌توانی حسابش را از فهرست حساب‌های ثبت‌نام‌شده انتخاب کنی.</div>
+          <div class="table-wrap" style="margin-top:12px"><table><thead><tr><th>نام دعوت‌شده</th><th>ایمیل</th><th>وضعیت</th><th>عملیات</th></tr></thead><tbody id="inviteRows"></tbody></table></div>
+          <div class="panel-title" style="margin-top:25px"><h3>حساب‌های ثبت‌نام‌شده</h3></div>
+          <div class="field"><label for="coachAthleteSelect">انتخاب ورزشکار برای مدیریت برنامه و رکورد</label><select id="coachAthleteSelect"><option value="">در حال بارگذاری...</option></select></div>
+          <div id="selectedAthleteInfo" class="small-muted"></div>
+        </div>
+        <div class="grid grid-2">
+          <div class="panel-box">
+            <h3>ثبت / ویرایش برنامه تمرینی</h3>
+            <form id="programForm">
+              <div class="field"><label for="programTitle">عنوان برنامه</label><input id="programTitle" required placeholder="مثلاً برنامه قدرتی هفته اول"></div>
+              <div class="form-grid">
+                <div class="field"><label for="programDate">تاریخ</label><input id="programDate" type="date" required></div>
+                <div class="field"><label for="programWeek">هفته</label><input id="programWeek" placeholder="مثلاً هفته اول"></div>
+              </div>
+              <div class="field"><label for="programContent">متن برنامه</label><textarea id="programContent" required placeholder="روز اول: ...&#10;روز دوم: ..."></textarea></div>
+              <div class="actions"><button class="btn btn-red btn-small" type="submit" id="programSubmit">ذخیره برنامه</button><button class="btn btn-dark btn-small hidden" type="button" id="cancelProgramEdit">لغو ویرایش</button></div>
+            </form>
+            <div id="programMessage" class="notice hidden"></div>
+            <div id="coachPrograms" class="empty">ابتدا یک ورزشکار انتخاب کن.</div>
+          </div>
+          <div class="panel-box">
+            <h3>ثبت / ویرایش رکورد ورزشکار</h3>
+            <form id="coachRecordForm">
+              <div class="field"><label for="coachExercise">حرکت</label><select id="coachExercise" required></select></div>
+              <div class="field"><label id="coachRecordLabel" for="coachRecordWeight">رکورد (کیلوگرم)</label><input id="coachRecordWeight" type="number" min="0" step="0.5" required></div>
+              <div class="field"><label for="coachRecordDate">تاریخ</label><input id="coachRecordDate" type="date" required></div>
+              <div class="field"><label for="coachRecordNote">توضیح</label><input id="coachRecordNote" maxlength="150"></div>
+              <div class="actions"><button class="btn btn-red btn-small" type="submit" id="coachRecordSubmit">ثبت رکورد</button><button class="btn btn-dark btn-small hidden" type="button" id="cancelRecordEdit">لغو ویرایش</button></div>
+            </form>
+            <div id="coachRecordMessage" class="notice hidden"></div>
+            <div class="table-wrap" style="margin-top:14px"><table><thead><tr><th>حرکت</th><th>رکورد</th><th>تاریخ</th><th>عملیات</th></tr></thead><tbody id="coachRecords"></tbody></table></div>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="panel-box">
+            <h3>تعریف حرکت جدید</h3>
+            <form id="exerciseForm">
+              <div class="field"><label for="exerciseName">نام حرکت</label><input id="exerciseName" required maxlength="50" placeholder="مثلاً Clean"></div>
+              <div class="field"><label for="exerciseType">نوع محاسبه</label><select id="exerciseType"><option value="weighted">وزنه‌ای (رکورد ÷ وزن بدن)</option><option value="pullup">بارفیکس (وزن بدن + وزنه اضافه)</option></select></div>
+              <button class="btn btn-red btn-small" type="submit">افزودن حرکت</button>
+            </form>
+            <div id="exerciseMessage" class="notice hidden"></div>
+            <div id="exerciseList" class="small-muted"></div>
+          </div>
+          <div class="panel-box">
+            <h3>تنظیم معیارهای سطح‌بندی</h3>
+            <div class="field"><label for="standardExercise">حرکت</label><select id="standardExercise"></select></div>
+            <p class="small-muted">مقادیر زیر نسبت رکورد به وزن بدن هستند. برای بارفیکس نسبت (وزن بدن + وزنه اضافه) به وزن بدن محاسبه می‌شود.</p>
+            <div class="form-grid">
+              <div class="field"><label for="stdBeginner">مبتدی</label><input id="stdBeginner" type="number" min="0" step="0.05"></div>
+              <div class="field"><label for="stdIntermediate">متوسط</label><input id="stdIntermediate" type="number" min="0" step="0.05"></div>
+              <div class="field"><label for="stdAdvanced">پیشرفته</label><input id="stdAdvanced" type="number" min="0" step="0.05"></div>
+              <div class="field"><label for="stdElite">حرفه‌ای</label><input id="stdElite" type="number" min="0" step="0.05"></div>
+            </div>
+            <button class="btn btn-red btn-small" id="saveStandards" type="button">ذخیره معیارها</button>
+            <div id="standardMessage" class="notice hidden"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="container footer-inner"><span>© <span id="year"></span> AMIN NIKAEE CROSSFIT</span><span>قدرت • استمرار • پیشرفت</span></div></footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+/* ================= FIREBASE CONFIG =================
+   This is the existing Firebase web app configuration.
+   Firebase client config is public by design; database rules protect the data.
+*/
+const firebaseConfig = {
+  apiKey: "AIzaSyD81ZMMuKfQ4msqUHgeoo8MYMXQcnbx0DM",
+  authDomain: "amiral-1390.firebaseapp.com",
+  databaseURL: "https://amiral-1390-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "amiral-1390",
+  storageBucket: "amiral-1390.firebasestorage.app",
+  messagingSenderId: "992833996810",
+  appId: "1:992833996810:web:371a5cc9779da7457437f3",
+  measurementId: "G-CF5CRGZVRR"
+};
+
+/* بعد از ساخت حساب مربی، UID او را هم در این خط و هم در قوانین دیتابیس قرار بده. */
+const COACH_UID = "PASTE_COACH_UID_HERE";
+
+const DEFAULT_EXERCISES = {
+  deadlift:{name:"Deadlift",type:"weighted"},
+  squat:{name:"Squat",type:"weighted"},
+  bench_press:{name:"Bench Press",type:"weighted"},
+  pull_up:{name:"Pull Up",type:"pullup"}
+};
+const DEFAULT_STANDARDS = {
+  deadlift:{beginner:1.0,intermediate:1.5,advanced:2.0,elite:2.5},
+  squat:{beginner:0.75,intermediate:1.25,advanced:1.75,elite:2.25},
+  bench_press:{beginner:0.5,intermediate:0.9,advanced:1.25,elite:1.75},
+  pull_up:{beginner:1.0,intermediate:1.1,advanced:1.25,elite:1.5}
+};
+
+let auth, db, currentUser=null, isCoach=false;
+let exercises={...DEFAULT_EXERCISES}, standards={...DEFAULT_STANDARDS};
+let athleteRecords={}, coachProfiles={}, selectedAthlete="", selectedPrograms={};
+let editingProgramId=null, editingAthleteRecordId=null, editingCoachRecordId=null;
+let progressChart=null, ownBodyweight=0, coachBodyweight=0;
+let ownRecordRef=null, coachRecordRef=null, programRef=null;
+
 const $=id=>document.getElementById(id);
-const c=$("c"),ctx=c.getContext("2d");
-const W=600,H=700;
+const today=()=>new Date().toISOString().slice(0,10);
+$("year").textContent=new Date().getFullYear();
+$("programDate").value=today();
+$("athleteRecordDate").value=today();
+$("coachRecordDate").value=today();
 
-const names=[
- ["🐦","Flappy Bird","لمس صفحه برای پرواز"],
- ["🐍","Snake","کشیدن انگشت برای تغییر جهت"],
- ["🏓","Pong","حرکت انگشت برای کنترل"],
- ["🧱","Breakout","حرکت انگشت برای کنترل توپ"],
- ["❌","Tic Tac Toe","لمس خانه ها"],
- ["🔢","2048","کشیدن انگشت در چهار جهت"],
- ["🧠","Memory Cards","لمس کارت ها"],
- ["🎵","Simon Game","تکرار ترتیب رنگ ها"],
- ["🏃","Jungle Runner","لمس برای پرش"],
- ["🏎️","Mini Racing","کشیدن انگشت برای تغییر مسیر"]
-];
+function showMessage(id,msg,type="notice"){
+  const el=$(id); if(!el)return;
+  el.textContent=msg;el.className="notice"+(type==="error"?" error":type==="success"?" success":"");
+  el.classList.remove("hidden");
+}
+function hideMessage(id){const el=$(id);if(el)el.classList.add("hidden")}
+function escapeHtml(v){
+  return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function dateText(v){return v?new Date(v+"T00:00:00").toLocaleDateString("fa-IR"):"—"}
+function levelFor(exerciseId,record,bodyweight){
+  const ex=exercises[exerciseId]||{type:"weighted"};
+  const bw=Number(bodyweight)||0, w=Number(record.weight)||0;
+  if(!bw)return {ratio:null,label:"وزن بدن ثبت نشده",css:""};
+  const ratio=ex.type==="pullup"?(bw+w)/bw:w/bw;
+  const s=standards[exerciseId]||{beginner:1,intermediate:1.5,advanced:2,elite:2.5};
+  let label="مبتدی",css="level-beginner";
+  if(ratio>=Number(s.elite)){label="حرفه‌ای";css="level-elite"}
+  else if(ratio>=Number(s.advanced)){label="پیشرفته";css="level-advanced"}
+  else if(ratio>=Number(s.intermediate)){label="متوسط";css="level-intermediate"}
+  return {ratio,label,css};
+}
+function exerciseName(id){return exercises[id]?.name||id}
+function fillExerciseSelects(){
+  const selects=["athleteExercise","coachExercise","progressExercise","standardExercise"];
+  selects.forEach(id=>{
+    const el=$(id);if(!el)return;
+    const old=el.value;
+    el.innerHTML=Object.entries(exercises).map(([k,v])=>`<option value="${escapeHtml(k)}">${escapeHtml(v.name)}</option>`).join("");
+    if(old&&exercises[old])el.value=old;
+  });
+  updateRecordLabels();
+  renderExerciseList();
+  loadStandardFields();
+}
+function updateRecordLabels(){
+  const a=$("athleteExercise")?.value,c=$("coachExercise")?.value;
+  if($("athleteRecordLabel"))$("athleteRecordLabel").textContent=exercises[a]?.type==="pullup"?"وزنه اضافه در بارفیکس (کیلوگرم)":"رکورد (کیلوگرم)";
+  if($("coachRecordLabel"))$("coachRecordLabel").textContent=exercises[c]?.type==="pullup"?"وزنه اضافه در بارفیکس (کیلوگرم)":"رکورد (کیلوگرم)";
+}
+function renderExerciseList(){
+  if(!$("exerciseList"))return;
+  $("exerciseList").innerHTML=Object.entries(exercises).map(([id,e])=>`<div style="padding:7px 0;border-bottom:1px solid #ffffff12">${escapeHtml(e.name)} <span class="pill">${e.type==="pullup"?"بارفیکس":"وزنه‌ای"}</span> ${isCoach?`<button class="btn btn-dark btn-small" onclick="deleteExercise('${escapeHtml(id)}')">حذف</button>`:""}</div>`).join("");
+}
+function loadStandardFields(){
+  const id=$("standardExercise")?.value;if(!id)return;
+  const s=standards[id]||DEFAULT_STANDARDS[id]||{beginner:1,intermediate:1.5,advanced:2,elite:2.5};
+  $("stdBeginner").value=s.beginner??1;$("stdIntermediate").value=s.intermediate??1.5;
+  $("stdAdvanced").value=s.advanced??2;$("stdElite").value=s.elite??2.5;
+}
+function showAuthMessage(msg,type="notice"){showMessage("authMessage",msg,type)}
+function authError(error){
+  const code=error?.code||"";
+  const map={
+    "auth/invalid-email":"فرمت ایمیل درست نیست.",
+    "auth/user-not-found":"حسابی با این ایمیل پیدا نشد.",
+    "auth/wrong-password":"رمز عبور اشتباه است.",
+    "auth/invalid-credential":"ایمیل یا رمز عبور اشتباه است.",
+    "auth/email-already-in-use":"این ایمیل قبلاً ثبت شده است.",
+    "auth/weak-password":"رمز عبور باید حداقل ۶ کاراکتر باشد.",
+    "auth/network-request-failed":"ارتباط اینترنت یا دسترسی به Firebase برقرار نیست.",
+    "auth/too-many-requests":"تلاش‌های ناموفق زیاد بوده؛ کمی بعد دوباره امتحان کن."
+  };
+  return map[code]||("خطا: "+(error?.message||"عملیات انجام نشد"));
+}
 
-let game=0,s={},running=false,over=false;
-let score=0,best={},raf=0,last=0;
-let pointer=null,particles=[];
-let simonTimer=null;
+function setupAuth(){
+  firebase.initializeApp(firebaseConfig);
+  auth=firebase.auth();db=firebase.database();
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(()=>{});
+  auth.onAuthStateChanged(async user=>{
+    currentUser=user;
+    if(!user){
+      $("authArea").classList.remove("hidden");$("dashboard").classList.add("hidden");
+      $("coachPanel").classList.add("hidden");$("athletePanel").classList.add("hidden");
+      return;
+    }
+    isCoach=COACH_UID!=="PASTE_COACH_UID_HERE"&&user.uid===COACH_UID;
+    $("authArea").classList.add("hidden");$("dashboard").classList.remove("hidden");
+    $("welcomeName").textContent=isCoach?"پنل مربی — Amin Nikaee":"پنل ورزشکار";
+    $("accountEmail").textContent=user.email||"";
+    $("coachPanel").classList.toggle("hidden",!isCoach);
+    $("athletePanel").classList.toggle("hidden",isCoach);
+    await loadExercisesAndStandards();
+    if(isCoach){startCoachPanel()}else{startAthletePanel()}
+  });
+}
+async function loadExercisesAndStandards(){
+  try{
+    const [eSnap,sSnap]=await Promise.all([db.ref("exercises").once("value"),db.ref("standards").once("value")]);
+    exercises={...DEFAULT_EXERCISES,...(eSnap.val()||{})};
+    standards={...DEFAULT_STANDARDS,...(sSnap.val()||{})};
+  }catch(err){console.error(err)}
+  fillExerciseSelects();
+}
 
-names.forEach((g,i)=>{
- let d=document.createElement("div");
- d.className="card";
- d.innerHTML=`<div class="emoji">${g[0]}</div>
- <h3>${g[1]}</h3><p>${g[2]}</p>`;
- d.addEventListener("click",()=>start(i));
- $("games").appendChild(d);
+$("showLogin").onclick=()=>{$("loginForm").classList.remove("hidden");$("registerForm").classList.add("hidden");$("showLogin").className="btn btn-red";$("showRegister").className="btn btn-dark"};
+$("showRegister").onclick=()=>{$("registerForm").classList.remove("hidden");$("loginForm").classList.add("hidden");$("showRegister").className="btn btn-red";$("showLogin").className="btn btn-dark"};
+$("loginForm").addEventListener("submit",async e=>{
+  e.preventDefault();hideMessage("authMessage");
+  try{await auth.signInWithEmailAndPassword($("loginEmail").value.trim(),$("loginPassword").value)}
+  catch(err){showAuthMessage(authError(err),"error")}
 });
-
-function rand(a,b){return Math.random()*(b-a)+a}
-function bg(a="#17294c",b="#080d1b"){
- let g=ctx.createLinearGradient(0,0,0,H);
- g.addColorStop(0,a);g.addColorStop(1,b);
- ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-}
-function rect(x,y,w,h,color,r=7){
- ctx.fillStyle=color;ctx.beginPath();
- ctx.roundRect(x,y,w,h,r);ctx.fill();
-}
-function circle(x,y,r,color){
- ctx.fillStyle=color;ctx.beginPath();
- ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
-}
-function txt(t,x,y,size=25,color="white"){
- ctx.fillStyle=color;
- ctx.font=`bold ${size}px Tahoma`;
- ctx.textAlign="center";ctx.fillText(t,x,y);
-}
-function add(n=1){
- score+=n;
- best[game]=Math.max(best[game]||0,score);
- $("bottom").textContent="امتیاز: "+score+" | رکورد: "+best[game];
-}
-function finish(msg="بازی تمام شد"){
- if(over)return;
- over=true;
- $("bottom").textContent=msg+" | برای شروع دوباره 🔄 را بزن";
-}
-
-function start(i){
- game=i;score=0;over=false;running=true;
- $("menu").style.display="none";
- $("play").style.display="flex";
- $("gameTitle").textContent=names[i][1];
- $("bottom").textContent=names[i][2];
- cancelAnimationFrame(raf);
- if(simonTimer)clearTimeout(simonTimer);
- init();
- last=0;
- raf=requestAnimationFrame(loop);
-}
-
-function home(){
- running=false;
- cancelAnimationFrame(raf);
- if(simonTimer)clearTimeout(simonTimer);
- pointer=null;
- $("play").style.display="none";
- $("menu").style.display="block";
- if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
-}
-
-async function fullScreen(){
- try{
-  if(!document.fullscreenElement){
-   await document.documentElement.requestFullscreen();
-  }else{
-   await document.exitFullscreen();
-  }
- }catch(e){
-  $("bottom").textContent="تمام صفحه در این مرورگر پشتیبانی نمی شود";
- }
-}
-
-function restart(){
- if(!running)return;
- score=0;over=false;particles=[];
- if(simonTimer)clearTimeout(simonTimer);
- init();
- $("bottom").textContent=names[game][2];
-}
-
-function init(){
- s={};
- if(game===0)s={y:300,v:0,pipes:[],timer:0};
- if(game===1)s={body:[[15,15],[14,15],[13,15]],dir:[1,0],food:[21,10],timer:0};
- if(game===2)s={x:300,y:350,vx:5,vy:4,p:300,ai:300};
- if(game===3){
-  s={x:300,bx:300,by:500,vx:4,vy:-5,bricks:[]};
-  for(let r=0;r<6;r++)for(let j=0;j<9;j++){
-   s.bricks.push({x:25+j*62,y:80+r*32,on:true,
-    color:["#ff526c","#ffb84b","#47c9f0","#a76cff","#55dc94","#ff7bba"][r]});
-  }
- }
- if(game===4)s={board:Array(9).fill(""),turn:"X",done:false};
- if(game===5){s={board:Array(16).fill(0)};spawn2048();spawn2048();}
- if(game===6){
-  let a=["🍎","🍎","🚗","🚗","⭐","⭐","🐱","🐱","⚽","⚽","🍀","🍀","🌙","🌙","🍒","🍒"];
-  a.sort(()=>Math.random()-.5);
-  s={cards:a,open:[],matched:[],moves:0};
- }
- if(game===7)s={seq:[],step:0,waiting:false,active:-1};
- if(game===8)s={y:530,vy:0,obs:[],timer:0};
- if(game===9)s={lane:1,obs:[],timer:0,speed:6};
-}
-
-// دریافت مختصات واقعی انگشت روی Canvas
-function point(e){
- let r=c.getBoundingClientRect();
- return {
-  x:(e.clientX-r.left)*W/r.width,
-  y:(e.clientY-r.top)*H/r.height
- };
-}
-
-// تمام کنترل های لمسی از همین قسمت انجام می شوند
-c.addEventListener("pointerdown",e=>{
- e.preventDefault();
- if(!running||over)return;
- c.setPointerCapture(e.pointerId);
- let p=point(e);
- pointer={id:e.pointerId,x:p.x,y:p.y,lastX:p.x,lastY:p.y};
-
- if(game===0)flap();
- if(game===2)s.p=p.y-55;
- if(game===3)s.x=p.x;
- if(game===4)tic(p.x,p.y);
- if(game===6)memory(p.x,p.y);
- if(game===7)simonClick(p.x,p.y);
- if(game===8)jump();
- if(game===9)changeLane(p.x);
-},{passive:false});
-
-c.addEventListener("pointermove",e=>{
- if(!pointer||pointer.id!==e.pointerId||!running||over)return;
- e.preventDefault();
- let p=point(e);
-
- if(game===2)s.p=Math.max(0,Math.min(H-110,p.y-55));
- if(game===3)s.x=Math.max(55,Math.min(545,p.x));
- if(game===9)changeLane(p.x);
-
- pointer.lastX=p.x;
- pointer.lastY=p.y;
-},{passive:false});
-
-c.addEventListener("pointerup",e=>{
- if(!pointer||pointer.id!==e.pointerId)return;
- e.preventDefault();
-
- let p=point(e);
- let dx=p.x-pointer.x;
- let dy=p.y-pointer.y;
-
- if(game===1){
-  if(Math.abs(dx)+Math.abs(dy)>25){
-   let d=Math.abs(dx)>Math.abs(dy)
-   ?(dx>0?[1,0]:[-1,0])
-   :(dy>0?[0,1]:[0,-1]);
-   if(d[0]!==-s.dir[0]||d[1]!==-s.dir[1])s.dir=d;
-  }
- }
-
- if(game===5){
-  if(Math.abs(dx)+Math.abs(dy)>25)move2048(dx,dy);
- }
-
- pointer=null;
-},{passive:false});
-
-c.addEventListener("pointercancel",()=>pointer=null);
-
-// صفحه کلید برای کامپیوتر
-window.addEventListener("keydown",e=>{
- if(!running||over)return;
- if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(e.key))e.preventDefault();
-
- if(e.key==="ArrowUp"||e.key===" ") {
-  if(game===0)flap();
-  if(game===8)jump();
-  if(game===1)snakeDirection(0,-1);
- }
- if(e.key==="ArrowDown"&&game===1)snakeDirection(0,1);
- if(e.key==="ArrowLeft"&&game===1)snakeDirection(-1,0);
- if(e.key==="ArrowRight"&&game===1)snakeDirection(1,0);
- if(e.key==="ArrowLeft"&&game===9)changeLane((s.lane-1)*200+20);
- if(e.key==="ArrowRight"&&game===9)changeLane((s.lane+1)*200+250);
- if(e.key==="ArrowLeft"&&game===2)s.p-=35;
- if(e.key==="ArrowRight"&&game===2)s.p+=35;
+$("registerForm").addEventListener("submit",async e=>{
+  e.preventDefault();hideMessage("authMessage");
+  const name=$("registerName").value.trim(),email=$("registerEmail").value.trim();
+  try{
+    const cred=await auth.createUserWithEmailAndPassword(email,$("registerPassword").value);
+    await db.ref("profiles/"+cred.user.uid).set({name,email,createdAt:Date.now()});
+    showAuthMessage("حساب ساخته شد. خوش آمدی!","success");
+  }catch(err){showAuthMessage(authError(err),"error")}
 });
+$("resetPassword").onclick=async()=>{
+  const email=$("loginEmail").value.trim();
+  if(!email){showAuthMessage("ابتدا ایمیل خود را وارد کن.");return}
+  try{await auth.sendPasswordResetEmail(email);showAuthMessage("لینک بازیابی رمز عبور به ایمیل ارسال شد.","success")}
+  catch(err){showAuthMessage(authError(err),"error")}
+};
+$("logoutBtn").onclick=()=>auth.signOut();
 
-function loop(t){
- if(!running)return;
- let dt=Math.min((t-last)/16.67||1,2);
- last=t;
- if(!over)update(dt);
- draw();
- raf=requestAnimationFrame(loop);
+function startAthletePanel(){
+  db.ref("profiles/"+currentUser.uid).once("value").then(s=>{
+    const p=s.val()||{};
+    $("welcomeName").textContent="سلام "+(p.name||"ورزشکار")+" 👋";
+  });
+  db.ref("bodyweights/"+currentUser.uid).on("value",s=>{
+    ownBodyweight=Number(s.val()?.weight)||0;$("myBodyweight").value=ownBodyweight||"";
+    renderOwnRecords();
+  });
+  if(ownRecordRef)ownRecordRef.off();
+  ownRecordRef=db.ref("records/"+currentUser.uid);
+  ownRecordRef.on("value",s=>{
+    athleteRecords=s.val()||{};renderOwnRecords();renderProgress();
+  });
+  if(programRef)programRef.off();
+  programRef=db.ref("programs/"+currentUser.uid);
+  programRef.on("value",s=>renderPrograms(s.val()||{},"myPrograms",false));
 }
-function update(dt){
- if(game===0)updateFlappy(dt);
- if(game===1)updateSnake(dt);
- if(game===2)updatePong(dt);
- if(game===3)updateBreakout(dt);
- if(game===8)updateRunner(dt);
- if(game===9)updateRacing(dt);
- updateParticles();
+$("saveBodyweight").onclick=async()=>{
+  const w=Number($("myBodyweight").value);
+  if(!(w>0&&w<400)){showMessage("bodyweightMessage","وزن بدن معتبر وارد کن.","error");return}
+  try{await db.ref("bodyweights/"+currentUser.uid).set({weight:w,updatedAt:Date.now()});showMessage("bodyweightMessage","وزن بدن ذخیره شد.","success")}
+  catch(e){showMessage("bodyweightMessage",authError(e),"error")}
+};
+$("athleteExercise").onchange=updateRecordLabels;
+$("coachExercise").onchange=updateRecordLabels;
+$("athleteRecordForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const id=$("athleteExercise").value;
+  const item={weight:Number($("athleteRecordWeight").value),date:$("athleteRecordDate").value,note:$("athleteRecordNote").value.trim(),updatedAt:Date.now()};
+  if(!(item.weight>=0)||!item.date)return;
+  try{await db.ref("records/"+currentUser.uid).push(item);$("athleteRecordForm").reset();$("athleteRecordDate").value=today();showMessage("athleteRecordMessage","رکورد با موفقیت ثبت شد.","success")}
+  catch(err){showMessage("athleteRecordMessage",authError(err),"error")}
+});
+function renderOwnRecords(){
+  const rows=[];
+  Object.entries(athleteRecords||{}).forEach(([exId,items])=>{
+    const best=Math.max(0,...Object.values(items||{}).map(r=>Number(r.weight)||0));
+    Object.entries(items||{}).forEach(([key,r])=>{
+      const l=levelFor(exId,r,ownBodyweight);
+      const pct=best>0?(Number(r.weight)||0)/best*100:0;
+      rows.push({exId,key,...r,level:l,pct});
+    });
+  });
+  rows.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  $("myRecords").innerHTML=rows.map(r=>`<tr><td>${escapeHtml(exerciseName(r.exId))}</td><td>${Number(r.weight).toLocaleString("fa-IR")} kg ${exercises[r.exId]?.type==="pullup"?"(وزنه اضافه)":""}</td><td>${r.pct.toLocaleString("fa-IR",{maximumFractionDigits:1})}٪</td><td>${r.level.ratio===null?"—":r.level.ratio.toFixed(2)+"×"}</td><td><span class="pill ${r.level.css}">${r.level.label}</span></td><td>${dateText(r.date)}</td></tr>`).join("");
+  $("myRecordsEmpty").classList.toggle("hidden",rows.length>0);
 }
+function renderPrograms(data,target,coachMode){
+  const el=$(target);if(!el)return;
+  const list=Object.entries(data||{}).sort((a,b)=>(b[1].date||"").localeCompare(a[1].date||""));
+  if(!list.length){el.innerHTML='<div class="empty">هنوز برنامه‌ای ثبت نشده است.</div>';return}
+  el.innerHTML=list.map(([id,p])=>`<div class="card" style="margin:10px 0;padding:17px"><div class="panel-title"><div><b>${escapeHtml(p.title||"برنامه تمرینی")}</b><div class="small-muted">${dateText(p.date)} ${p.week?" • "+escapeHtml(p.week):""}</div></div>${coachMode?`<div class="actions"><button class="btn btn-dark btn-small" onclick="editProgram('${id}')">ویرایش</button><button class="btn btn-dark btn-small" onclick="removeProgram('${id}')">حذف</button></div>`:""}</div><div style="white-space:pre-wrap;color:#ddd;font-size:13px">${escapeHtml(p.content||"")}</div></div>`).join("");
+}
+function renderProgress(){
+  const exId=$("progressExercise")?.value;if(!exId)return;
+  const items=Object.values(athleteRecords[exId]||{}).filter(r=>r.date&&Number.isFinite(Number(r.weight))).sort((a,b)=>a.date.localeCompare(b.date));
+  const canvas=$("progressChart");if(!canvas)return;
+  if(progressChart){progressChart.destroy();progressChart=null}
+  if(!window.Chart||!items.length)return;
+  progressChart=new Chart(canvas,{type:"line",data:{labels:items.map(r=>dateText(r.date)),datasets:[{label:exerciseName(exId)+" (kg)",data:items.map(r=>Number(r.weight)),borderColor:"#ed3344",backgroundColor:"#ed334433",tension:.25,fill:true}]},options:{responsive:true,plugins:{legend:{labels:{color:"#eee"}}},scales:{x:{ticks:{color:"#aaa"},grid:{color:"#ffffff10"}},y:{ticks:{color:"#aaa"},grid:{color:"#ffffff10"}}}}});
+}
+$("progressExercise").onchange=renderProgress;
 
-// 1. FLAPPY BIRD
-function flap(){if(!over)s.v=-10}
-function updateFlappy(dt){
- s.timer+=dt;
- s.v+=.38*dt;
- s.y+=s.v*dt;
- if(s.timer>95){
-  s.timer=0;
-  s.pipes.push({x:630,top:rand(120,340),gap:205,passed:false});
- }
- s.pipes.forEach(p=>{
-  p.x-=4*dt;
-  if(!p.passed&&p.x<120){p.passed=true;add();}
-  if(120>p.x&&92<p.x+65&&(s.y<p.top||s.y>p.top+p.gap))finish();
- });
- s.pipes=s.pipes.filter(p=>p.x>-80);
- if(s.y<10||s.y>650)finish();
+function startCoachPanel(){
+  db.ref("profiles").on("value",s=>{
+    coachProfiles=s.val()||{};
+    const entries=Object.entries(coachProfiles).filter(([uid])=>uid!==COACH_UID);
+    const select=$("coachAthleteSelect"),old=select.value;
+    select.innerHTML='<option value="">انتخاب ورزشکار...</option>'+entries.map(([uid,p])=>`<option value="${escapeHtml(uid)}">${escapeHtml(p.name||p.email||uid)} — ${escapeHtml(p.email||"")}</option>`).join("");
+    if(old&&coachProfiles[old])select.value=old;
+    if(select.value){selectedAthlete=select.value;loadSelectedAthlete()}
+  });
+  db.ref("athleteInvites").on("value",s=>renderInvites(s.val()||{}));
+  $("coachAthleteSelect").onchange=()=>{
+    selectedAthlete=$("coachAthleteSelect").value;
+    resetProgramEdit();resetCoachRecordEdit();
+    loadSelectedAthlete();
+  };
+  db.ref("exercises").on("value",s=>{
+    exercises={...DEFAULT_EXERCISES,...(s.val()||{})};fillExerciseSelects();
+  });
+  db.ref("standards").on("value",s=>{
+    standards={...DEFAULT_STANDARDS,...(s.val()||{})};loadStandardFields();
+  });
 }
-function drawFlappy(){
- bg("#39a8e9","#b5eaff");
- circle(500,100,42,"#fff1a5");
- for(let i=0;i<6;i++){
-  let x=(i*150-Date.now()*.025%150);
-  circle(x,160+i%2*25,25,"#ffffff77");
-  circle(x+25,155+i%2*25,34,"#ffffff77");
- }
- s.pipes.forEach(p=>{
-  let g=ctx.createLinearGradient(p.x,0,p.x+65,0);
-  g.addColorStop(0,"#087c37");g.addColorStop(.5,"#4bed70");g.addColorStop(1,"#087c37");
-  rect(p.x,0,65,p.top,g,4);
-  rect(p.x-6,p.top-20,77,20,"#25bd50");
-  rect(p.x,p.top+p.gap,65,700,g,4);
-  rect(p.x-6,p.top+p.gap,77,20,"#25bd50");
- });
- rect(0,665,600,35,"#4ca64d");
- circle(120,s.y,19,"#ffda35");
- circle(126,s.y-6,6,"white");circle(128,s.y-6,2,"#222");
- rect(133,s.y,17,8,"#ff8c31",4);
- txt("FLAPPY BIRD",300,45,24,"#17436a");
+function renderInvites(data){
+  const invites=Object.entries(data||{});
+  $("inviteRows").innerHTML=invites.map(([id,v])=>{
+    const matched=Object.entries(coachProfiles).find(([uid,p])=>String(p.email||"").toLowerCase()===String(v.email||"").toLowerCase());
+    return `<tr><td>${escapeHtml(v.name)}</td><td>${escapeHtml(v.email)}</td><td>${matched?"حساب ثبت‌نام کرده":"در انتظار ثبت‌نام"}</td><td><button class="btn btn-dark btn-small" onclick="deleteInvite('${id}')">حذف</button>${matched?` <button class="btn btn-red btn-small" onclick="chooseAthlete('${matched[0]}')">انتخاب حساب</button>`:""}</td></tr>`;
+  }).join("");
+  if(!invites.length)$("inviteRows").innerHTML='<tr><td colspan="4" class="empty">فهرست دعوت‌ها خالی است.</td></tr>';
 }
+window.deleteInvite=async id=>{if(confirm("این دعوت حذف شود؟"))await db.ref("athleteInvites/"+id).remove()};
+window.chooseAthlete=uid=>{$("coachAthleteSelect").value=uid;selectedAthlete=uid;loadSelectedAthlete();$("coachAthleteSelect").scrollIntoView({behavior:"smooth",block:"center"})};
+$("inviteForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!isCoach)return;
+  const name=$("inviteName").value.trim(),email=$("inviteEmail").value.trim().toLowerCase();
+  try{await db.ref("athleteInvites").push({name,email,createdAt:Date.now()});$("inviteForm").reset();showMessage("inviteMessage","ورزشکار به فهرست دعوت‌ها اضافه شد.","success")}
+  catch(err){alert(authError(err))}
+});
+function loadSelectedAthlete(){
+  if(!selectedAthlete){$("selectedAthleteInfo").textContent="";$("coachPrograms").innerHTML='<div class="empty">ابتدا یک ورزشکار انتخاب کن.</div>';$("coachRecords").innerHTML="";return}
+  const p=coachProfiles[selectedAthlete]||{};
+  $("selectedAthleteInfo").textContent="انتخاب‌شده: "+(p.name||"ورزشکار")+" • "+(p.email||"");
+  if(coachRecordRef)coachRecordRef.off();
+  coachRecordRef=db.ref("records/"+selectedAthlete);
+  coachRecordRef.on("value",s=>{athleteRecords=s.val()||{};renderCoachRecords()});
+  db.ref("bodyweights/"+selectedAthlete).once("value").then(s=>{
+    coachBodyweight=Number(s.val()?.weight)||0;
+    $("selectedAthleteInfo").textContent+=" • وزن بدن: "+(coachBodyweight?coachBodyweight+" kg":"ثبت نشده");
+    renderCoachRecords();
+  });
+  if(programRef)programRef.off();
+  programRef=db.ref("programs/"+selectedAthlete);
+  programRef.on("value",s=>{selectedPrograms=s.val()||{};renderPrograms(selectedPrograms,"coachPrograms",true)});
+}
+function renderCoachRecords(){
+  const rows=[];
+  Object.entries(athleteRecords||{}).forEach(([exId,items])=>Object.entries(items||{}).forEach(([key,r])=>rows.push({exId,key,...r})));
+  rows.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  $("coachRecords").innerHTML=rows.map(r=>`<tr><td>${escapeHtml(exerciseName(r.exId))}</td><td>${Number(r.weight).toLocaleString("fa-IR")} kg</td><td>${dateText(r.date)}</td><td><div class="actions"><button class="btn btn-dark btn-small" onclick="editCoachRecord('${r.exId}','${r.key}')">ویرایش</button><button class="btn btn-dark btn-small" onclick="removeCoachRecord('${r.exId}','${r.key}')">حذف</button></div></td></tr>`).join("");
+  if(!rows.length)$("coachRecords").innerHTML='<tr><td colspan="4" class="empty">برای این ورزشکار رکوردی ثبت نشده است.</td></tr>';
+}
+$("programForm").addEventListener("submit",async e=>{
+  e.preventDefault();if(!selectedAthlete){showMessage("programMessage","ابتدا ورزشکار را انتخاب کن.","error");return}
+  const data={title:$("programTitle").value.trim(),date:$("programDate").value,week:$("programWeek").value.trim(),content:$("programContent").value.trim(),updatedAt:Date.now()};
+  try{
+    if(editingProgramId)await db.ref(`programs/${selectedAthlete}/${editingProgramId}`).update(data);
+    else await db.ref("programs/"+selectedAthlete).push({...data,createdAt:Date.now()});
+    resetProgramEdit();showMessage("programMessage","برنامه ذخیره شد.","success");
+  }catch(err){showMessage("programMessage",authError(err),"error")}
+});
+window.editProgram=id=>{
+  const p=selectedPrograms[id];if(!p)return;
+  editingProgramId=id;$("programTitle").value=p.title||"";$("programDate").value=p.date||today();
+  $("programWeek").value=p.week||"";$("programContent").value=p.content||"";
+  $("programSubmit").textContent="ذخیره ویرایش";$("cancelProgramEdit").classList.remove("hidden");
+  $("programForm").scrollIntoView({behavior:"smooth",block:"center"});
+};
+window.removeProgram=async id=>{if(!selectedAthlete||!confirm("این برنامه حذف شود؟"))return;await db.ref(`programs/${selectedAthlete}/${id}`).remove()};
+function resetProgramEdit(){
+  editingProgramId=null;$("programForm").reset();$("programDate").value=today();
+  $("programSubmit").textContent="ذخیره برنامه";$("cancelProgramEdit").classList.add("hidden");
+}
+$("cancelProgramEdit").onclick=resetProgramEdit;
 
-// 2. SNAKE
-function snakeDirection(x,y){
- if(x!==-s.dir[0]||y!==-s.dir[1])s.dir=[x,y];
+$("coachRecordForm").addEventListener("submit",async e=>{
+  e.preventDefault();if(!selectedAthlete){showMessage("coachRecordMessage","ابتدا ورزشکار را انتخاب کن.","error");return}
+  const exId=$("coachExercise").value;
+  const data={weight:Number($("coachRecordWeight").value),date:$("coachRecordDate").value,note:$("coachRecordNote").value.trim(),updatedAt:Date.now()};
+  try{
+    if(editingCoachRecordId)await db.ref(`records/${selectedAthlete}/${editingCoachRecordId.exId}/${editingCoachRecordId.key}`).update(data);
+    else await db.ref(`records/${selectedAthlete}/${exId}`).push({...data,createdAt:Date.now()});
+    resetCoachRecordEdit();showMessage("coachRecordMessage","رکورد ذخیره شد.","success");
+  }catch(err){showMessage("coachRecordMessage",authError(err),"error")}
+});
+window.editCoachRecord=(exId,key)=>{
+  const r=athleteRecords?.[exId]?.[key];if(!r)return;
+  editingCoachRecordId={exId,key};$("coachExercise").value=exId;updateRecordLabels();
+  $("coachRecordWeight").value=r.weight;$("coachRecordDate").value=r.date||today();$("coachRecordNote").value=r.note||"";
+  $("coachRecordSubmit").textContent="ذخیره ویرایش";$("cancelRecordEdit").classList.remove("hidden");
+  $("coachRecordForm").scrollIntoView({behavior:"smooth",block:"center"});
+};
+window.removeCoachRecord=async(exId,key)=>{if(!selectedAthlete||!confirm("این رکورد حذف شود؟"))return;await db.ref(`records/${selectedAthlete}/${exId}/${key}`).remove()};
+function resetCoachRecordEdit(){
+  editingCoachRecordId=null;$("coachRecordForm").reset();$("coachRecordDate").value=today();
+  $("coachRecordSubmit").textContent="ثبت رکورد";$("cancelRecordEdit").classList.add("hidden");updateRecordLabels();
 }
-function updateSnake(dt){
- s.timer+=dt;
- if(s.timer<7)return;
- s.timer=0;
- let h=s.body[0],n=[h[0]+s.dir[0],h[1]+s.dir[1]];
- if(n[0]<0||n[0]>=30||n[1]<0||n[1]>=35||
- s.body.some(p=>p[0]===n[0]&&p[1]===n[1])){
-  finish("برخورد کردی");return;
- }
- s.body.unshift(n);
- if(n[0]===s.food[0]&&n[1]===s.food[1]){
-  add(10);s.food=[Math.floor(rand(1,29)),Math.floor(rand(1,34))];
- }else s.body.pop();
-}
-function drawSnake(){
- bg("#061e23","#07121d");
- for(let x=0;x<30;x++)for(let y=0;y<35;y++)
-  if((x+y)%2===0)rect(x*20,y*20,20,20,"#ffffff08",1);
- circle(s.food[0]*20+10,s.food[1]*20+10,9,"#ff4f66");
- s.body.forEach((p,i)=>rect(p[0]*20+2,p[1]*20+2,16,16,i?"#25d38c":"#b1ff64",5));
- txt("SNAKE",300,35,22);
-}
+$("cancelRecordEdit").onclick=resetCoachRecordEdit;
 
-// 3. PONG
-function updatePong(dt){
- s.x+=s.vx*dt;s.y+=s.vy*dt;
- if(s.y<10||s.y>690)s.vy*=-1;
- s.ai+=(s.y-s.ai)*.045*dt;
- s.p=Math.max(0,Math.min(590,s.p));
- if(s.x<45&&s.y>s.p&&s.y<s.p+110){
-  s.vx=Math.abs(s.vx)*1.05;s.vy+=(s.y-s.p-55)*.06;
- }
- if(s.x>555&&s.y>s.ai&&s.y<s.ai+110)s.vx=-Math.abs(s.vx);
- if(s.x<0)finish("حریف برنده شد");
- if(s.x>600){add();s.x=300;s.y=350;s.vx=-5;}
-}
-function drawPong(){
- bg("#101a3a","#070d1c");
- for(let y=0;y<700;y+=55)rect(298,y,4,28,"#ffffff44");
- rect(20,s.p,14,110,"#53e2ff");
- rect(566,s.ai,14,110,"#ff6eb8");
- circle(s.x,s.y,12,"white");
- txt("YOU",100,40,20,"#6deaff");
- txt("CPU",500,40,20,"#ff9dce");
-}
-
-// 4. BREAKOUT
-function updateBreakout(dt){
- s.x=Math.max(55,Math.min(545,s.x));
- s.bx+=s.vx*dt;s.by+=s.vy*dt;
- if(s.bx<10||s.bx>590)s.vx*=-1;
- if(s.by<10)s.vy=Math.abs(s.vy);
- if(s.by>620&&s.bx>s.x-65&&s.bx<s.x+65){
-  s.vy=-Math.abs(s.vy);
-  s.vx+=(s.bx-s.x)*.06;
- }
- if(s.by>700){finish();return;}
- s.bricks.forEach(b=>{
-  if(b.on&&s.bx>b.x&&s.bx<b.x+55&&s.by>b.y&&s.by<b.y+25){
-   b.on=false;s.vy*=-1;add(5);particle(s.bx,s.by,b.color);
+$("exerciseForm").addEventListener("submit",async e=>{
+  e.preventDefault();const name=$("exerciseName").value.trim(),type=$("exerciseType").value;
+  if(!name)return;
+  const key="ex_"+Date.now().toString(36);
+  try{
+    await db.ref("exercises/"+key).set({name,type});
+    const defaults=type==="pullup"?{beginner:1,intermediate:1.1,advanced:1.25,elite:1.5}:{beginner:1,intermediate:1.5,advanced:2,elite:2.5};
+    await db.ref("standards/"+key).set(defaults);
+    $("exerciseForm").reset();showMessage("exerciseMessage","حرکت جدید اضافه شد.","success");
+  }catch(err){showMessage("exerciseMessage",authError(err),"error")}
+});
+window.deleteExercise=async id=>{
+  if(Object.keys(DEFAULT_EXERCISES).includes(id)){alert("حرکات پیش‌فرض حذف نمی‌شوند.");return}
+  if(!confirm("حرکت حذف شود؟ رکوردهای قبلی آن باقی می‌مانند."))return;
+  await db.ref("exercises/"+id).remove();
+};
+$("standardExercise").onchange=loadStandardFields;
+$("saveStandards").onclick=async()=>{
+  const id=$("standardExercise").value;
+  const vals={beginner:Number($("stdBeginner").value),intermediate:Number($("stdIntermediate").value),advanced:Number($("stdAdvanced").value),elite:Number($("stdElite").value)};
+  if(!id||Object.values(vals).some(v=>!Number.isFinite(v)||v<0)||!(vals.beginner<=vals.intermediate&&vals.intermediate<=vals.advanced&&vals.advanced<=vals.elite)){
+    showMessage("standardMessage","مقادیر باید معتبر و به ترتیب صعودی باشند.","error");return;
   }
- });
- if(s.bricks.every(b=>!b.on))finish("همه آجرها شکسته شدند!");
-}
-function drawBreakout(){
- bg("#19122f","#080d1c");
- s.bricks.forEach(b=>{if(b.on)rect(b.x,b.y,54,23,b.color,5)});
- rect(s.x-65,645,130,14,"#60e1ff",8);
- circle(s.bx,s.by,10,"#fff17a");
-}
+  try{await db.ref("standards/"+id).set(vals);showMessage("standardMessage","معیارهای سطح‌بندی ذخیره شد.","success")}
+  catch(err){showMessage("standardMessage",authError(err),"error")}
+};
 
-// 5. TIC TAC TOE
-function tic(x,y){
- if(s.done)return;
- let i=Math.floor(y/230)*3+Math.floor(x/200);
- if(i<0||i>8||s.board[i])return;
- s.board[i]=s.turn;
- let lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
- if(lines.some(a=>a.every(k=>s.board[k]===s.turn))){
-  s.done=true;finish(s.turn+" برنده شد!");return;
- }
- if(s.board.every(Boolean)){s.done=true;finish("مساوی");return}
- s.turn=s.turn==="X"?"O":"X";
-}
-function drawTic(){
- bg("#171533","#080d1b");
- for(let i=1;i<3;i++){
-  rect(i*200-2,80,4,540,"#7886bb");
-  rect(25,i*180+80,550,4,"#7886bb");
- }
- s.board.forEach((v,i)=>{
-  let x=i%3*200+100,y=Math.floor(i/3)*230+185;
-  if(v==="X")txt("X",x,y,95,"#ff7098");
-  if(v==="O"){
-   ctx.strokeStyle="#63dcff";ctx.lineWidth=11;
-   ctx.beginPath();ctx.arc(x,y-25,42,0,Math.PI*2);ctx.stroke();
+$("calculateBtn").onclick=()=>{
+  const max=Number($("maxLift").value),training=Number($("trainingLift").value);
+  if(!(max>0)||!(training>=0)){
+    $("calcResult").textContent="—";$("calcCaption").textContent="لطفاً هر دو مقدار معتبر را وارد کن.";return;
   }
- });
- txt("TIC TAC TOE",300,40,23);
-}
+  const pct=training/max*100;
+  $("calcResult").textContent=pct.toLocaleString("fa-IR",{maximumFractionDigits:2})+"٪";
+  $("calcCaption").textContent=training+" کیلوگرم از رکورد "+max+" کیلوگرم";
+};
+$("menuToggle").onclick=()=>$("navlinks").classList.toggle("open");
+document.querySelectorAll("#navlinks a").forEach(a=>a.addEventListener("click",()=>$("navlinks").classList.remove("open")));
 
-// 6. 2048
-function spawn2048(){
- let a=s.board.map((v,i)=>v===0?i:-1).filter(i=>i>=0);
- if(a.length)s.board[a[Math.floor(Math.random()*a.length)]]=Math.random()<.9?2:4;
-}
-function move2048(dx,dy){
- if(over)return;
- let dir=Math.abs(dx)>Math.abs(dy)
-  ?(dx>0?"right":"left"):(dy>0?"down":"up");
- let old=s.board.slice(),b=old.slice();
- for(let i=0;i<4;i++){
-  let a=[];
-  for(let j=0;j<4;j++){
-   let k=dir==="left"?i*4+j:
-    dir==="right"?i*4+3-j:
-    dir==="up"?j*4+i:(3-j)*4+i;
-   a.push(b[k]);
-  }
-  a=a.filter(Boolean);
-  for(let j=0;j<a.length-1;j++){
-   if(a[j]===a[j+1]){
-    a[j]*=2;add(a[j]);a.splice(j+1,1);
-   }
-  }
-  while(a.length<4)a.push(0);
-  for(let j=0;j<4;j++){
-   let k=dir==="left"?i*4+j:
-    dir==="right"?i*4+3-j:
-    dir==="up"?j*4+i:(3-j)*4+i;
-   b[k]=a[j];
-  }
- }
- if(b.some((v,i)=>v!==old[i]))s.board=b,spawn2048();
-}
-function draw2048(){
- bg("#242038","#101321");
- let colors={2:"#eee4da",4:"#ede0c8",8:"#f2b179",16:"#f59563",32:"#f67c5f",64:"#f65e3b",128:"#edcf72",256:"#edcc61",512:"#edc850",1024:"#edc53f",2048:"#edc22e"};
- for(let i=0;i<16;i++){
-  let x=18+i%4*145,y=85+Math.floor(i/4)*150,v=s.board[i];
-  rect(x,y,137,140,v?colors[v]||"#9563db":"#ffffff13",12);
-  if(v)txt(v,x+68,y+84,37,v>=8?"white":"#584a42");
- }
- txt("2048",300,48,30);
-}
-
-// 7. MEMORY
-function memory(x,y){
- let col=Math.floor((x-15)/145);
- let row=Math.floor((y-110)/145);
- let i=row*4+col;
- if(i<0||i>=16||s.open.length===2||
- s.matched.includes(i)||s.open.includes(i))return;
- s.open.push(i);
- if(s.open.length===2){
-  s.moves++;
-  if(s.cards[s.open[0]]===s.cards[s.open[1]]){
-   s.matched.push(...s.open);s.open=[];add(10);
-   if(s.matched.length===16)finish("همه کارت ها پیدا شدند!");
-  }else{
-   setTimeout(()=>{if(game===6&&s.open.length===2)s.open=[]},700);
-  }
- }
-}
-function drawMemory(){
- bg("#151d3c","#0a1023");
- s.cards.forEach((v,i)=>{
-  let x=15+i%4*145,y=110+Math.floor(i/4)*145;
-  let show=s.open.includes(i)||s.matched.includes(i);
-  rect(x,y,135,125,show?"#eee8ff":"#4655a4",12);
-  txt(show?v:"?",x+67,y+80,show?42:48,show?"#30284b":"white");
- });
- txt("MOVES: "+s.moves,300,55,23);
-}
-
-// 8. SIMON
-function beginSimon(){
- if(over)return;
- s.seq=[Math.floor(rand(0,4))];s.step=0;s.waiting=true;
- simonShow();
-}
-function simonShow(){
- if(game!==7||over)return;
- s.waiting=false;
- let i=0;
- function next(){
-  if(game!==7||over)return;
-  if(i>=s.seq.length){
-   s.active=-1;s.step=0;s.waiting=true;
-   $("bottom").textContent="ترتیب رنگ ها را لمس کن";
-   return;
-  }
-  s.active=s.seq[i++];
-  simonTimer=setTimeout(()=>{
-   s.active=-1;
-   simonTimer=setTimeout(next,180);
-  },450);
- }
- next();
-}
-function simonClick(x,y){
- if(!s.waiting||over)return;
- let i=Math.floor(y/(H/2))*2+Math.floor(x/(W/2));
- if(i!==s.seq[s.step]){
-  finish("اشتباه شد!");return;
- }
- s.step++;
- if(s.step===s.seq.length){
-  add();
-  s.waiting=false;
-  simonTimer=setTimeout(()=>{
-   if(game===7&&!over){
-    s.seq.push(Math.floor(rand(0,4)));
-    simonShow();
-   }
-  },600);
- }
-}
-function drawSimon(){
- bg("#14162e","#080d1b");
- let colors=["#ed5269","#44d88c","#438bff","#f3c34e"];
- for(let i=0;i<4;i++){
-  let x=i%2*300+8,y=Math.floor(i/2)*330+8;
-  rect(x,y,284,315,s.active===i?"white":colors[i],22);
-  txt(["●","◆","▲","★"][i],x+142,y+185,85,"#ffffff");
- }
- txt("SIMON",300,685,22);
-}
-
-// 9. RUNNER
-function jump(){
- if(!over&&s.y>=525)s.vy=-15;
-}
-function updateRunner(dt){
- s.vy+=.65*dt;s.y+=s.vy*dt;
- if(s.y>525){s.y=525;s.vy=0;}
- s.timer+=dt;
- if(s.timer>55){
-  s.timer=0;s.obs.push({x:630,h:rand(50,110),passed:false});
- }
- s.obs.forEach(o=>{
-  o.x-=7*dt;
-  if(o.x<125&&o.x+40>85&&s.y+65>625-o.h)finish("به مانع برخورد کردی");
-  if(!o.passed&&o.x<80){o.passed=true;add();}
- });
- s.obs=s.obs.filter(o=>o.x>-60);
-}
-function drawRunner(){
- bg("#58b9e8","#d1eaff");
- circle(500,90,40,"#fff1a0");
- for(let i=0;i<6;i++)circle(i*120+20,170,35,"#ffffff77");
- rect(0,625,600,75,"#4aaf58");
- s.obs.forEach(o=>rect(o.x,625-o.h,40,o.h,"#258b4a"));
- circle(105,s.y+20,22,"#ffb23f");
- rect(88,s.y+35,35,38,"#477cf6");
- rect(90,s.y+68,12,18,"#242e4b");
- rect(110,s.y+68,12,18,"#242e4b");
-}
-
-// 10. RACING
-function changeLane(x){
- s.lane=Math.max(0,Math.min(2,Math.floor(x/200)));
-}
-function updateRacing(dt){
- s.timer+=dt;s.speed=Math.min(12,6+score*.08);
- if(s.timer>40){
-  s.timer=0;s.obs.push({lane:Math.floor(rand(0,3)),y:-70,passed:false});
- }
- s.obs.forEach(o=>{
-  o.y+=s.speed*dt;
-  if(o.lane===s.lane&&o.y>555&&o.y<680)finish("تصادف کردی!");
-  if(!o.passed&&o.y>700){o.passed=true;add();}
- });
- s.obs=s.obs.filter(o=>o.y<760);
-}
-function car(x,y,color){
- rect(x-23,y-35,46,72,color,12);
- rect(x-16,y-25,32,22,"#b9edff",6);
- rect(x-15,y+7,30,17,"#26334d",4);
- rect(x-28,y-22,7,17,"#111",3);
- rect(x+21,y-22,7,17,"#111",3);
-}
-function drawRacing(){
- bg("#27844e","#145234");
- rect(75,0,450,700,"#454a54");
- rect(90,0,5,700,"#f2dc5a");
- rect(505,0,5,700,"#f2dc5a");
- for(let i=0;i<2;i++){
-  for(let y=-40;y<740;y+=100){
-   rect(225+i*150,y+(s.timer*8)%100,5,45,"#ffffff88");
-  }
- }
- s.obs.forEach(o=>car(150+o.lane*150,o.y,"#e84d65"));
- car(150+s.lane*150,590,"#36b9ff");
- txt("MINI RACING",300,45,23);
-}
-
-// ذرات تصویری
-function particle(x,y,color){
- for(let i=0;i<12;i++)particles.push({
-  x,y,vx:rand(-4,4),vy:rand(-4,4),life:30,color
- });
-}
-function updateParticles(){
- particles.forEach(p=>{
-  p.x+=p.vx;p.y+=p.vy;p.life--;
- });
- particles=particles.filter(p=>p.life>0);
-}
-function drawParticles(){
- particles.forEach(p=>{
-  ctx.globalAlpha=p.life/30;
-  circle(p.x,p.y,4,p.color);
- });
- ctx.globalAlpha=1;
-}
-
-function draw(){
- if(game===0)drawFlappy();
- if(game===1)drawSnake();
- if(game===2)drawPong();
- if(game===3)drawBreakout();
- if(game===4)drawTic();
- if(game===5)draw2048();
- if(game===6)drawMemory();
- if(game===7)drawSimon();
- if(game===8)drawRunner();
- if(game===9)drawRacing();
-
- drawParticles();
-
- if(over){
-  ctx.fillStyle="#050817cc";
-  ctx.fillRect(0,0,W,H);
-  txt("GAME OVER",300,300,45);
-  txt("امتیاز: "+score,300,365,30,"#ffe17b");
-  txt("برای بازی دوباره 🔄 را بزن",300,420,21);
- }
+try{setupAuth()}catch(err){
+  console.error(err);
+  $("authArea").classList.remove("hidden");
+  showAuthMessage("راه‌اندازی Firebase انجام نشد. تنظیمات پروژه و اتصال اینترنت را بررسی کن.","error");
 }
 </script>
 </body>
